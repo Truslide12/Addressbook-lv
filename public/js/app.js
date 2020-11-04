@@ -1911,10 +1911,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/createContact.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/createContact.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/index.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/index.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1922,12 +1922,15 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1959,38 +1962,239 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import contacts pages
+// import createContactModal from './createContactModal.vue'
+// import editContactModal from './editContactModal.vue'
+// import deleteContactModal from './deleteContactModal.vue'
+// import addresses pages
+// import detailsModal from '../Addresses/detailsModal.vue'
+// import createAddressModal from '../Addresses/createAddressModal.vue'
+// import editAddressModal from '../Addresses/editAddressModal.vue'
+// import deleteAddressModal from '../Addresses/deleteAddressModal.vue'
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      data: {
+    return _defineProperty({
+      contactData: {
         id: '',
         firstName: '',
         lastName: '',
         email: '',
         phone: '',
-        birthday: ''
+        birthday: '',
+        addressLists: []
       },
+      contactLists: [],
+      addressLists: [],
+      token: '',
+      createContactModal: false,
+      isCreatingContact: false,
       formValidate: {
         firstName: '',
         lastName: '',
         email: '',
         phone: '',
-        birthday: ''
+        birthday: '',
+        addressLists: []
       },
       ruleValidate: {
         firstName: [{
           required: true,
-          message: 'The name cannot be empty',
+          message: 'The first name cannot be empty',
           trigger: 'blur'
         }],
         lastName: [{
           required: true,
-          message: 'The name cannot be empty',
+          message: 'The last name cannot be empty',
           trigger: 'blur'
         }],
         email: [{
           required: true,
-          message: 'Mailbox cannot be empty',
+          message: 'Email cannot be empty',
           trigger: 'blur'
         }, {
           type: 'email',
@@ -2009,415 +2213,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           trigger: 'change'
         }]
       },
-      token: ''
-    };
-  },
-  methods: {
-    handleSubmit: function handleSubmit(formValidate) {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!(_this.formValidate.firstName.trim() == '')) {
-                  _context.next = 2;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('First Name is required'));
-
-              case 2:
-                if (!(_this.formValidate.lastName.trim() == '')) {
-                  _context.next = 4;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Last Name is required'));
-
-              case 4:
-                if (!(_this.formValidate.email.trim() == '')) {
-                  _context.next = 6;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Email is required'));
-
-              case 6:
-                if (!(_this.formValidate.phone.trim() == '')) {
-                  _context.next = 8;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Phone is required'));
-
-              case 8:
-                _context.next = 10;
-                return _this.callApi('post', '/app/createContact', _this.formValidate);
-
-              case 10:
-                res = _context.sent;
-                console.log(res);
-
-                if (res.status === 201) {
-                  // this.contactLists.unshift(res.formValidate) // need to add this to vue
-                  _this.s('Contact has been added successfully!');
-
-                  _this.formValidate.firstName = '';
-                  _this.formValidate.lastName = '';
-                  _this.formValidate.email = '';
-                  _this.formValidate.phone = '';
-                  _this.formValidate.birthday = ''; // need to reload the context/index.vue
-                } else {
-                  if (res.status == 422) {
-                    if (_this.res.errors.firstName) {
-                      _this.i(res.formValidate.errors.firstName[0]);
-                    }
-
-                    if (_this.res.errors.lastName) {
-                      _this.i(res.formValidate.errors.lastName[0]);
-                    }
-
-                    if (_this.res.errors.email) {
-                      _this.i(res.formValidate.errors.email[0]);
-                    }
-
-                    if (_this.res.errors.phone) {
-                      _this.i(res.formValidate.errors.phone[0]);
-                    }
-
-                    if (_this.res.errors.birthday) {
-                      _this.i(res.formValidate.errors.birthday[0]);
-                    }
-                  } else {
-                    _this.swr();
-                  }
-                }
-
-              case 13:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    handleReset: function handleReset(name) {
-      this.$refs[name].resetFields();
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/deleteContact.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/deleteContact.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      data: {
-        id: this.contactLists[this.index].id,
-        firstName: this.contactLists[this.index].firstName,
-        lastName: this.contactLists[this.index].lastName,
-        email: this.contactLists[this.index].email,
-        phone: this.contactLists[this.index].phone,
-        birthday: this.contactLists[this.index].birthday
-      },
-      token: ''
-    };
-  },
-  methods: {
-    deleteImage: function deleteImage() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.next = 2;
-                return _this.callApi('post', 'Contacts/deleteContact', {
-                  id: _this.data.id
-                });
-
-              case 2:
-                res = _context.sent;
-
-                if (res.status != 200) {
-                  _this.swr();
-                }
-
-              case 4:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/editContact.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/editContact.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      data: {
-        id: this.contactLists[this.index].id,
-        firstName: this.contactLists[this.index].firstName,
-        lastName: this.contactLists[this.index].lastName,
-        email: this.contactLists[this.index].email,
-        phone: this.contactLists[this.index].phone,
-        birthday: this.contactLists[this.index].birthday
-      },
-      token: ''
-    };
-  },
-  methods: {
-    edit: function edit() {
-      var _this = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!(_this.data.firstName.trim() == '')) {
-                  _context.next = 2;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('First Name is required'));
-
-              case 2:
-                if (!(_this.data.lastName.trim() == '')) {
-                  _context.next = 4;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Last Name is required'));
-
-              case 4:
-                if (!(_this.data.email.trim() == '')) {
-                  _context.next = 6;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Email is required'));
-
-              case 6:
-                if (!(_this.data.phone.trim() == '')) {
-                  _context.next = 8;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Phone is required'));
-
-              case 8:
-                if (!(_this.data.birthday.trim() == '')) {
-                  _context.next = 10;
-                  break;
-                }
-
-                return _context.abrupt("return", _this.e('Birthday is required'));
-
-              case 10:
-                _context.next = 12;
-                return _this.callApi('post', '/Contacts/editContact', _this.data);
-
-              case 12:
-                res = _context.sent;
-
-                if (res.status === 200) {
-                  _this.contactLists[_this.index].firstName = _this.data.firstName;
-                  _this.contactLists[_this.index].lasstName = _this.data.lastName;
-                  _this.contactLists[_this.index].email = _this.data.email;
-                  _this.contactLists[_this.index].firstName = _this.data.phone;
-                  _this.contactLists[_this.index].birthday = _this.data.birthday;
-
-                  _this.s('Contact has been updated successfully!');
-                } else {
-                  if (res.status == 422) {
-                    if (_this.res.errors.firstName) {
-                      _this.i(res.data.errors.firstName[0]);
-                    }
-
-                    if (_this.res.errors.lastName) {
-                      _this.i(res.data.errors.lastName[0]);
-                    }
-
-                    if (_this.res.errors.email) {
-                      _this.i(res.data.errors.email[0]);
-                    }
-
-                    if (_this.res.errors.phone) {
-                      _this.i(res.data.errors.phone[0]);
-                    }
-
-                    if (_this.res.errors.birthday) {
-                      _this.i(res.data.errors.birthday[0]);
-                    }
-                  } else {
-                    _this.swr();
-                  }
-                }
-
-              case 14:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/index.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/index.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      data: {
-        id: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        birthday: ''
-      },
-      contactLists: [],
-      token: ''
-    };
+      editContactModal: false,
+      isEditingContact: false,
+      createAddressModal: false,
+      editAddressModal: false,
+      isCreatingAddress: false,
+      isEditingAddress: false,
+      index: -1,
+      showDeletingContactModal: false,
+      isDeleting: false,
+      deleteItem: {},
+      deletingIndex: -1,
+      showingDetailsModal: false,
+      deletingAddressIndex: -1,
+      websiteSettings: []
+    }, "token", '');
   },
   created: function created() {
     var _this = this;
@@ -2430,11 +2240,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               _this.token = window.Laravel.csrfToken;
               _context.next = 3;
-              return _this.callApi('get', '/app/index');
+              return _this.callApi('get', 'app/index');
 
             case 3:
               res = _context.sent;
 
+              // console.log(res)
               if (res.status === 200) {
                 _this.contactLists = res.data;
               } else {
@@ -2448,7 +2259,343 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }
       }, _callee);
     }))();
-  }
+  },
+  methods: {
+    createContact: function createContact(formValidate) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(_this2.contactData.firstName.trim() == '')) {
+                  _context2.next = 2;
+                  break;
+                }
+
+                return _context2.abrupt("return", _this2.e('First Name is required'));
+
+              case 2:
+                if (!(_this2.contactData.lastName.trim() == '')) {
+                  _context2.next = 4;
+                  break;
+                }
+
+                return _context2.abrupt("return", _this2.e('Last Name is required'));
+
+              case 4:
+                if (!(_this2.contactData.email.trim() == '')) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                return _context2.abrupt("return", _this2.e('Email is required'));
+
+              case 6:
+                if (!(_this2.contactData.phone.trim() == '')) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                return _context2.abrupt("return", _this2.e('Phone is required'));
+
+              case 8:
+                // if(this.formValidate.birthday.trim()=='') return this.e('Birthday is required')
+                _this2.isCreatingContact = true;
+                _context2.next = 11;
+                return _this2.callApi('post', 'app/createContact', _this2.contactData);
+
+              case 11:
+                res = _context2.sent;
+                console.log(res);
+
+                if (res.status === 201) {
+                  _this2.contactLists.unshift(res.data); // need to add this to vue
+
+
+                  _this2.s('Contact has been added successfully!');
+
+                  _this2.contactData.firstName = '';
+                  _this2.contactData.lastName = '';
+                  _this2.contactData.email = '';
+                  _this2.contactData.phone = '';
+                  _this2.contactData.birthday = '';
+                } else {
+                  if (res.status == 422) {
+                    if (_this2.res.errors.firstName) {
+                      _this2.i(res.formValidate.errors.firstName[0]);
+                    }
+
+                    if (_this2.res.errors.lastName) {
+                      _this2.i(res.formValidate.errors.lastName[0]);
+                    }
+
+                    if (_this2.res.errors.email) {
+                      _this2.i(res.formValidate.errors.email[0]);
+                    }
+
+                    if (_this2.res.errors.phone) {
+                      _this2.i(res.formValidate.errors.phone[0]);
+                    }
+
+                    if (_this2.res.errors.birthday) {
+                      _this2.i(res.formValidate.errors.birthday[0]);
+                    }
+                  } else {
+                    _this2.swr();
+                  }
+                }
+
+                _this2.createContactModal = false;
+                _this2.isCreatingContact = false;
+
+              case 16:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    closeCreateContactModal: function closeCreateContactModal(formValidate) {
+      // handleReset (formValidate);
+      this.isCreatingContact = false;
+      this.createContactModal = false;
+    },
+    showEditContactModal: function showEditContactModal(contact, index) {
+      var obj = {
+        id: contact.id,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        email: contact.email,
+        phone: contact.phone,
+        birthday: contact.birthday
+      };
+      this.formValidate = obj;
+      this.editContactModal = true;
+      this.index = index;
+    },
+    closeEditContactModal: function closeEditContactModal() {
+      this.isEditingContact = false;
+      this.editContactModal = false;
+    },
+    editContact: function editContact() {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!(_this3.formValidate.firstName.trim() == '')) {
+                  _context3.next = 2;
+                  break;
+                }
+
+                return _context3.abrupt("return", _this3.e('First Name is required'));
+
+              case 2:
+                if (!(_this3.formValidate.lastName.trim() == '')) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                return _context3.abrupt("return", _this3.e('Last Name is required'));
+
+              case 4:
+                if (!(_this3.formValidate.email.trim() == '')) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                return _context3.abrupt("return", _this3.e('Email is required'));
+
+              case 6:
+                if (!(_this3.formValidate.phone.trim() == '')) {
+                  _context3.next = 8;
+                  break;
+                }
+
+                return _context3.abrupt("return", _this3.e('Phone is required'));
+
+              case 8:
+                _context3.next = 10;
+                return _this3.callApi('post', 'app/editContact', _this3.formValidate);
+
+              case 10:
+                res = _context3.sent;
+                console.log(res);
+
+                if (res.status === 201) {
+                  _this3.contactLists.unshift(res.formValidate); // need to add this to vue
+
+
+                  _this3.s('Contact has been edited successfully!');
+
+                  _this3.formValidate.firstName = '';
+                  _this3.formValidate.lastName = '';
+                  _this3.formValidate.email = '';
+                  _this3.formValidate.phone = '';
+                  _this3.formValidate.birthday = ''; // need to reload the context/index.vue
+                } else {
+                  if (res.status == 422) {
+                    if (_this3.res.errors.firstName) {
+                      _this3.i(res.formValidate.errors.firstName[0]);
+                    }
+
+                    if (_this3.res.errors.lastName) {
+                      _this3.i(res.formValidate.errors.lastName[0]);
+                    }
+
+                    if (_this3.res.errors.email) {
+                      _this3.i(res.formValidate.errors.email[0]);
+                    }
+
+                    if (_this3.res.errors.phone) {
+                      _this3.i(res.formValidate.errors.phone[0]);
+                    }
+
+                    if (_this3.res.errors.birthday) {
+                      _this3.i(res.formValidate.errors.birthday[0]);
+                    }
+                  } else {
+                    _this3.swr();
+                  }
+                }
+
+                _this3.editContactModal = false;
+
+              case 14:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    showDetailsModal: function showDetailsModal(contact, index) {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this4.token = window.Laravel.csrfToken;
+                console.log(contact);
+                _context4.next = 4;
+                return _this4.callApi('get', 'app/details', 2);
+
+              case 4:
+                res = _context4.sent;
+                // this.addressLists = res.addresses
+                console.log(res); // if(res.status===200){
+                //     this.addressLists = res.data
+                //     this.showingDetailsModal = true
+                // } else {
+                //     this.swr(error)
+                // }
+
+              case 6:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    handleReset: function handleReset(name) {
+      this.$refs[name].resetFields();
+    },
+    // showDeletingModal(contact, i){
+    //     const deleteContactModalObj  =  {
+    //         showDeleteContactModal: true,
+    //         deleteUrl : 'app/deleteContact',
+    //         contactData : contact,
+    //         deletingIndex: i,
+    //         isDeleted : false,
+    //     }
+    //     this.$store.commit('setDeletingModalObj', deleteContactModalObj)
+    //     console.log('delete method called')
+    //     this.deleteItem = contact
+    //     this.deletingIndex = i
+    //     this.showDeleteContactModal = true
+    // },
+    showDeleteContactModal: function showDeleteContactModal(contact, i) {
+      console.log(contact);
+      this.contactData = contact;
+      console.log('delete method called');
+      this.deletingIndex = i;
+      this.showDeletingContactModal = true;
+      console.log(this.contactData);
+    },
+    deleteContact: function deleteContact() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _this5.isDeleting = true;
+                console.log('This is the contact data to be deleted');
+                console.log(_this5.contactData);
+                _context5.next = 5;
+                return _this5.callApi('post', 'app/deleteContact/', _this5.contactData);
+
+              case 5:
+                res = _context5.sent;
+
+                if (res.status === 200) {
+                  _this5.tags.splice(_this5.deletingIndex, 1);
+
+                  _this5.s('Tag has been deleted successfully!');
+                } else {
+                  _this5.swr();
+                }
+
+                _this5.isDeleting = false;
+                _this5.showDeleteConactModal = false;
+
+              case 9:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    }
+  },
+  getters: {// getContactData(state){
+    //    return state.contactData
+    // },
+    // getContactLists(state){
+    // },
+    // getDeleteModalObj(state){
+    //     return state.deleteModalObj
+    // },
+    // getUserPermission(state){
+    //     return state.userPermission
+    // },
+  } // components : {
+  // 	deleteModal
+  // },
+  // computed : {
+  // 	...mapGetters(['getDeleteModalObj'])
+  // },
+  // watch : {
+  // 	getDeleteModalObj(obj){
+  // 		if(obj.isDeleted){
+  // 			this.tags.splice(obj.deletingIndex,1)
+  // 		}
+  // 	}
+  // },
+
 });
 
 /***/ }),
@@ -67053,6 +67200,18 @@ exports.staticRenderFns = staticRenderFns;
 
 /***/ }),
 
+/***/ "./node_modules/view-design/dist/locale/en-US.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/view-design/dist/locale/en-US.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,t){ true?module.exports=t(__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js")):undefined}("undefined"!=typeof self?self:this,function(e){return function(e){var t={};function o(r){if(t[r])return t[r].exports;var n=t[r]={i:r,l:!1,exports:{}};return e[r].call(n.exports,n,n.exports,o),n.l=!0,n.exports}return o.m=e,o.c=t,o.d=function(e,t,r){o.o(e,t)||Object.defineProperty(e,t,{configurable:!1,enumerable:!0,get:r})},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="/dist/locale/",o(o.s=8)}({0:function(e,t,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default=function(e){r||void 0!==window.iview&&("langs"in iview||(iview.langs={}),iview.langs[e.i.locale]=e)};var r=function(e){return e&&e.__esModule?e:{default:e}}(o(1)).default.prototype.$isServer},1:function(t,o){t.exports=e},8:function(e,t,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var r={i:{locale:"en-US",select:{placeholder:"Select",noMatch:"No matching data",loading:"Loading"},table:{noDataText:"No Data",noFilteredDataText:"No filter data",confirmFilter:"Confirm",resetFilter:"Reset",clearFilter:"All",sumText:"Sum"},datepicker:{selectDate:"Select date",selectTime:"Select time",startTime:"Start Time",endTime:"End Time",clear:"Clear",ok:"OK",datePanelLabel:"[mmmm] [yyyy]",month:"Month",month1:"January",month2:"February",month3:"March",month4:"April",month5:"May",month6:"June",month7:"July",month8:"August",month9:"September",month10:"October",month11:"November",month12:"December",year:"Year",weekStartDay:"0",weeks:{sun:"Sun",mon:"Mon",tue:"Tue",wed:"Wed",thu:"Thu",fri:"Fri",sat:"Sat"},months:{m1:"Jan",m2:"Feb",m3:"Mar",m4:"Apr",m5:"May",m6:"Jun",m7:"Jul",m8:"Aug",m9:"Sep",m10:"Oct",m11:"Nov",m12:"Dec"}},transfer:{titles:{source:"Source",target:"Target"},filterPlaceholder:"Search here",notFoundText:"Not Found"},modal:{okText:"OK",cancelText:"Cancel"},poptip:{okText:"OK",cancelText:"Cancel"},page:{prev:"Previous Page",next:"Next Page",total:"Total",item:"item",items:"items",prev5:"Previous 5 Pages",next5:"Next 5 Pages",page:"/page",goto:"Goto",p:""},rate:{star:"Star",stars:"Stars"},time:{before:" ago",after:" after",just:"just now",seconds:" seconds",minutes:" minutes",hours:" hours",days:" days"},tree:{emptyText:"No Data"}}};(0,function(e){return e&&e.__esModule?e:{default:e}}(o(0)).default)(r),t.default=r}})});
+//# sourceMappingURL=en-US.js.map
+
+/***/ }),
+
 /***/ "./node_modules/view-design/dist/styles/fonts/ionicons.svg?v=3.0.0":
 /*!*************************************************************************!*\
   !*** ./node_modules/view-design/dist/styles/fonts/ionicons.svg?v=3.0.0 ***!
@@ -67127,388 +67286,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/createAddress.vue?vue&type=template&id=f0b76edc&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Addresses/createAddress.vue?vue&type=template&id=f0b76edc& ***!
-  \*********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("This is the createAddress Page")])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/deleteAddress.vue?vue&type=template&id=605cf083&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Addresses/deleteAddress.vue?vue&type=template&id=605cf083& ***!
-  \*********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("This is the deleteAddres Page")])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&":
-/*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008& ***!
-  \***************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [
-        _vm._v("This is the Contact Details Page (addresses/index.vue)")
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/editAddress.vue?vue&type=template&id=fa18b178&":
-/*!*******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Addresses/editAddress.vue?vue&type=template&id=fa18b178& ***!
-  \*******************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("h1", [_vm._v("This is the editAddress Page")])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/createContact.vue?vue&type=template&id=ffbd609e&":
-/*!********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/createContact.vue?vue&type=template&id=ffbd609e& ***!
-  \********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "content" },
-    [
-      _c(
-        "Form",
-        {
-          ref: "formValidate",
-          attrs: {
-            model: _vm.formValidate,
-            rules: _vm.ruleValidate,
-            "label-width": 90
-          }
-        },
-        [
-          _c(
-            "FormItem",
-            { attrs: { label: "First Name", prop: "firstName" } },
-            [
-              _c("Input", {
-                attrs: { placeholder: "Enter the First Name" },
-                model: {
-                  value: _vm.formValidate.firstName,
-                  callback: function($$v) {
-                    _vm.$set(_vm.formValidate, "firstName", $$v)
-                  },
-                  expression: "formValidate.firstName"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "FormItem",
-            { attrs: { label: "Last Name", prop: "lastName" } },
-            [
-              _c("Input", {
-                attrs: { placeholder: "Enter the Last Name" },
-                model: {
-                  value: _vm.formValidate.lastName,
-                  callback: function($$v) {
-                    _vm.$set(_vm.formValidate, "lastName", $$v)
-                  },
-                  expression: "formValidate.lastName"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "FormItem",
-            { attrs: { label: "E-mail", prop: "mail" } },
-            [
-              _c("Input", {
-                attrs: { placeholder: "Enter their e-mail" },
-                model: {
-                  value: _vm.formValidate.email,
-                  callback: function($$v) {
-                    _vm.$set(_vm.formValidate, "email", $$v)
-                  },
-                  expression: "formValidate.email"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "FormItem",
-            { attrs: { label: "Phone", prop: "phone" } },
-            [
-              _c("Input", {
-                attrs: { placeholder: "Enter their phone number" },
-                model: {
-                  value: _vm.formValidate.phone,
-                  callback: function($$v) {
-                    _vm.$set(_vm.formValidate, "phone", $$v)
-                  },
-                  expression: "formValidate.phone"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "FormItem",
-            { attrs: { label: "Birthday" } },
-            [
-              _c(
-                "Row",
-                [
-                  _c(
-                    "Col",
-                    { attrs: { span: "11" } },
-                    [
-                      _c("DatePicker", {
-                        attrs: {
-                          format: "yyyy/MM/dd",
-                          type: "date",
-                          placeholder: "Select date"
-                        },
-                        model: {
-                          value: _vm.formValidate.birthday,
-                          callback: function($$v) {
-                            _vm.$set(_vm.formValidate, "birthday", $$v)
-                          },
-                          expression: "formValidate.birthday"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "FormItem",
-            [
-              _c(
-                "Button",
-                {
-                  attrs: { type: "primary" },
-                  on: {
-                    click: function($event) {
-                      return _vm.handleSubmit("formValidate")
-                    }
-                  }
-                },
-                [_vm._v("Submit")]
-              ),
-              _vm._v(" "),
-              _c(
-                "Button",
-                {
-                  staticStyle: { "margin-left": "8px" },
-                  on: {
-                    click: function($event) {
-                      return _vm.handleReset("formValidate")
-                    }
-                  }
-                },
-                [_vm._v("Reset")]
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/deleteContact.vue?vue&type=template&id=58d9f7a2&":
-/*!********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/deleteContact.vue?vue&type=template&id=58d9f7a2& ***!
-  \********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "contents" }, [
-      _c("h1", [_vm._v("Are you sure you want to ")])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/editContact.vue?vue&type=template&id=141f4f23&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/editContact.vue?vue&type=template&id=141f4f23& ***!
-  \******************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "contents" }, [
-      _c("h1", [_vm._v("This is the editContact Page")])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/index.vue?vue&type=template&id=33783eff&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/index.vue?vue&type=template&id=33783eff& ***!
@@ -67526,120 +67303,673 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20"
-          },
-          [
-            _c(
-              "p",
-              { staticClass: "_title0" },
-              [
-                _vm._v("Contacts List "),
-                _c(
-                  "Button",
-                  {
-                    attrs: { type: "success" },
-                    on: {
-                      click: function($event) {
-                        return _vm.$router.push("createContact")
-                      }
-                    }
-                  },
-                  [
-                    _c("Icon", { attrs: { type: "md-add" } }),
-                    _vm._v("Add Contact")
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "_overflow _table_div" }, [
+      _c(
+        "div",
+        { staticClass: "container-fluid" },
+        [
+          _c(
+            "div",
+            {
+              staticClass:
+                "_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20"
+            },
+            [
               _c(
-                "table",
-                { staticClass: "_table" },
+                "p",
+                { staticClass: "_title0" },
                 [
-                  _vm._m(0),
+                  _vm._v("Contacts List "),
+                  _c(
+                    "Button",
+                    {
+                      attrs: { type: "success" },
+                      on: {
+                        click: function($event) {
+                          _vm.createContactModal = true
+                        }
+                      }
+                    },
+                    [
+                      _c("Icon", { attrs: { type: "md-add" } }),
+                      _vm._v("Add Contact")
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "_overflow _table_div" }, [
+                _c(
+                  "table",
+                  { staticClass: "_table" },
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _vm._l(_vm.contactLists, function(contacts, i) {
+                      return _c("tr", { key: i }, [
+                        _c("td", [_vm._v(_vm._s(contacts.firstName))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(contacts.lastName))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(contacts.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(contacts.phone))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(contacts.birthday))]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "Button",
+                              {
+                                attrs: { type: "info", size: "small" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.showDetailsModal(contacts, i)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "Details\n                                        "
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "Button",
+                              {
+                                attrs: { type: "warning", size: "small" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.showEditContactModal(contacts, i)
+                                  }
+                                }
+                              },
+                              [_vm._v("Edit")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "Button",
+                              {
+                                attrs: {
+                                  type: "error",
+                                  size: "small",
+                                  loading: contacts.isDeleting
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.showDeleteContactModal(
+                                      contacts,
+                                      i
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "Delete\n                                    "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "Modal",
+            {
+              attrs: {
+                title: "Create New Contact",
+                "mask-closable": false,
+                closable: false
+              },
+              model: {
+                value: _vm.createContactModal,
+                callback: function($$v) {
+                  _vm.createContactModal = $$v
+                },
+                expression: "createContactModal"
+              }
+            },
+            [
+              _c(
+                "Form",
+                {
+                  ref: "contactData",
+                  attrs: {
+                    model: _vm.contactData,
+                    rules: _vm.ruleValidate,
+                    "label-width": 90
+                  }
+                },
+                [
+                  _c(
+                    "FormItem",
+                    { attrs: { label: "First Name", prop: "firstName" } },
+                    [
+                      _c("Input", {
+                        attrs: { placeholder: "Enter the First Name" },
+                        model: {
+                          value: _vm.contactData.firstName,
+                          callback: function($$v) {
+                            _vm.$set(_vm.contactData, "firstName", $$v)
+                          },
+                          expression: "contactData.firstName"
+                        }
+                      })
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _vm._l(_vm.contactLists, function(contacts, i) {
-                    return _c("tr", { key: i }, [
-                      _c("td", [_vm._v(_vm._s(contacts.firstName))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(contacts.lastName))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(contacts.email))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(contacts.phone))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(contacts.birthday))]),
-                      _vm._v(" "),
+                  _c(
+                    "FormItem",
+                    { attrs: { label: "Last Name", prop: "lastName" } },
+                    [
+                      _c("Input", {
+                        attrs: { placeholder: "Enter the Last Name" },
+                        model: {
+                          value: _vm.contactData.lastName,
+                          callback: function($$v) {
+                            _vm.$set(_vm.contactData, "lastName", $$v)
+                          },
+                          expression: "contactData.lastName"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "FormItem",
+                    { attrs: { label: "E-mail", prop: "mail" } },
+                    [
+                      _c("Input", {
+                        attrs: { placeholder: "Enter their e-mail" },
+                        model: {
+                          value: _vm.contactData.email,
+                          callback: function($$v) {
+                            _vm.$set(_vm.contactData, "email", $$v)
+                          },
+                          expression: "contactData.email"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "FormItem",
+                    { attrs: { label: "Phone", prop: "phone" } },
+                    [
+                      _c("Input", {
+                        attrs: { placeholder: "Enter their phone number" },
+                        model: {
+                          value: _vm.contactData.phone,
+                          callback: function($$v) {
+                            _vm.$set(_vm.contactData, "phone", $$v)
+                          },
+                          expression: "contactData.phone"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("FormItem", { attrs: { label: "Birthday" } }, [
+                    _c("div", { staticClass: "row" }, [
                       _c(
-                        "td",
+                        "div",
+                        { staticClass: "col" },
                         [
-                          _c(
-                            "Button",
-                            {
-                              attrs: { type: "info", size: "small" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.$router.push({
-                                    path: "/details",
-                                    params: { id: _vm.$route.params.id }
-                                  })
-                                }
-                              }
+                          _c("DatePicker", {
+                            attrs: {
+                              format: "yyyy/MM/dd",
+                              type: "date",
+                              placeholder: "Select date"
                             },
-                            [_vm._v("Details")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "Button",
-                            {
-                              attrs: { type: "warning", size: "small" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.$router.push({
-                                    path: "editContact",
-                                    params: { id: _vm.$route.params.id }
-                                  })
-                                }
-                              }
-                            },
-                            [_vm._v("Edit")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "Button",
-                            {
-                              attrs: { type: "error", size: "small" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.$router.push({
-                                    path: "deleteContact",
-                                    params: { id: _vm.$route.params.id }
-                                  })
-                                }
-                              }
-                            },
-                            [_vm._v("Delete")]
-                          )
+                            model: {
+                              value: _vm.contactData.birthday,
+                              callback: function($$v) {
+                                _vm.$set(_vm.contactData, "birthday", $$v)
+                              },
+                              expression: "contactData.birthday"
+                            }
+                          })
                         ],
                         1
                       )
                     ])
-                  })
+                  ])
                 ],
-                2
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { slot: "footer" }, slot: "footer" },
+                [
+                  _c(
+                    "Button",
+                    {
+                      staticStyle: { "margin-left": "8px" },
+                      attrs: {
+                        type: "default",
+                        disabled: _vm.isCreatingAddress,
+                        loading: _vm.isCreatingAddress
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.closeCreateContactModal(_vm.formValidate)
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "Button",
+                    {
+                      attrs: {
+                        type: "primary",
+                        disabled: _vm.isCreatingContact,
+                        loading: _vm.isCreatingContact
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.createContact("formValidate")
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(
+                          _vm.isCreatingContact ? "Creating.." : "Add Contact"
+                        )
+                      )
+                    ]
+                  )
+                ],
+                1
               )
-            ])
-          ]
-        )
-      ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "Modal",
+            {
+              attrs: {
+                title: "Edit contact",
+                "mask-closable": false,
+                closable: false
+              },
+              model: {
+                value: _vm.editContactModal,
+                callback: function($$v) {
+                  _vm.editContactModal = $$v
+                },
+                expression: "editContactModal"
+              }
+            },
+            [
+              _c(
+                "Form",
+                {
+                  ref: "formValidate",
+                  attrs: {
+                    model: _vm.formValidate,
+                    rules: _vm.ruleValidate,
+                    "label-width": 90
+                  }
+                },
+                [
+                  _c(
+                    "FormItem",
+                    { attrs: { label: "First Name", prop: "firstName" } },
+                    [
+                      _c("Input", {
+                        attrs: { placeholder: "Enter the First Name" },
+                        model: {
+                          value: _vm.formValidate.firstName,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formValidate, "firstName", $$v)
+                          },
+                          expression: "formValidate.firstName"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "FormItem",
+                    { attrs: { label: "Last Name", prop: "lastName" } },
+                    [
+                      _c("Input", {
+                        attrs: { placeholder: "Enter the Last Name" },
+                        model: {
+                          value: _vm.formValidate.lastName,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formValidate, "lastName", $$v)
+                          },
+                          expression: "formValidate.lastName"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "FormItem",
+                    { attrs: { label: "E-mail", prop: "mail" } },
+                    [
+                      _c("Input", {
+                        attrs: { placeholder: "Enter their e-mail" },
+                        model: {
+                          value: _vm.formValidate.email,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formValidate, "email", $$v)
+                          },
+                          expression: "formValidate.email"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "FormItem",
+                    { attrs: { label: "Phone", prop: "phone" } },
+                    [
+                      _c("Input", {
+                        attrs: { placeholder: "Enter their phone number" },
+                        model: {
+                          value: _vm.formValidate.phone,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formValidate, "phone", $$v)
+                          },
+                          expression: "formValidate.phone"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("FormItem", { attrs: { label: "Birthday" } }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "div",
+                        { staticClass: "col" },
+                        [
+                          _c("DatePicker", {
+                            attrs: {
+                              format: "yyyy/MM/dd",
+                              type: "date",
+                              placeholder: "Select date"
+                            },
+                            model: {
+                              value: _vm.formValidate.birthday,
+                              callback: function($$v) {
+                                _vm.$set(_vm.formValidate, "birthday", $$v)
+                              },
+                              expression: "formValidate.birthday"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { slot: "footer" }, slot: "footer" },
+                [
+                  _c(
+                    "Button",
+                    {
+                      staticStyle: { "margin-left": "8px" },
+                      on: { click: _vm.closeEditContactModal }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "Button",
+                    {
+                      attrs: { type: "primary" },
+                      on: {
+                        click: function($event) {
+                          return _vm.editContact("formValidate")
+                        }
+                      }
+                    },
+                    [_vm._v("Submit")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "Modal",
+            {
+              attrs: { width: "360" },
+              model: {
+                value: _vm.showDeletingContactModal,
+                callback: function($$v) {
+                  _vm.showDeletingContactModal = $$v
+                },
+                expression: "showDeletingContactModal"
+              }
+            },
+            [
+              _c(
+                "p",
+                {
+                  staticStyle: { color: "#f60", "text-align": "center" },
+                  attrs: { slot: "header" },
+                  slot: "header"
+                },
+                [
+                  _c("Icon", { attrs: { type: "ios-information-circle" } }),
+                  _vm._v(" "),
+                  _c("span", [_vm._v("Delete confirmation")])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticStyle: { "text-align": "center" } }, [
+                _c("p", [
+                  _vm._v("Are you sure you want to delete this Contact?")
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { attrs: { slot: "footer" }, slot: "footer" },
+                [
+                  _c(
+                    "Button",
+                    {
+                      attrs: {
+                        type: "error",
+                        size: "large",
+                        long: "",
+                        loading: _vm.isDeleting,
+                        disabled: _vm.isDeleting
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteContact(_vm.contact, _vm.i)
+                        }
+                      }
+                    },
+                    [_vm._v("Delete")]
+                  )
+                ],
+                1
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "Modal",
+            {
+              attrs: {
+                title: "Contact Details",
+                "mask-closable": false,
+                closable: false
+              },
+              model: {
+                value: _vm.showingDetailsModal,
+                callback: function($$v) {
+                  _vm.showingDetailsModal = $$v
+                },
+                expression: "showingDetailsModal"
+              }
+            },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20"
+                },
+                [
+                  _c(
+                    "p",
+                    { staticClass: "_title0" },
+                    [
+                      _vm._v("Contact Details "),
+                      _c(
+                        "Button",
+                        {
+                          attrs: { type: "info", size: "small" },
+                          on: {
+                            click: function($event) {
+                              return _vm.$router.push({
+                                path: "createAddress",
+                                params: { id: _vm.$route.params.id }
+                              })
+                            }
+                          }
+                        },
+                        [_vm._v("Add Address")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "_overflow _table_div" }, [
+                    _c(
+                      "table",
+                      { staticClass: "_table" },
+                      [
+                        _c("tr", [
+                          _c("th", [_vm._v("Number")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Street")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("City")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("State")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Zip")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Type")]),
+                          _vm._v(" "),
+                          _c("th", [_vm._v("Action")])
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.addressLists, function(addresses, i) {
+                          return _c("tr", { key: i }, [
+                            _c("td", [_vm._v(_vm._s(addresses.number))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(addresses.street))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(addresses.city))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(addresses.state))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(addresses.zip))]),
+                            _vm._v(" "),
+                            _c("td", [_vm._v(_vm._s(addresses.type))]),
+                            _vm._v(" "),
+                            _c(
+                              "td",
+                              [
+                                _c(
+                                  "Button",
+                                  {
+                                    attrs: { type: "warning", size: "small" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.showEditAddressModal(
+                                          addresses,
+                                          i
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Edit")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "Button",
+                                  {
+                                    attrs: {
+                                      type: "error",
+                                      size: "small",
+                                      loading: addresses.isDeleting
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.showDeleteAddressModal(
+                                          addresses,
+                                          i
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Delete\n                                        "
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ])
+                        })
+                      ],
+                      2
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ],
+        1
+      )
     ])
   ])
 }
@@ -82882,6 +83212,1267 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/vuex/dist/vuex.esm.js":
+/*!********************************************!*\
+  !*** ./node_modules/vuex/dist/vuex.esm.js ***!
+  \********************************************/
+/*! exports provided: default, Store, createLogger, createNamespacedHelpers, install, mapActions, mapGetters, mapMutations, mapState */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* WEBPACK VAR INJECTION */(function(global) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Store", function() { return Store; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createLogger", function() { return createLogger; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamespacedHelpers", function() { return createNamespacedHelpers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "install", function() { return install; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapActions", function() { return mapActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapGetters", function() { return mapGetters; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapMutations", function() { return mapMutations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapState", function() { return mapState; });
+/*!
+ * vuex v3.5.1
+ * (c) 2020 Evan You
+ * @license MIT
+ */
+function applyMixin (Vue) {
+  var version = Number(Vue.version.split('.')[0]);
+
+  if (version >= 2) {
+    Vue.mixin({ beforeCreate: vuexInit });
+  } else {
+    // override init and inject vuex init procedure
+    // for 1.x backwards compatibility.
+    var _init = Vue.prototype._init;
+    Vue.prototype._init = function (options) {
+      if ( options === void 0 ) options = {};
+
+      options.init = options.init
+        ? [vuexInit].concat(options.init)
+        : vuexInit;
+      _init.call(this, options);
+    };
+  }
+
+  /**
+   * Vuex init hook, injected into each instances init hooks list.
+   */
+
+  function vuexInit () {
+    var options = this.$options;
+    // store injection
+    if (options.store) {
+      this.$store = typeof options.store === 'function'
+        ? options.store()
+        : options.store;
+    } else if (options.parent && options.parent.$store) {
+      this.$store = options.parent.$store;
+    }
+  }
+}
+
+var target = typeof window !== 'undefined'
+  ? window
+  : typeof global !== 'undefined'
+    ? global
+    : {};
+var devtoolHook = target.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+
+function devtoolPlugin (store) {
+  if (!devtoolHook) { return }
+
+  store._devtoolHook = devtoolHook;
+
+  devtoolHook.emit('vuex:init', store);
+
+  devtoolHook.on('vuex:travel-to-state', function (targetState) {
+    store.replaceState(targetState);
+  });
+
+  store.subscribe(function (mutation, state) {
+    devtoolHook.emit('vuex:mutation', mutation, state);
+  }, { prepend: true });
+
+  store.subscribeAction(function (action, state) {
+    devtoolHook.emit('vuex:action', action, state);
+  }, { prepend: true });
+}
+
+/**
+ * Get the first item that pass the test
+ * by second argument function
+ *
+ * @param {Array} list
+ * @param {Function} f
+ * @return {*}
+ */
+function find (list, f) {
+  return list.filter(f)[0]
+}
+
+/**
+ * Deep copy the given object considering circular structure.
+ * This function caches all nested objects and its copies.
+ * If it detects circular structure, use cached copy to avoid infinite loop.
+ *
+ * @param {*} obj
+ * @param {Array<Object>} cache
+ * @return {*}
+ */
+function deepCopy (obj, cache) {
+  if ( cache === void 0 ) cache = [];
+
+  // just return if obj is immutable value
+  if (obj === null || typeof obj !== 'object') {
+    return obj
+  }
+
+  // if obj is hit, it is in circular structure
+  var hit = find(cache, function (c) { return c.original === obj; });
+  if (hit) {
+    return hit.copy
+  }
+
+  var copy = Array.isArray(obj) ? [] : {};
+  // put the copy into cache at first
+  // because we want to refer it in recursive deepCopy
+  cache.push({
+    original: obj,
+    copy: copy
+  });
+
+  Object.keys(obj).forEach(function (key) {
+    copy[key] = deepCopy(obj[key], cache);
+  });
+
+  return copy
+}
+
+/**
+ * forEach for object
+ */
+function forEachValue (obj, fn) {
+  Object.keys(obj).forEach(function (key) { return fn(obj[key], key); });
+}
+
+function isObject (obj) {
+  return obj !== null && typeof obj === 'object'
+}
+
+function isPromise (val) {
+  return val && typeof val.then === 'function'
+}
+
+function assert (condition, msg) {
+  if (!condition) { throw new Error(("[vuex] " + msg)) }
+}
+
+function partial (fn, arg) {
+  return function () {
+    return fn(arg)
+  }
+}
+
+// Base data struct for store's module, package with some attribute and method
+var Module = function Module (rawModule, runtime) {
+  this.runtime = runtime;
+  // Store some children item
+  this._children = Object.create(null);
+  // Store the origin module object which passed by programmer
+  this._rawModule = rawModule;
+  var rawState = rawModule.state;
+
+  // Store the origin module's state
+  this.state = (typeof rawState === 'function' ? rawState() : rawState) || {};
+};
+
+var prototypeAccessors = { namespaced: { configurable: true } };
+
+prototypeAccessors.namespaced.get = function () {
+  return !!this._rawModule.namespaced
+};
+
+Module.prototype.addChild = function addChild (key, module) {
+  this._children[key] = module;
+};
+
+Module.prototype.removeChild = function removeChild (key) {
+  delete this._children[key];
+};
+
+Module.prototype.getChild = function getChild (key) {
+  return this._children[key]
+};
+
+Module.prototype.hasChild = function hasChild (key) {
+  return key in this._children
+};
+
+Module.prototype.update = function update (rawModule) {
+  this._rawModule.namespaced = rawModule.namespaced;
+  if (rawModule.actions) {
+    this._rawModule.actions = rawModule.actions;
+  }
+  if (rawModule.mutations) {
+    this._rawModule.mutations = rawModule.mutations;
+  }
+  if (rawModule.getters) {
+    this._rawModule.getters = rawModule.getters;
+  }
+};
+
+Module.prototype.forEachChild = function forEachChild (fn) {
+  forEachValue(this._children, fn);
+};
+
+Module.prototype.forEachGetter = function forEachGetter (fn) {
+  if (this._rawModule.getters) {
+    forEachValue(this._rawModule.getters, fn);
+  }
+};
+
+Module.prototype.forEachAction = function forEachAction (fn) {
+  if (this._rawModule.actions) {
+    forEachValue(this._rawModule.actions, fn);
+  }
+};
+
+Module.prototype.forEachMutation = function forEachMutation (fn) {
+  if (this._rawModule.mutations) {
+    forEachValue(this._rawModule.mutations, fn);
+  }
+};
+
+Object.defineProperties( Module.prototype, prototypeAccessors );
+
+var ModuleCollection = function ModuleCollection (rawRootModule) {
+  // register root module (Vuex.Store options)
+  this.register([], rawRootModule, false);
+};
+
+ModuleCollection.prototype.get = function get (path) {
+  return path.reduce(function (module, key) {
+    return module.getChild(key)
+  }, this.root)
+};
+
+ModuleCollection.prototype.getNamespace = function getNamespace (path) {
+  var module = this.root;
+  return path.reduce(function (namespace, key) {
+    module = module.getChild(key);
+    return namespace + (module.namespaced ? key + '/' : '')
+  }, '')
+};
+
+ModuleCollection.prototype.update = function update$1 (rawRootModule) {
+  update([], this.root, rawRootModule);
+};
+
+ModuleCollection.prototype.register = function register (path, rawModule, runtime) {
+    var this$1 = this;
+    if ( runtime === void 0 ) runtime = true;
+
+  if ((true)) {
+    assertRawModule(path, rawModule);
+  }
+
+  var newModule = new Module(rawModule, runtime);
+  if (path.length === 0) {
+    this.root = newModule;
+  } else {
+    var parent = this.get(path.slice(0, -1));
+    parent.addChild(path[path.length - 1], newModule);
+  }
+
+  // register nested modules
+  if (rawModule.modules) {
+    forEachValue(rawModule.modules, function (rawChildModule, key) {
+      this$1.register(path.concat(key), rawChildModule, runtime);
+    });
+  }
+};
+
+ModuleCollection.prototype.unregister = function unregister (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+  var child = parent.getChild(key);
+
+  if (!child) {
+    if ((true)) {
+      console.warn(
+        "[vuex] trying to unregister module '" + key + "', which is " +
+        "not registered"
+      );
+    }
+    return
+  }
+
+  if (!child.runtime) {
+    return
+  }
+
+  parent.removeChild(key);
+};
+
+ModuleCollection.prototype.isRegistered = function isRegistered (path) {
+  var parent = this.get(path.slice(0, -1));
+  var key = path[path.length - 1];
+
+  return parent.hasChild(key)
+};
+
+function update (path, targetModule, newModule) {
+  if ((true)) {
+    assertRawModule(path, newModule);
+  }
+
+  // update target module
+  targetModule.update(newModule);
+
+  // update nested modules
+  if (newModule.modules) {
+    for (var key in newModule.modules) {
+      if (!targetModule.getChild(key)) {
+        if ((true)) {
+          console.warn(
+            "[vuex] trying to add a new module '" + key + "' on hot reloading, " +
+            'manual reload is needed'
+          );
+        }
+        return
+      }
+      update(
+        path.concat(key),
+        targetModule.getChild(key),
+        newModule.modules[key]
+      );
+    }
+  }
+}
+
+var functionAssert = {
+  assert: function (value) { return typeof value === 'function'; },
+  expected: 'function'
+};
+
+var objectAssert = {
+  assert: function (value) { return typeof value === 'function' ||
+    (typeof value === 'object' && typeof value.handler === 'function'); },
+  expected: 'function or object with "handler" function'
+};
+
+var assertTypes = {
+  getters: functionAssert,
+  mutations: functionAssert,
+  actions: objectAssert
+};
+
+function assertRawModule (path, rawModule) {
+  Object.keys(assertTypes).forEach(function (key) {
+    if (!rawModule[key]) { return }
+
+    var assertOptions = assertTypes[key];
+
+    forEachValue(rawModule[key], function (value, type) {
+      assert(
+        assertOptions.assert(value),
+        makeAssertionMessage(path, key, type, value, assertOptions.expected)
+      );
+    });
+  });
+}
+
+function makeAssertionMessage (path, key, type, value, expected) {
+  var buf = key + " should be " + expected + " but \"" + key + "." + type + "\"";
+  if (path.length > 0) {
+    buf += " in module \"" + (path.join('.')) + "\"";
+  }
+  buf += " is " + (JSON.stringify(value)) + ".";
+  return buf
+}
+
+var Vue; // bind on install
+
+var Store = function Store (options) {
+  var this$1 = this;
+  if ( options === void 0 ) options = {};
+
+  // Auto install if it is not done yet and `window` has `Vue`.
+  // To allow users to avoid auto-installation in some cases,
+  // this code should be placed here. See #731
+  if (!Vue && typeof window !== 'undefined' && window.Vue) {
+    install(window.Vue);
+  }
+
+  if ((true)) {
+    assert(Vue, "must call Vue.use(Vuex) before creating a store instance.");
+    assert(typeof Promise !== 'undefined', "vuex requires a Promise polyfill in this browser.");
+    assert(this instanceof Store, "store must be called with the new operator.");
+  }
+
+  var plugins = options.plugins; if ( plugins === void 0 ) plugins = [];
+  var strict = options.strict; if ( strict === void 0 ) strict = false;
+
+  // store internal state
+  this._committing = false;
+  this._actions = Object.create(null);
+  this._actionSubscribers = [];
+  this._mutations = Object.create(null);
+  this._wrappedGetters = Object.create(null);
+  this._modules = new ModuleCollection(options);
+  this._modulesNamespaceMap = Object.create(null);
+  this._subscribers = [];
+  this._watcherVM = new Vue();
+  this._makeLocalGettersCache = Object.create(null);
+
+  // bind commit and dispatch to self
+  var store = this;
+  var ref = this;
+  var dispatch = ref.dispatch;
+  var commit = ref.commit;
+  this.dispatch = function boundDispatch (type, payload) {
+    return dispatch.call(store, type, payload)
+  };
+  this.commit = function boundCommit (type, payload, options) {
+    return commit.call(store, type, payload, options)
+  };
+
+  // strict mode
+  this.strict = strict;
+
+  var state = this._modules.root.state;
+
+  // init root module.
+  // this also recursively registers all sub-modules
+  // and collects all module getters inside this._wrappedGetters
+  installModule(this, state, [], this._modules.root);
+
+  // initialize the store vm, which is responsible for the reactivity
+  // (also registers _wrappedGetters as computed properties)
+  resetStoreVM(this, state);
+
+  // apply plugins
+  plugins.forEach(function (plugin) { return plugin(this$1); });
+
+  var useDevtools = options.devtools !== undefined ? options.devtools : Vue.config.devtools;
+  if (useDevtools) {
+    devtoolPlugin(this);
+  }
+};
+
+var prototypeAccessors$1 = { state: { configurable: true } };
+
+prototypeAccessors$1.state.get = function () {
+  return this._vm._data.$$state
+};
+
+prototypeAccessors$1.state.set = function (v) {
+  if ((true)) {
+    assert(false, "use store.replaceState() to explicit replace store state.");
+  }
+};
+
+Store.prototype.commit = function commit (_type, _payload, _options) {
+    var this$1 = this;
+
+  // check object-style commit
+  var ref = unifyObjectStyle(_type, _payload, _options);
+    var type = ref.type;
+    var payload = ref.payload;
+    var options = ref.options;
+
+  var mutation = { type: type, payload: payload };
+  var entry = this._mutations[type];
+  if (!entry) {
+    if ((true)) {
+      console.error(("[vuex] unknown mutation type: " + type));
+    }
+    return
+  }
+  this._withCommit(function () {
+    entry.forEach(function commitIterator (handler) {
+      handler(payload);
+    });
+  });
+
+  this._subscribers
+    .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+    .forEach(function (sub) { return sub(mutation, this$1.state); });
+
+  if (
+    ( true) &&
+    options && options.silent
+  ) {
+    console.warn(
+      "[vuex] mutation type: " + type + ". Silent option has been removed. " +
+      'Use the filter functionality in the vue-devtools'
+    );
+  }
+};
+
+Store.prototype.dispatch = function dispatch (_type, _payload) {
+    var this$1 = this;
+
+  // check object-style dispatch
+  var ref = unifyObjectStyle(_type, _payload);
+    var type = ref.type;
+    var payload = ref.payload;
+
+  var action = { type: type, payload: payload };
+  var entry = this._actions[type];
+  if (!entry) {
+    if ((true)) {
+      console.error(("[vuex] unknown action type: " + type));
+    }
+    return
+  }
+
+  try {
+    this._actionSubscribers
+      .slice() // shallow copy to prevent iterator invalidation if subscriber synchronously calls unsubscribe
+      .filter(function (sub) { return sub.before; })
+      .forEach(function (sub) { return sub.before(action, this$1.state); });
+  } catch (e) {
+    if ((true)) {
+      console.warn("[vuex] error in before action subscribers: ");
+      console.error(e);
+    }
+  }
+
+  var result = entry.length > 1
+    ? Promise.all(entry.map(function (handler) { return handler(payload); }))
+    : entry[0](payload);
+
+  return new Promise(function (resolve, reject) {
+    result.then(function (res) {
+      try {
+        this$1._actionSubscribers
+          .filter(function (sub) { return sub.after; })
+          .forEach(function (sub) { return sub.after(action, this$1.state); });
+      } catch (e) {
+        if ((true)) {
+          console.warn("[vuex] error in after action subscribers: ");
+          console.error(e);
+        }
+      }
+      resolve(res);
+    }, function (error) {
+      try {
+        this$1._actionSubscribers
+          .filter(function (sub) { return sub.error; })
+          .forEach(function (sub) { return sub.error(action, this$1.state, error); });
+      } catch (e) {
+        if ((true)) {
+          console.warn("[vuex] error in error action subscribers: ");
+          console.error(e);
+        }
+      }
+      reject(error);
+    });
+  })
+};
+
+Store.prototype.subscribe = function subscribe (fn, options) {
+  return genericSubscribe(fn, this._subscribers, options)
+};
+
+Store.prototype.subscribeAction = function subscribeAction (fn, options) {
+  var subs = typeof fn === 'function' ? { before: fn } : fn;
+  return genericSubscribe(subs, this._actionSubscribers, options)
+};
+
+Store.prototype.watch = function watch (getter, cb, options) {
+    var this$1 = this;
+
+  if ((true)) {
+    assert(typeof getter === 'function', "store.watch only accepts a function.");
+  }
+  return this._watcherVM.$watch(function () { return getter(this$1.state, this$1.getters); }, cb, options)
+};
+
+Store.prototype.replaceState = function replaceState (state) {
+    var this$1 = this;
+
+  this._withCommit(function () {
+    this$1._vm._data.$$state = state;
+  });
+};
+
+Store.prototype.registerModule = function registerModule (path, rawModule, options) {
+    if ( options === void 0 ) options = {};
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+    assert(path.length > 0, 'cannot register the root module by using registerModule.');
+  }
+
+  this._modules.register(path, rawModule);
+  installModule(this, this.state, path, this._modules.get(path), options.preserveState);
+  // reset store to update getters...
+  resetStoreVM(this, this.state);
+};
+
+Store.prototype.unregisterModule = function unregisterModule (path) {
+    var this$1 = this;
+
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  this._modules.unregister(path);
+  this._withCommit(function () {
+    var parentState = getNestedState(this$1.state, path.slice(0, -1));
+    Vue.delete(parentState, path[path.length - 1]);
+  });
+  resetStore(this);
+};
+
+Store.prototype.hasModule = function hasModule (path) {
+  if (typeof path === 'string') { path = [path]; }
+
+  if ((true)) {
+    assert(Array.isArray(path), "module path must be a string or an Array.");
+  }
+
+  return this._modules.isRegistered(path)
+};
+
+Store.prototype.hotUpdate = function hotUpdate (newOptions) {
+  this._modules.update(newOptions);
+  resetStore(this, true);
+};
+
+Store.prototype._withCommit = function _withCommit (fn) {
+  var committing = this._committing;
+  this._committing = true;
+  fn();
+  this._committing = committing;
+};
+
+Object.defineProperties( Store.prototype, prototypeAccessors$1 );
+
+function genericSubscribe (fn, subs, options) {
+  if (subs.indexOf(fn) < 0) {
+    options && options.prepend
+      ? subs.unshift(fn)
+      : subs.push(fn);
+  }
+  return function () {
+    var i = subs.indexOf(fn);
+    if (i > -1) {
+      subs.splice(i, 1);
+    }
+  }
+}
+
+function resetStore (store, hot) {
+  store._actions = Object.create(null);
+  store._mutations = Object.create(null);
+  store._wrappedGetters = Object.create(null);
+  store._modulesNamespaceMap = Object.create(null);
+  var state = store.state;
+  // init all modules
+  installModule(store, state, [], store._modules.root, true);
+  // reset vm
+  resetStoreVM(store, state, hot);
+}
+
+function resetStoreVM (store, state, hot) {
+  var oldVm = store._vm;
+
+  // bind store public getters
+  store.getters = {};
+  // reset local getters cache
+  store._makeLocalGettersCache = Object.create(null);
+  var wrappedGetters = store._wrappedGetters;
+  var computed = {};
+  forEachValue(wrappedGetters, function (fn, key) {
+    // use computed to leverage its lazy-caching mechanism
+    // direct inline function use will lead to closure preserving oldVm.
+    // using partial to return function with only arguments preserved in closure environment.
+    computed[key] = partial(fn, store);
+    Object.defineProperty(store.getters, key, {
+      get: function () { return store._vm[key]; },
+      enumerable: true // for local getters
+    });
+  });
+
+  // use a Vue instance to store the state tree
+  // suppress warnings just in case the user has added
+  // some funky global mixins
+  var silent = Vue.config.silent;
+  Vue.config.silent = true;
+  store._vm = new Vue({
+    data: {
+      $$state: state
+    },
+    computed: computed
+  });
+  Vue.config.silent = silent;
+
+  // enable strict mode for new vm
+  if (store.strict) {
+    enableStrictMode(store);
+  }
+
+  if (oldVm) {
+    if (hot) {
+      // dispatch changes in all subscribed watchers
+      // to force getter re-evaluation for hot reloading.
+      store._withCommit(function () {
+        oldVm._data.$$state = null;
+      });
+    }
+    Vue.nextTick(function () { return oldVm.$destroy(); });
+  }
+}
+
+function installModule (store, rootState, path, module, hot) {
+  var isRoot = !path.length;
+  var namespace = store._modules.getNamespace(path);
+
+  // register in namespace map
+  if (module.namespaced) {
+    if (store._modulesNamespaceMap[namespace] && ("development" !== 'production')) {
+      console.error(("[vuex] duplicate namespace " + namespace + " for the namespaced module " + (path.join('/'))));
+    }
+    store._modulesNamespaceMap[namespace] = module;
+  }
+
+  // set state
+  if (!isRoot && !hot) {
+    var parentState = getNestedState(rootState, path.slice(0, -1));
+    var moduleName = path[path.length - 1];
+    store._withCommit(function () {
+      if ((true)) {
+        if (moduleName in parentState) {
+          console.warn(
+            ("[vuex] state field \"" + moduleName + "\" was overridden by a module with the same name at \"" + (path.join('.')) + "\"")
+          );
+        }
+      }
+      Vue.set(parentState, moduleName, module.state);
+    });
+  }
+
+  var local = module.context = makeLocalContext(store, namespace, path);
+
+  module.forEachMutation(function (mutation, key) {
+    var namespacedType = namespace + key;
+    registerMutation(store, namespacedType, mutation, local);
+  });
+
+  module.forEachAction(function (action, key) {
+    var type = action.root ? key : namespace + key;
+    var handler = action.handler || action;
+    registerAction(store, type, handler, local);
+  });
+
+  module.forEachGetter(function (getter, key) {
+    var namespacedType = namespace + key;
+    registerGetter(store, namespacedType, getter, local);
+  });
+
+  module.forEachChild(function (child, key) {
+    installModule(store, rootState, path.concat(key), child, hot);
+  });
+}
+
+/**
+ * make localized dispatch, commit, getters and state
+ * if there is no namespace, just use root ones
+ */
+function makeLocalContext (store, namespace, path) {
+  var noNamespace = namespace === '';
+
+  var local = {
+    dispatch: noNamespace ? store.dispatch : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if (( true) && !store._actions[type]) {
+          console.error(("[vuex] unknown local action type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      return store.dispatch(type, payload)
+    },
+
+    commit: noNamespace ? store.commit : function (_type, _payload, _options) {
+      var args = unifyObjectStyle(_type, _payload, _options);
+      var payload = args.payload;
+      var options = args.options;
+      var type = args.type;
+
+      if (!options || !options.root) {
+        type = namespace + type;
+        if (( true) && !store._mutations[type]) {
+          console.error(("[vuex] unknown local mutation type: " + (args.type) + ", global type: " + type));
+          return
+        }
+      }
+
+      store.commit(type, payload, options);
+    }
+  };
+
+  // getters and state object must be gotten lazily
+  // because they will be changed by vm update
+  Object.defineProperties(local, {
+    getters: {
+      get: noNamespace
+        ? function () { return store.getters; }
+        : function () { return makeLocalGetters(store, namespace); }
+    },
+    state: {
+      get: function () { return getNestedState(store.state, path); }
+    }
+  });
+
+  return local
+}
+
+function makeLocalGetters (store, namespace) {
+  if (!store._makeLocalGettersCache[namespace]) {
+    var gettersProxy = {};
+    var splitPos = namespace.length;
+    Object.keys(store.getters).forEach(function (type) {
+      // skip if the target getter is not match this namespace
+      if (type.slice(0, splitPos) !== namespace) { return }
+
+      // extract local getter type
+      var localType = type.slice(splitPos);
+
+      // Add a port to the getters proxy.
+      // Define as getter property because
+      // we do not want to evaluate the getters in this time.
+      Object.defineProperty(gettersProxy, localType, {
+        get: function () { return store.getters[type]; },
+        enumerable: true
+      });
+    });
+    store._makeLocalGettersCache[namespace] = gettersProxy;
+  }
+
+  return store._makeLocalGettersCache[namespace]
+}
+
+function registerMutation (store, type, handler, local) {
+  var entry = store._mutations[type] || (store._mutations[type] = []);
+  entry.push(function wrappedMutationHandler (payload) {
+    handler.call(store, local.state, payload);
+  });
+}
+
+function registerAction (store, type, handler, local) {
+  var entry = store._actions[type] || (store._actions[type] = []);
+  entry.push(function wrappedActionHandler (payload) {
+    var res = handler.call(store, {
+      dispatch: local.dispatch,
+      commit: local.commit,
+      getters: local.getters,
+      state: local.state,
+      rootGetters: store.getters,
+      rootState: store.state
+    }, payload);
+    if (!isPromise(res)) {
+      res = Promise.resolve(res);
+    }
+    if (store._devtoolHook) {
+      return res.catch(function (err) {
+        store._devtoolHook.emit('vuex:error', err);
+        throw err
+      })
+    } else {
+      return res
+    }
+  });
+}
+
+function registerGetter (store, type, rawGetter, local) {
+  if (store._wrappedGetters[type]) {
+    if ((true)) {
+      console.error(("[vuex] duplicate getter key: " + type));
+    }
+    return
+  }
+  store._wrappedGetters[type] = function wrappedGetter (store) {
+    return rawGetter(
+      local.state, // local state
+      local.getters, // local getters
+      store.state, // root state
+      store.getters // root getters
+    )
+  };
+}
+
+function enableStrictMode (store) {
+  store._vm.$watch(function () { return this._data.$$state }, function () {
+    if ((true)) {
+      assert(store._committing, "do not mutate vuex store state outside mutation handlers.");
+    }
+  }, { deep: true, sync: true });
+}
+
+function getNestedState (state, path) {
+  return path.reduce(function (state, key) { return state[key]; }, state)
+}
+
+function unifyObjectStyle (type, payload, options) {
+  if (isObject(type) && type.type) {
+    options = payload;
+    payload = type;
+    type = type.type;
+  }
+
+  if ((true)) {
+    assert(typeof type === 'string', ("expects string as the type, but found " + (typeof type) + "."));
+  }
+
+  return { type: type, payload: payload, options: options }
+}
+
+function install (_Vue) {
+  if (Vue && _Vue === Vue) {
+    if ((true)) {
+      console.error(
+        '[vuex] already installed. Vue.use(Vuex) should be called only once.'
+      );
+    }
+    return
+  }
+  Vue = _Vue;
+  applyMixin(Vue);
+}
+
+/**
+ * Reduce the code which written in Vue.js for getting the state.
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} states # Object's item can be a function which accept state and getters for param, you can do something for state and getters in it.
+ * @param {Object}
+ */
+var mapState = normalizeNamespace(function (namespace, states) {
+  var res = {};
+  if (( true) && !isValidMap(states)) {
+    console.error('[vuex] mapState: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(states).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedState () {
+      var state = this.$store.state;
+      var getters = this.$store.getters;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapState', namespace);
+        if (!module) {
+          return
+        }
+        state = module.context.state;
+        getters = module.context.getters;
+      }
+      return typeof val === 'function'
+        ? val.call(this, state, getters)
+        : state[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for committing the mutation
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} mutations # Object's item can be a function which accept `commit` function as the first param, it can accept anthor params. You can commit mutation and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapMutations = normalizeNamespace(function (namespace, mutations) {
+  var res = {};
+  if (( true) && !isValidMap(mutations)) {
+    console.error('[vuex] mapMutations: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(mutations).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedMutation () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // Get the commit method from store
+      var commit = this.$store.commit;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapMutations', namespace);
+        if (!module) {
+          return
+        }
+        commit = module.context.commit;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [commit].concat(args))
+        : commit.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for getting the getters
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} getters
+ * @return {Object}
+ */
+var mapGetters = normalizeNamespace(function (namespace, getters) {
+  var res = {};
+  if (( true) && !isValidMap(getters)) {
+    console.error('[vuex] mapGetters: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(getters).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    // The namespace has been mutated by normalizeNamespace
+    val = namespace + val;
+    res[key] = function mappedGetter () {
+      if (namespace && !getModuleByNamespace(this.$store, 'mapGetters', namespace)) {
+        return
+      }
+      if (( true) && !(val in this.$store.getters)) {
+        console.error(("[vuex] unknown getter: " + val));
+        return
+      }
+      return this.$store.getters[val]
+    };
+    // mark vuex getter for devtools
+    res[key].vuex = true;
+  });
+  return res
+});
+
+/**
+ * Reduce the code which written in Vue.js for dispatch the action
+ * @param {String} [namespace] - Module's namespace
+ * @param {Object|Array} actions # Object's item can be a function which accept `dispatch` function as the first param, it can accept anthor params. You can dispatch action and do any other things in this function. specially, You need to pass anthor params from the mapped function.
+ * @return {Object}
+ */
+var mapActions = normalizeNamespace(function (namespace, actions) {
+  var res = {};
+  if (( true) && !isValidMap(actions)) {
+    console.error('[vuex] mapActions: mapper parameter must be either an Array or an Object');
+  }
+  normalizeMap(actions).forEach(function (ref) {
+    var key = ref.key;
+    var val = ref.val;
+
+    res[key] = function mappedAction () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+
+      // get dispatch function from store
+      var dispatch = this.$store.dispatch;
+      if (namespace) {
+        var module = getModuleByNamespace(this.$store, 'mapActions', namespace);
+        if (!module) {
+          return
+        }
+        dispatch = module.context.dispatch;
+      }
+      return typeof val === 'function'
+        ? val.apply(this, [dispatch].concat(args))
+        : dispatch.apply(this.$store, [val].concat(args))
+    };
+  });
+  return res
+});
+
+/**
+ * Rebinding namespace param for mapXXX function in special scoped, and return them by simple object
+ * @param {String} namespace
+ * @return {Object}
+ */
+var createNamespacedHelpers = function (namespace) { return ({
+  mapState: mapState.bind(null, namespace),
+  mapGetters: mapGetters.bind(null, namespace),
+  mapMutations: mapMutations.bind(null, namespace),
+  mapActions: mapActions.bind(null, namespace)
+}); };
+
+/**
+ * Normalize the map
+ * normalizeMap([1, 2, 3]) => [ { key: 1, val: 1 }, { key: 2, val: 2 }, { key: 3, val: 3 } ]
+ * normalizeMap({a: 1, b: 2, c: 3}) => [ { key: 'a', val: 1 }, { key: 'b', val: 2 }, { key: 'c', val: 3 } ]
+ * @param {Array|Object} map
+ * @return {Object}
+ */
+function normalizeMap (map) {
+  if (!isValidMap(map)) {
+    return []
+  }
+  return Array.isArray(map)
+    ? map.map(function (key) { return ({ key: key, val: key }); })
+    : Object.keys(map).map(function (key) { return ({ key: key, val: map[key] }); })
+}
+
+/**
+ * Validate whether given map is valid or not
+ * @param {*} map
+ * @return {Boolean}
+ */
+function isValidMap (map) {
+  return Array.isArray(map) || isObject(map)
+}
+
+/**
+ * Return a function expect two param contains namespace and map. it will normalize the namespace and then the param's function will handle the new namespace and the map.
+ * @param {Function} fn
+ * @return {Function}
+ */
+function normalizeNamespace (fn) {
+  return function (namespace, map) {
+    if (typeof namespace !== 'string') {
+      map = namespace;
+      namespace = '';
+    } else if (namespace.charAt(namespace.length - 1) !== '/') {
+      namespace += '/';
+    }
+    return fn(namespace, map)
+  }
+}
+
+/**
+ * Search a special module from store by namespace. if module not exist, print error message.
+ * @param {Object} store
+ * @param {String} helper
+ * @param {String} namespace
+ * @return {Object}
+ */
+function getModuleByNamespace (store, helper, namespace) {
+  var module = store._modulesNamespaceMap[namespace];
+  if (( true) && !module) {
+    console.error(("[vuex] module namespace not found in " + helper + "(): " + namespace));
+  }
+  return module
+}
+
+// Credits: borrowed code from fcomb/redux-logger
+
+function createLogger (ref) {
+  if ( ref === void 0 ) ref = {};
+  var collapsed = ref.collapsed; if ( collapsed === void 0 ) collapsed = true;
+  var filter = ref.filter; if ( filter === void 0 ) filter = function (mutation, stateBefore, stateAfter) { return true; };
+  var transformer = ref.transformer; if ( transformer === void 0 ) transformer = function (state) { return state; };
+  var mutationTransformer = ref.mutationTransformer; if ( mutationTransformer === void 0 ) mutationTransformer = function (mut) { return mut; };
+  var actionFilter = ref.actionFilter; if ( actionFilter === void 0 ) actionFilter = function (action, state) { return true; };
+  var actionTransformer = ref.actionTransformer; if ( actionTransformer === void 0 ) actionTransformer = function (act) { return act; };
+  var logMutations = ref.logMutations; if ( logMutations === void 0 ) logMutations = true;
+  var logActions = ref.logActions; if ( logActions === void 0 ) logActions = true;
+  var logger = ref.logger; if ( logger === void 0 ) logger = console;
+
+  return function (store) {
+    var prevState = deepCopy(store.state);
+
+    if (typeof logger === 'undefined') {
+      return
+    }
+
+    if (logMutations) {
+      store.subscribe(function (mutation, state) {
+        var nextState = deepCopy(state);
+
+        if (filter(mutation, prevState, nextState)) {
+          var formattedTime = getFormattedTime();
+          var formattedMutation = mutationTransformer(mutation);
+          var message = "mutation " + (mutation.type) + formattedTime;
+
+          startMessage(logger, message, collapsed);
+          logger.log('%c prev state', 'color: #9E9E9E; font-weight: bold', transformer(prevState));
+          logger.log('%c mutation', 'color: #03A9F4; font-weight: bold', formattedMutation);
+          logger.log('%c next state', 'color: #4CAF50; font-weight: bold', transformer(nextState));
+          endMessage(logger);
+        }
+
+        prevState = nextState;
+      });
+    }
+
+    if (logActions) {
+      store.subscribeAction(function (action, state) {
+        if (actionFilter(action, state)) {
+          var formattedTime = getFormattedTime();
+          var formattedAction = actionTransformer(action);
+          var message = "action " + (action.type) + formattedTime;
+
+          startMessage(logger, message, collapsed);
+          logger.log('%c action', 'color: #03A9F4; font-weight: bold', formattedAction);
+          endMessage(logger);
+        }
+      });
+    }
+  }
+}
+
+function startMessage (logger, message, collapsed) {
+  var startMessage = collapsed
+    ? logger.groupCollapsed
+    : logger.group;
+
+  // render
+  try {
+    startMessage.call(logger, message);
+  } catch (e) {
+    logger.log(message);
+  }
+}
+
+function endMessage (logger) {
+  try {
+    logger.groupEnd();
+  } catch (e) {
+    logger.log('—— log end ——');
+  }
+}
+
+function getFormattedTime () {
+  var time = new Date();
+  return (" @ " + (pad(time.getHours(), 2)) + ":" + (pad(time.getMinutes(), 2)) + ":" + (pad(time.getSeconds(), 2)) + "." + (pad(time.getMilliseconds(), 3)))
+}
+
+function repeat (str, times) {
+  return (new Array(times + 1)).join(str)
+}
+
+function pad (num, maxLength) {
+  return repeat('0', maxLength - num.toString().length) + num
+}
+
+var index = {
+  Store: Store,
+  install: install,
+  version: '3.5.1',
+  mapState: mapState,
+  mapMutations: mapMutations,
+  mapGetters: mapGetters,
+  mapActions: mapActions,
+  createNamespacedHelpers: createNamespacedHelpers,
+  createLogger: createLogger
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (index);
+
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -82942,425 +84533,6 @@ module.exports = function(module) {
 	}
 	return module;
 };
-
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Addresses/createAddress.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/Pages/Addresses/createAddress.vue ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _createAddress_vue_vue_type_template_id_f0b76edc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createAddress.vue?vue&type=template&id=f0b76edc& */ "./resources/js/Pages/Addresses/createAddress.vue?vue&type=template&id=f0b76edc&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _createAddress_vue_vue_type_template_id_f0b76edc___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _createAddress_vue_vue_type_template_id_f0b76edc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/Pages/Addresses/createAddress.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Addresses/createAddress.vue?vue&type=template&id=f0b76edc&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/Pages/Addresses/createAddress.vue?vue&type=template&id=f0b76edc& ***!
-  \***************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createAddress_vue_vue_type_template_id_f0b76edc___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./createAddress.vue?vue&type=template&id=f0b76edc& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/createAddress.vue?vue&type=template&id=f0b76edc&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createAddress_vue_vue_type_template_id_f0b76edc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createAddress_vue_vue_type_template_id_f0b76edc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Addresses/deleteAddress.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/Pages/Addresses/deleteAddress.vue ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _deleteAddress_vue_vue_type_template_id_605cf083___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./deleteAddress.vue?vue&type=template&id=605cf083& */ "./resources/js/Pages/Addresses/deleteAddress.vue?vue&type=template&id=605cf083&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _deleteAddress_vue_vue_type_template_id_605cf083___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _deleteAddress_vue_vue_type_template_id_605cf083___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/Pages/Addresses/deleteAddress.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Addresses/deleteAddress.vue?vue&type=template&id=605cf083&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/Pages/Addresses/deleteAddress.vue?vue&type=template&id=605cf083& ***!
-  \***************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteAddress_vue_vue_type_template_id_605cf083___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./deleteAddress.vue?vue&type=template&id=605cf083& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/deleteAddress.vue?vue&type=template&id=605cf083&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteAddress_vue_vue_type_template_id_605cf083___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteAddress_vue_vue_type_template_id_605cf083___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Addresses/details.vue":
-/*!**************************************************!*\
-  !*** ./resources/js/Pages/Addresses/details.vue ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./details.vue?vue&type=template&id=4d03d008& */ "./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/Pages/Addresses/details.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008& ***!
-  \*********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./details.vue?vue&type=template&id=4d03d008& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Addresses/editAddress.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/Pages/Addresses/editAddress.vue ***!
-  \******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _editAddress_vue_vue_type_template_id_fa18b178___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editAddress.vue?vue&type=template&id=fa18b178& */ "./resources/js/Pages/Addresses/editAddress.vue?vue&type=template&id=fa18b178&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-var script = {}
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
-  script,
-  _editAddress_vue_vue_type_template_id_fa18b178___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _editAddress_vue_vue_type_template_id_fa18b178___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/Pages/Addresses/editAddress.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Addresses/editAddress.vue?vue&type=template&id=fa18b178&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/Pages/Addresses/editAddress.vue?vue&type=template&id=fa18b178& ***!
-  \*************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editAddress_vue_vue_type_template_id_fa18b178___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./editAddress.vue?vue&type=template&id=fa18b178& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/editAddress.vue?vue&type=template&id=fa18b178&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editAddress_vue_vue_type_template_id_fa18b178___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editAddress_vue_vue_type_template_id_fa18b178___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Contacts/createContact.vue":
-/*!*******************************************************!*\
-  !*** ./resources/js/Pages/Contacts/createContact.vue ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _createContact_vue_vue_type_template_id_ffbd609e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createContact.vue?vue&type=template&id=ffbd609e& */ "./resources/js/Pages/Contacts/createContact.vue?vue&type=template&id=ffbd609e&");
-/* harmony import */ var _createContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createContact.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Contacts/createContact.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _createContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _createContact_vue_vue_type_template_id_ffbd609e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _createContact_vue_vue_type_template_id_ffbd609e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/Pages/Contacts/createContact.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Contacts/createContact.vue?vue&type=script&lang=js&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/Pages/Contacts/createContact.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_createContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./createContact.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/createContact.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_createContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Contacts/createContact.vue?vue&type=template&id=ffbd609e&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/Pages/Contacts/createContact.vue?vue&type=template&id=ffbd609e& ***!
-  \**************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createContact_vue_vue_type_template_id_ffbd609e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./createContact.vue?vue&type=template&id=ffbd609e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/createContact.vue?vue&type=template&id=ffbd609e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createContact_vue_vue_type_template_id_ffbd609e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createContact_vue_vue_type_template_id_ffbd609e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Contacts/deleteContact.vue":
-/*!*******************************************************!*\
-  !*** ./resources/js/Pages/Contacts/deleteContact.vue ***!
-  \*******************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _deleteContact_vue_vue_type_template_id_58d9f7a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./deleteContact.vue?vue&type=template&id=58d9f7a2& */ "./resources/js/Pages/Contacts/deleteContact.vue?vue&type=template&id=58d9f7a2&");
-/* harmony import */ var _deleteContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./deleteContact.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Contacts/deleteContact.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _deleteContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _deleteContact_vue_vue_type_template_id_58d9f7a2___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _deleteContact_vue_vue_type_template_id_58d9f7a2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/Pages/Contacts/deleteContact.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Contacts/deleteContact.vue?vue&type=script&lang=js&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/Pages/Contacts/deleteContact.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./deleteContact.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/deleteContact.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Contacts/deleteContact.vue?vue&type=template&id=58d9f7a2&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/Pages/Contacts/deleteContact.vue?vue&type=template&id=58d9f7a2& ***!
-  \**************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteContact_vue_vue_type_template_id_58d9f7a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./deleteContact.vue?vue&type=template&id=58d9f7a2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/deleteContact.vue?vue&type=template&id=58d9f7a2&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteContact_vue_vue_type_template_id_58d9f7a2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_deleteContact_vue_vue_type_template_id_58d9f7a2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Contacts/editContact.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/Pages/Contacts/editContact.vue ***!
-  \*****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _editContact_vue_vue_type_template_id_141f4f23___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./editContact.vue?vue&type=template&id=141f4f23& */ "./resources/js/Pages/Contacts/editContact.vue?vue&type=template&id=141f4f23&");
-/* harmony import */ var _editContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editContact.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Contacts/editContact.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _editContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _editContact_vue_vue_type_template_id_141f4f23___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _editContact_vue_vue_type_template_id_141f4f23___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/Pages/Contacts/editContact.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Contacts/editContact.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/Pages/Contacts/editContact.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./editContact.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/editContact.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_editContact_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Contacts/editContact.vue?vue&type=template&id=141f4f23&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/Pages/Contacts/editContact.vue?vue&type=template&id=141f4f23& ***!
-  \************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editContact_vue_vue_type_template_id_141f4f23___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./editContact.vue?vue&type=template&id=141f4f23& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/editContact.vue?vue&type=template&id=141f4f23&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editContact_vue_vue_type_template_id_141f4f23___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_editContact_vue_vue_type_template_id_141f4f23___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
 
 
 /***/ }),
@@ -83444,24 +84616,32 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router */ "./resources/js/router.js");
-/* harmony import */ var view_design__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! view-design */ "./node_modules/view-design/dist/iview.js");
-/* harmony import */ var view_design__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(view_design__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var view_design_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! view-design/dist/styles/iview.css */ "./node_modules/view-design/dist/styles/iview.css");
-/* harmony import */ var view_design_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(view_design_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _comonajax__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./comonajax */ "./resources/js/comonajax.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
+/* harmony import */ var view_design__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! view-design */ "./node_modules/view-design/dist/iview.js");
+/* harmony import */ var view_design__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(view_design__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var view_design_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! view-design/dist/styles/iview.css */ "./node_modules/view-design/dist/styles/iview.css");
+/* harmony import */ var view_design_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(view_design_dist_styles_iview_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var view_design_dist_locale_en_US__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! view-design/dist/locale/en-US */ "./node_modules/view-design/dist/locale/en-US.js");
+/* harmony import */ var view_design_dist_locale_en_US__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(view_design_dist_locale_en_US__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _comonajax__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./comonajax */ "./resources/js/comonajax.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
 
-Vue.use(view_design__WEBPACK_IMPORTED_MODULE_1___default.a);
 
-Vue.mixin(_comonajax__WEBPACK_IMPORTED_MODULE_3__["default"]);
+
+Vue.use(view_design__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  locale: view_design_dist_locale_en_US__WEBPACK_IMPORTED_MODULE_4___default.a
+});
+
+Vue.mixin(_comonajax__WEBPACK_IMPORTED_MODULE_5__["default"]);
 Vue.component('mainapp', __webpack_require__(/*! ./mainapp */ "./resources/js/mainapp.vue")["default"]);
 var app = new Vue({
   el: '#app',
-  router: _router__WEBPACK_IMPORTED_MODULE_0__["default"]
+  router: _router__WEBPACK_IMPORTED_MODULE_0__["default"],
+  store: _store__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 
 /***/ }),
@@ -83660,56 +84840,210 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _Pages_Contacts_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Pages/Contacts/index */ "./resources/js/Pages/Contacts/index.vue");
-/* harmony import */ var _Pages_Contacts_createContact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Pages/Contacts/createContact */ "./resources/js/Pages/Contacts/createContact.vue");
-/* harmony import */ var _Pages_Contacts_editContact__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Pages/Contacts/editContact */ "./resources/js/Pages/Contacts/editContact.vue");
-/* harmony import */ var _Pages_Contacts_deleteContact__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Pages/Contacts/deleteContact */ "./resources/js/Pages/Contacts/deleteContact.vue");
-/* harmony import */ var _Pages_Addresses_details__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Pages/Addresses/details */ "./resources/js/Pages/Addresses/details.vue");
-/* harmony import */ var _Pages_Addresses_createAddress__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Pages/Addresses/createAddress */ "./resources/js/Pages/Addresses/createAddress.vue");
-/* harmony import */ var _Pages_Addresses_editAddress__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Pages/Addresses/editAddress */ "./resources/js/Pages/Addresses/editAddress.vue");
-/* harmony import */ var _Pages_Addresses_deleteAddress__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Pages/Addresses/deleteAddress */ "./resources/js/Pages/Addresses/deleteAddress.vue");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); // contact routes
 
-
-
-
- // address routes
-
-
-
-
+ // import createContact from './Pages/Contacts/createContact'
+// import editContact from './Pages/Contacts/editContact'
+// import deleteContact from './Pages/Contacts/deleteContact'
+// address routes
+// import details from './Pages/Addresses/details'
+// import createAddress from './Pages/Addresses/createAddress'
+// import editAddress from './Pages/Addresses/editAddress'
+// import deleteAddress from './Pages/Addresses/deleteAddress'
 
 var routes = [// Project routes
 {
   path: '/',
-  component: _Pages_Contacts_index__WEBPACK_IMPORTED_MODULE_2__["default"]
-}, {
-  path: '/createContact',
-  component: _Pages_Contacts_createContact__WEBPACK_IMPORTED_MODULE_3__["default"]
-}, {
-  path: '/editContact',
-  component: _Pages_Contacts_editContact__WEBPACK_IMPORTED_MODULE_4__["default"]
-}, {
-  path: '/deleteContact',
-  component: _Pages_Contacts_deleteContact__WEBPACK_IMPORTED_MODULE_5__["default"]
-}, {
-  path: '/details',
-  name: _Pages_Addresses_details__WEBPACK_IMPORTED_MODULE_6__["default"],
-  component: _Pages_Addresses_details__WEBPACK_IMPORTED_MODULE_6__["default"]
-}, {
-  path: '/createAddress',
-  component: _Pages_Addresses_createAddress__WEBPACK_IMPORTED_MODULE_7__["default"]
-}, {
-  path: '/editAddress',
-  component: _Pages_Addresses_editAddress__WEBPACK_IMPORTED_MODULE_8__["default"]
-}, {
-  path: '/deleteAddress',
-  component: _Pages_Addresses_deleteAddress__WEBPACK_IMPORTED_MODULE_9__["default"]
-}];
+  component: _Pages_Contacts_index__WEBPACK_IMPORTED_MODULE_2__["default"],
+  name: _Pages_Contacts_index__WEBPACK_IMPORTED_MODULE_2__["default"]
+} // {
+//     path: '/createContact',
+//     component: createContact,
+//     name: createContact,
+// },
+// {
+//     path: '/editContact/{id}',
+//     component: editContact,
+//     name: editContact,
+// },
+// {
+//     path: '/deleteContact',
+//     component: deleteContact,
+//     name: deleteContact,
+// },
+// {
+//     path: '/details/{id}',
+//     name: details,
+//     component: details,
+// },
+// {
+//     path: '/createAddress',
+//     component: createAddress,
+// },
+// {
+//     path: '/editAddress/{id}',
+//     component: editAddress,
+//     name: editAddress,
+// },
+// {
+//     path: '/deleteAddress',
+//     component: deleteAddress,
+// },
+];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   mode: 'history',
   routes: routes
+}));
+
+/***/ }),
+
+/***/ "./resources/js/store.js":
+/*!*******************************!*\
+  !*** ./resources/js/store.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+var _getters;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
+  state: {
+    contactsList: [],
+    contactData: {
+      id: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      birthday: '',
+      address: []
+    },
+    deleteContactModalObj: {
+      showDeleteModal: false,
+      deleteUrl: '',
+      data: null,
+      deletingIndex: -1,
+      isDeleted: false
+    },
+    editContactModalObj: {
+      showEditModal: false,
+      editUrl: '',
+      contactData: null,
+      editingIndex: -1,
+      isEdited: false
+    },
+    detailsModalObj: {
+      showEditModal: false,
+      editUrl: '',
+      contactData: null,
+      editingIndex: -1,
+      isEdited: false,
+      addressListData: []
+    },
+    deleteAddressModalObj: {
+      showDeleteAddressModal: false,
+      deleteUrl: '',
+      addressData: null,
+      deletingIndex: -1,
+      isDeleted: false
+    },
+    editAddressModalObj: {
+      showEditModal: false,
+      editUrl: '',
+      contactData: null,
+      editingIndex: -1,
+      isEdited: false,
+      addressListData: []
+    },
+    user: false,
+    userPermission: null
+  },
+  getters: (_getters = {
+    // Contact getters
+    getContact: function getContact(state) {
+      return state.data;
+    },
+    getContactList: function getContactList(state) {
+      return state.contactsList;
+    },
+    getDeleteModalObj: function getDeleteModalObj(state) {
+      return state.deleteModalObj;
+    },
+    getEditContactModalObj: function getEditContactModalObj(state) {
+      return state.editContactModalObj;
+    },
+    // Address getters
+    getDetailsModalObj: function getDetailsModalObj(state) {
+      return state.detailsModalObj;
+    },
+    getAddressModalObj: function getAddressModalObj(state) {
+      return state.editAddressModalObj;
+    },
+    getEditAddressModalObj: function getEditAddressModalObj(state) {
+      return state.editAddressModalObj;
+    }
+  }, _defineProperty(_getters, "getEditAddressModalObj", function getEditAddressModalObj(state) {
+    return state.editAddressModalObj;
+  }), _defineProperty(_getters, "getEditAddressModalObj", function getEditAddressModalObj(state) {
+    return state.editAddressModalObj;
+  }), _getters),
+  mutations: {
+    // Contact Mutations
+    setEditingContactModal: function setEditingContactModal(state, data) {
+      var deleteModalObj = {
+        showDeleteModal: false,
+        deleteUrl: '',
+        data: null,
+        deletingIndex: -1,
+        isDeleted: data
+      };
+      state.deleteModalObj = deleteModalObj;
+    },
+    setEditingContactModalObj: function setEditingContactModalObj(state, contactData) {
+      state.editContactModalObj = contactData;
+    },
+    setDeleteContactModal: function setDeleteContactModal(state, contactData) {
+      var deleteContactModalObj = {
+        showDeleteContactModal: false,
+        deleteUrl: '',
+        contactData: null,
+        deletingIndex: -1,
+        isDeleted: contactData
+      };
+      state.deleteContactModalObj = deleteContactModalObj;
+    },
+    setDeletingContactModalObj: function setDeletingContactModalObj(state, contactData) {
+      state.deleteContactModalObj = contactData;
+    },
+    // Address Mutations
+    setContactData: function setContactData(state, contactData) {
+      state.contactData = contactData;
+    },
+    // Authentication
+    setUpdateUser: function setUpdateUser(state, data) {
+      state.user = data;
+    },
+    setUserPermission: function setUserPermission(state, data) {
+      state.userPermission = data;
+    }
+  } // actions :{
+  //     changeCounterAction({commit}, data){
+  //         commit('changeTheCounter', data)
+  //     }
+  // }
+
 }));
 
 /***/ }),
