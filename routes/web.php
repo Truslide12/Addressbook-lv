@@ -21,16 +21,16 @@ Route::get('/', function () {
 });
 
 // Contact Routes
-    Route::get('/app/index', 'App\Http\Controllers\ContactController@index'); //->name('index');
-    Route::post('/app/createContact', 'App\Http\Controllers\ContactController@createContact'); //->name('createContact');
-    Route::post('/app/Contacts/editContact', 'App\Http\Controllers\ContactController@editContact')->name('editContact');
-    Route::post('/app/Contacts/deleteContact', 'App\Http\Controllers\ContactController@deleteContact')->name('deleteContact');
+    Route::get('/app/index', 'App\Http\Controllers\ContactController@index');
+    Route::post('/app/createContact', 'App\Http\Controllers\ContactController@createContact');
+    Route::post('/app/editContact/{id}', 'App\Http\Controllers\ContactController@editContact');
+    Route::post('/app/deleteContact/{id}', 'App\Http\Controllers\ContactController@deleteContact');
 
 // Addresses Routes
-    Route::get('/Addresses/details', 'App\Http\Controllers\ContactController@details')->name('details');
-    Route::post('/Addresses/createAddress', 'App\Http\Controllers\ContactController@createAddress')->name('createAddress');
-    Route::post('/Addresses/editAddress', 'App\Http\Controllers\ContactController@editAddress')->name('editAddress');
-    Route::post('/Addresses/deleteAddress', 'App\Http\Controllers\ContactController@deleteAddress')->name('deleteAddress');
+    Route::get('/app/details/{id}', 'App\Http\Controllers\ContactController@details');
+    Route::post('/app/createAddress', 'App\Http\Controllers\ContactController@createAddress');
+    Route::post('/app/editAddress/{id}', 'App\Http\Controllers\ContactController@editAddress');
+    Route::post('/app/deleteAddress/{id}', 'App\Http\Controllers\ContactController@deleteAddress');
 
 // ue Spa
 Route::any('{slug}', function(){

@@ -64,10 +64,14 @@ class ContactController extends Controller
     }
 
     // Addresses
-    public function details() {
-        $contacts = Contact::orderBy('id', 'desc')->get();
-        dd($contacts);
-        return  $contacts;
+    public function details($id) {
+        $contact = Contact::find($id);
+        dump($contact->addresses);
+        if($contact) {
+            return view('contacts.details')->with('contact', $contact);
+        } else {
+            return redirect('contacts');
+        }
     }
 
     public function createAddress(Request $request) {
