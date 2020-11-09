@@ -9,7 +9,7 @@ import index from './Pages/Contacts/index'
 // import deleteContact from './Pages/Contacts/deleteContact'
 
 // address routes
-// import details from './Pages/Addresses/details'
+import details from './Pages/Addresses/details'
 // import createAddress from './Pages/Addresses/createAddress'
 // import editAddress from './Pages/Addresses/editAddress'
 // import deleteAddress from './Pages/Addresses/deleteAddress'
@@ -36,11 +36,11 @@ const routes = [
     //     component: deleteContact,
     //     name: deleteContact,
     // },
-    // {
-    //     path: '/details/{id}',
-    //     name: details,
-    //     component: details,
-    // },
+    {
+        path: '/details/{id}',
+        name: details,
+        component: details,
+    },
     // {
     //     path: '/createAddress',
     //     component: createAddress,

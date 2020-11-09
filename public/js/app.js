@@ -1911,6 +1911,188 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import addresses pages
+// import createAddressModal from './createAddressModal'
+// import editAddressModal from './editAddressModal'
+// import deleteAddressModal from './deleteAddressModal'
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      contactData: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        birthday: '',
+        address: []
+      },
+      addressList: [],
+      token: '',
+      isAdding: false,
+      createAddressModal: false,
+      editAddressModal: false,
+      isCreatingAddress: false,
+      index: -1,
+      showDeleteModal: false,
+      isDeleing: false,
+      deleteItem: {},
+      deletingIndex: -1,
+      deletingAddressIndex: -1,
+      websiteSettings: []
+    };
+  },
+  mounted: function mounted() {
+    this.contactData = this.$store.getters.getContactData;
+  },
+  created: function created() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var i, res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _this.token = window.Laravel.csrfToken;
+              i = contactData.id;
+              _context.next = 4;
+              return _this.callApi('get', '/app/details', i);
+
+            case 4:
+              res = _context.sent;
+
+              if (res.status === 200) {
+                _this.addressLists = res.data;
+              } else {
+                _this.swr(error);
+              }
+
+            case 6:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  showCreateAddressModal: function showCreateAddressModal(address, index) {
+    var createAddressModalObj = {
+      showCreateAddressModal: true,
+      createUrl: 'app/createAddress',
+      addressData: address,
+      deletingAddressIndex: i,
+      isAddressDeleted: false
+    };
+    this.editAddressData = editAddressModalObj;
+    this.editModal = true;
+    this.index = index;
+  },
+  showEditAddressModal: function showEditAddressModal(address, index) {
+    var editAddressModalObj = {
+      showEditAddressModal: true,
+      deleteUrl: 'app/editAddress',
+      addressData: address,
+      deletingAddressIndex: i,
+      isAddressDeleted: false
+    };
+    this.editData = editContactModalObj;
+    this.editModal = true;
+    this.index = index;
+  },
+  showDeletingModal: function showDeletingModal(contact, i) {
+    var deleteContactModalObj = {
+      showDeleteModal: true,
+      deleteUrl: 'app/deleteContact',
+      contactData: contact,
+      deletingIndex: i,
+      isDeleted: false
+    };
+    this.$store.commit('setDeletingModalObj', deleteContactModalObj);
+    console.log('delete method called');
+    this.deleteItem = contact;
+    this.deletingIndex = i;
+    this.showDeleteModal = true;
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/index.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/index.vue?vue&type=script&lang=js& ***!
@@ -1931,27 +2113,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2229,6 +2390,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       websiteSettings: []
     }, "token", '');
   },
+  mounted: function mounted() {
+    this.contactData = this.$store.getter.getContactData;
+  },
   created: function created() {
     var _this = this;
 
@@ -2486,21 +2650,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             switch (_context4.prev = _context4.next) {
               case 0:
                 _this4.token = window.Laravel.csrfToken;
-                console.log(contact);
-                _context4.next = 4;
-                return _this4.callApi('get', 'app/details', 2);
+                console.log(contact); // set the contactDetails info to the current contact
 
-              case 4:
+                _this4.$store.commit("setContactData", contact);
+
+                _context4.next = 5;
+                return _this4.callApi('get', "app/details", contact);
+
+              case 5:
                 res = _context4.sent;
-                // this.addressLists = res.addresses
-                console.log(res); // if(res.status===200){
+                consol.log(res); // this.addressLists = res.addresses
+                // console.log(res)
+                // if(res.status===200){
                 //     this.addressLists = res.data
                 //     this.showingDetailsModal = true
                 // } else {
                 //     this.swr(error)
                 // }
 
-              case 6:
+              case 7:
               case "end":
                 return _context4.stop();
             }
@@ -2532,44 +2700,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.deletingIndex = i;
       this.showDeletingContactModal = true;
       console.log(this.contactData);
-    },
-    deleteContact: function deleteContact() {
-      var _this5 = this;
+    } // async deleteContact(){
+    //     this.isDeleting = true
+    //     console.log('This is the contact data to be deleted')
+    //     console.log(this.contactData)
+    // 	const res = await this.callApi('post', 'app/deleteContact', this.contactData)
+    // 	if(res.status===200){
+    // 		this.tags.splice(this.deletingIndex , 1)
+    // 		this.s('Tag has been deleted successfully!')
+    // 	}else{
+    // 		this.swr()
+    // 	}
+    // 	this.isDeleting = false
+    // 	this.showDeleteConactModal = false
+    // },
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-        var res;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                _this5.isDeleting = true;
-                console.log('This is the contact data to be deleted');
-                console.log(_this5.contactData);
-                _context5.next = 5;
-                return _this5.callApi('post', 'app/deleteContact/', _this5.contactData);
-
-              case 5:
-                res = _context5.sent;
-
-                if (res.status === 200) {
-                  _this5.tags.splice(_this5.deletingIndex, 1);
-
-                  _this5.s('Tag has been deleted successfully!');
-                } else {
-                  _this5.swr();
-                }
-
-                _this5.isDeleting = false;
-                _this5.showDeleteConactModal = false;
-
-              case 9:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5);
-      }))();
-    }
   },
   getters: {// getContactData(state){
     //    return state.contactData
@@ -67286,6 +67431,96 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content" }, [
+    _c("h1", [_vm._v("This is the Contact Details Page")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container-fluid" }, [
+      _c(
+        "div",
+        {
+          staticClass:
+            "_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20"
+        },
+        [
+          _c(
+            "p",
+            { staticClass: "_title0" },
+            [
+              _vm._v("Contact Details "),
+              _c(
+                "Button",
+                {
+                  attrs: { type: "info", size: "small" },
+                  on: {
+                    click: function($event) {
+                      return _vm.$router.push({
+                        path: "createAddress",
+                        params: { id: _vm.$route.params.id }
+                      })
+                    }
+                  }
+                },
+                [_vm._v("Add Address")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm._m(0)
+        ]
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "_overflow _table_div" }, [
+      _c("table", { staticClass: "_table" }, [
+        _vm._v(" -->\n                            "),
+        _vm._v(" "),
+        _c("tr", [
+          _c("th", [_vm._v("Number")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Street")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("City")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("State")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Zip")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Type")]),
+          _vm._v(" "),
+          _c("th", [_vm._v("Action")])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/index.vue?vue&type=template&id=33783eff&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/index.vue?vue&type=template&id=33783eff& ***!
@@ -67363,19 +67598,15 @@ var render = function() {
                           [
                             _c(
                               "Button",
-                              {
-                                attrs: { type: "info", size: "small" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.showDetailsModal(contacts, i)
-                                  }
-                                }
-                              },
+                              { attrs: { type: "info", size: "small" } },
                               [
-                                _vm._v(
-                                  "Details\n                                        "
+                                _c(
+                                  "router-link",
+                                  { attrs: { to: { path: "/details" } } },
+                                  [_vm._v("Details")]
                                 )
-                              ]
+                              ],
+                              1
                             ),
                             _vm._v(" "),
                             _c(
@@ -67877,6 +68108,14 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
+                  _c("h4", [
+                    _vm._v(
+                      _vm._s(_vm.contactData.firstName) +
+                        " " +
+                        _vm._s(_vm.contactData.lastName)
+                    )
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "_overflow _table_div" }, [
                     _c(
                       "table",
@@ -67934,25 +68173,17 @@ var render = function() {
                                 _c(
                                   "Button",
                                   {
-                                    attrs: {
-                                      type: "error",
-                                      size: "small",
-                                      loading: addresses.isDeleting
-                                    },
+                                    attrs: { type: "error", size: "small" },
                                     on: {
                                       click: function($event) {
-                                        return _vm.showDeleteAddressModal(
-                                          addresses,
-                                          i
-                                        )
+                                        return _vm.$router.push({
+                                          path: "deleteContact",
+                                          params: { id: _vm.$route.params.id }
+                                        })
                                       }
                                     }
                                   },
-                                  [
-                                    _vm._v(
-                                      "Delete\n                                        "
-                                    )
-                                  ]
+                                  [_vm._v("Delete")]
                                 )
                               ],
                               1
@@ -68015,27 +68246,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _vm._m(0),
+    _c("div", { staticClass: "_1side_menu" }, [
+      _c(
+        "div",
+        { staticClass: "_1side_menu_logo" },
+        [
+          _c("router-link", { attrs: { to: "/" } }, [
+            _c("h3", { staticStyle: { "text-align": "center" } }, [
+              _vm._v("Address Book")
+            ])
+          ])
+        ],
+        1
+      )
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col" }, [_c("router-view")], 1)
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "_1side_menu" }, [
-      _c("div", { staticClass: "_1side_menu_logo" }, [
-        _c("h3", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("Address Book")
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -84537,6 +84768,75 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/Pages/Addresses/details.vue":
+/*!**************************************************!*\
+  !*** ./resources/js/Pages/Addresses/details.vue ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./details.vue?vue&type=template&id=4d03d008& */ "./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&");
+/* harmony import */ var _details_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./details.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _details_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Pages/Addresses/details.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js&":
+/*!***************************************************************************!*\
+  !*** ./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./details.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008& ***!
+  \*********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./details.vue?vue&type=template&id=4d03d008& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Pages/Contacts/index.vue":
 /*!***********************************************!*\
   !*** ./resources/js/Pages/Contacts/index.vue ***!
@@ -84840,6 +85140,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _Pages_Contacts_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Pages/Contacts/index */ "./resources/js/Pages/Contacts/index.vue");
+/* harmony import */ var _Pages_Addresses_details__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Pages/Addresses/details */ "./resources/js/Pages/Addresses/details.vue");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); // contact routes
@@ -84848,8 +85149,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 // import editContact from './Pages/Contacts/editContact'
 // import deleteContact from './Pages/Contacts/deleteContact'
 // address routes
-// import details from './Pages/Addresses/details'
-// import createAddress from './Pages/Addresses/createAddress'
+
+ // import createAddress from './Pages/Addresses/createAddress'
 // import editAddress from './Pages/Addresses/editAddress'
 // import deleteAddress from './Pages/Addresses/deleteAddress'
 
@@ -84858,7 +85159,7 @@ var routes = [// Project routes
   path: '/',
   component: _Pages_Contacts_index__WEBPACK_IMPORTED_MODULE_2__["default"],
   name: _Pages_Contacts_index__WEBPACK_IMPORTED_MODULE_2__["default"]
-} // {
+}, // {
 //     path: '/createContact',
 //     component: createContact,
 //     name: createContact,
@@ -84873,12 +85174,11 @@ var routes = [// Project routes
 //     component: deleteContact,
 //     name: deleteContact,
 // },
-// {
-//     path: '/details/{id}',
-//     name: details,
-//     component: details,
-// },
-// {
+{
+  path: '/details/{id}',
+  name: _Pages_Addresses_details__WEBPACK_IMPORTED_MODULE_3__["default"],
+  component: _Pages_Addresses_details__WEBPACK_IMPORTED_MODULE_3__["default"]
+} // {
 //     path: '/createAddress',
 //     component: createAddress,
 // },
@@ -84928,7 +85228,16 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       email: '',
       phone: '',
       birthday: '',
-      address: []
+      addresses: []
+    },
+    addressData: {
+      id: '',
+      number: '',
+      street: '',
+      city: '',
+      state: '',
+      zip: '',
+      type: ''
     },
     deleteContactModalObj: {
       showDeleteModal: false,
@@ -84945,11 +85254,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       isEdited: false
     },
     detailsModalObj: {
-      showEditModal: false,
-      editUrl: '',
+      showDetailsModal: false,
+      detailsUrl: '',
       contactData: null,
-      editingIndex: -1,
-      isEdited: false,
       addressListData: []
     },
     deleteAddressModalObj: {
@@ -84971,9 +85278,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     userPermission: null
   },
   getters: (_getters = {
-    // Contact getters
-    getContact: function getContact(state) {
-      return state.data;
+    // Contact Modal getters
+    getContactData: function getContactData(state) {
+      return state.contactData;
     },
     getContactList: function getContactList(state) {
       return state.contactsList;
@@ -84984,7 +85291,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     getEditContactModalObj: function getEditContactModalObj(state) {
       return state.editContactModalObj;
     },
-    // Address getters
+    // Address Modal getters
     getDetailsModalObj: function getDetailsModalObj(state) {
       return state.detailsModalObj;
     },
@@ -85001,15 +85308,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   }), _getters),
   mutations: {
     // Contact Mutations
+    setContactData: function setContactData(state, contactData) {
+      state.contactData = contactData;
+    },
     setEditingContactModal: function setEditingContactModal(state, data) {
-      var deleteModalObj = {
-        showDeleteModal: false,
+      var editModalObj = {
+        showEditContactModal: false,
         deleteUrl: '',
         data: null,
-        deletingIndex: -1,
-        isDeleted: data
+        isEdited: data
       };
-      state.deleteModalObj = deleteModalObj;
+      state.editModalObj = editModalObj;
     },
     setEditingContactModalObj: function setEditingContactModalObj(state, contactData) {
       state.editContactModalObj = contactData;
@@ -85028,9 +85337,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       state.deleteContactModalObj = contactData;
     },
     // Address Mutations
-    setContactData: function setContactData(state, contactData) {
-      state.contactData = contactData;
-    },
     // Authentication
     setUpdateUser: function setUpdateUser(state, data) {
       state.user = data;
