@@ -13,7 +13,16 @@ export default new Vuex.Store({
             email: '',
             phone: '',
             birthday: '',
-            address: [],
+            addresses: [],
+        },
+        addressData : {
+            id: '',
+            number: '',
+            street: '',
+            city: '',
+            state: '',
+            zip: '',
+            type: '',
         },
         deleteContactModalObj : {
             showDeleteModal: false,
@@ -30,11 +39,9 @@ export default new Vuex.Store({
             isEdited : false,
         },
         detailsModalObj : {
-            showEditModal: false,
-            editUrl : '',
+            showDetailsModal: false,
+            detailsUrl : '',
             contactData : null,
-            editingIndex: -1,
-            isEdited : false,
             addressListData : [],
         },
         deleteAddressModalObj : {
@@ -56,36 +63,18 @@ export default new Vuex.Store({
         userPermission: null
     },
     getters: {
-        // Contact getters
-        getContact(state){
-           return state.data
-        },
-        getContactList(state){
-            return state.contactsList
-        },
-        getDeleteModalObj(state){
-            return state.deleteModalObj
-        },
-        getEditContactModalObj(state){
-            return state.editContactModalObj
-        },
+        // Contact Modal getters
+        getContactData: state => state.contactData,
+        getContactList: state =>state.contactsList,
+        getDeleteModalObj: state => state.deleteModalObj,
+        getEditContactModalObj: state => state.editContactModalObj,
 
-        // Address getters
-        getDetailsModalObj(state){
-            return state.detailsModalObj
-        },
-        getAddressModalObj(state){
-            return state.editAddressModalObj
-        },
-        getEditAddressModalObj(state){
-            return state.editAddressModalObj
-        },
-        getEditAddressModalObj(state){
-            return state.editAddressModalObj
-        },
-        getEditAddressModalObj(state){
-            return state.editAddressModalObj
-        },
+        // Address Modal getters
+        getDetailsModalObj: state => state.detailsModalObj,
+        getAddressModalObj: state => state.editAddressModalObj,
+        getEditAddressModalObj: state => state.editAddressModalObj,
+        getEditAddressModalObj: state => state.editAddressModalObj,
+        getEditAddressModalObj: state => state.editAddressModalObj,
         // getUserPermission(state){
         //     return state.userPermission
         // },
@@ -93,15 +82,17 @@ export default new Vuex.Store({
 
     mutations: {
         // Contact Mutations
+        setContactData(state, contactData) {
+            state.contactData = contactData
+        },
         setEditingContactModal(state, data){
-            const deleteModalObj = {
-                showDeleteModal: false,
+            const editModalObj = {
+                showEditContactModal: false,
                 deleteUrl : '',
                 data : null,
-                deletingIndex: -1,
-                isDeleted : data,
+                isEdited : data,
             }
-            state.deleteModalObj = deleteModalObj
+            state.editModalObj = editModalObj
         },
         setEditingContactModalObj(state, contactData){
             state.editContactModalObj = contactData
@@ -120,9 +111,7 @@ export default new Vuex.Store({
             state.deleteContactModalObj = contactData
         },
         // Address Mutations
-        setContactData(state, contactData) {
-            state.contactData = contactData
-        },
+
 
         // Authentication
         setUpdateUser(state, data){

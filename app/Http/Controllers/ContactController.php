@@ -64,13 +64,17 @@ class ContactController extends Controller
     }
 
     // Addresses
-    public function details($id) {
-        $contact = Contact::find($id);
-        dump($contact->addresses);
-        if($contact) {
-            return view('contacts.details')->with('contact', $contact);
+    public function details($contact) {
+        dump($contact);
+        $contactData = Contact::find($contact->id);
+        dump($contactData->addresses);
+        dump($contactData);
+        if($contactData) {
+            $addresses = $contactData->addresses;
+            return ($addresses);
         } else {
-            return redirect('contacts');
+            // return redirect('contacts');
+            return (console.log('This failed'));
         }
     }
 

@@ -17,23 +17,7 @@
                                 <th>Birthday</th>
 								<th>Action</th>
 							</tr>
-								<!-- TABLE TITLE -->
-
-                                <!-- Test Items -->
-                            <!-- <tr>
-                                <td>John</td>
-                                <td>Malcovich</td>
-                                <td>jm@fake.com</td>
-                                <td>229-555-5555</td>
-                                <td>2001-05-28</td>
-								<td>
-                                    <Button type="info" size="small" @click="$router.push({path:'/details', params: { id: $route.params.id },})">Details</Button>
-									<Button type="info" size="small" @click="$router.push({path: 'editContact', params: { id: $route.params.id },})">Edit</Button>
-									<Button type="error" size="small" @click="$router.push({path: 'deleteContact', params: { id: $route.params.id },})">Delete</Button>
-                                </td>
-                            </tr> -->
-
-                        <!-- ITEMS -->
+                                <!-- ITEMS -->
 							<tr v-for="(contacts, i) in contactLists" :key="i">
                             <!-- v-if="contactss.length" -->
 								<td>{{contacts.firstName}}</td>
@@ -42,12 +26,12 @@
                                 <td>{{contacts.phone}}</td>
                                 <td>{{contacts.birthday}}</td>
 								<td>
-                                    <!-- <Button type="info" size='small' style='display:inline-block;'
-                                        v-bind: id="{{$contacts.id}}"
-                                        href="{{ route('/details', id)}}"
-                                        >Details</Button> -->
-                                    <Button type="info" size="small" @click="showDetailsModal(contacts, i)">Details
-                                        </Button>
+                                <!-- <Button
+                                    type="info"
+                                    size="small"
+                                    @click="$router.push({path: '/details/{id}', params: { id: $route.params.id },})"
+                                    >Details</Button> -->
+                                    <Button type="primary" size="small" @click="showDetailsModal(contacts,i)">Details</Button>
 									<Button type="warning" size="small" @click="showEditContactModal(contacts, i)">Edit</Button>
 									<Button
                                         type="error"
@@ -133,19 +117,9 @@
                         <Button @click="closeEditContactModal" style="margin-left: 8px">Cancel</Button>
                         <Button type="primary" @click="editContact('formValidate')">Submit</Button>
                     </div>
-    				<!-- <Input v-model="editContactData.firstName" placeholder="Edit first name"  />
-                    <Input v-model="editContactData.lastName" placeholder="Edit last name"  />
-                    <Input v-model="editContactData.email" placeholder="Edit email address"  />
-                    <Input v-model="editContactData.phone" placeholder="Edit phone number"  />
-                    <Input v-model="editContactData.birthday" placeholder="Edit first name"  />
-
-                    <div slot="footer">
-						<Button type="default" @click="editContactModal=false">Close</Button>
-						<Button type="primary" @click="editContact" :disabled="isEditingContact" :loading="isEditingContact">{{isEditingContact ? 'Editing..' : 'Edit Contact'}}</Button>
-					</div> -->
 				</Modal>
 
-                <!-- Delete Contact Modal -->
+                <!-- Delete Contact Warning Modal -->
                 <Modal v-model="showDeletingContactModal" width="360">
 					<p slot="header" style="color:#f60;text-align:center">
 						<Icon type="ios-information-circle"></Icon>
@@ -160,7 +134,7 @@
 					</div>
                 </Modal>
 
-                <!-- /Address Vues -->
+<!--------------------------------------------- /Address Modals ----------------------------------------------->
                 <!-- Details Modal-->
                 <Modal
                     v-model="showingDetailsModal"
@@ -170,6 +144,7 @@
                                    <!--~~~~~~~ Addresses Table ~~~~~~~~~-->
                     <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
                         <p class="_title0">Contact Details <Button type="info" size="small" @click="$router.push({path:'createAddress', params: { id: $route.params.id },})">Add Address</Button></p>
+                        <h4>{{contactData.firstName}} {{contactData.lastName}}</h4>
 
                         <div class="_overflow _table_div">
                             <table class="_table">
@@ -184,8 +159,8 @@
                                     <th>Action</th>
                                 </tr>
                                     <!-- TABLE TITLE --><!-- ITEMS -->
-                                <tr v-for="(addresses, i) in addressLists" :key="i">
-                                <!-- v-if="contactss.length" -->
+                                <!-- <tr v-for="(addresses, i) in addressLists" :key="i">
+                                v-if="contactss.length"
                                     <td>{{addresses.number}}</td>
                                     <td>{{addresses.street}}</td>
                                     <td>{{addresses.city}}</td>
@@ -194,6 +169,7 @@
                                     <td>{{addresses.type}}</td>
                                     <td>
                                         <Button type="warning" size="small" @click="showEditAddressModal(addresses, i)">Edit</Button>
+                                        <Button type="error" size="small" @click="$router.push({path: 'deleteContact', params: { id: $route.params.id },})">Delete</Button>
                                         <Button
                                             type="error"
                                             size="small"
@@ -201,7 +177,7 @@
                                             :loading="addresses.isDeleting">Delete
                                         </Button>
                                     </td>
-                                </tr>
+                                </tr> -->
                                     <!-- ITEMS -->
                             </table>
                         </div>
@@ -250,7 +226,6 @@ export default {
                 email: '',
                 phone: '',
                 birthday: '',
-                addressLists : [],
             },
             ruleValidate: {
                 firstName: [
@@ -288,6 +263,10 @@ export default {
         }
     },
 
+    // mounted(){
+    //     this.contactData = this.$store.getter.getContactData;
+    // },
+
     async created() {
         this.token = window.Laravel.csrfToken
         const res = await this.callApi('get', 'app/index',)
@@ -308,11 +287,14 @@ export default {
             // if(this.formValidate.birthday.trim()=='') return this.e('Birthday is required')
 
             this.isCreatingContact = true
-			const res = await this.callApi('post', 'app/createContact', this.contactData)
+			const res = await this.callApi(
+                'post',
+                'app/createContact',
+                this.contactData)
             console.log(res)
 			if(res.status===201){
 				this.contactLists.unshift(res.data) // need to add this to vue
-				this.s('Contact has been added successfully!')
+				this.s('Contact has been edited successfully!')
 				this.contactData.firstName = ''
                 this.contactData.lastName = ''
                 this.contactData.email = ''
@@ -367,6 +349,7 @@ export default {
         },
 
         async editContact(){
+            console.log(formValidate)
             if(this.formValidate.firstName.trim()=='') return this.e('First Name is required')
             if(this.formValidate.lastName.trim()=='') return this.e('Last Name is required')
             if(this.formValidate.email.trim()=='') return this.e('Email is required')
@@ -374,14 +357,21 @@ export default {
             // if(this.formValidate.birthday.trim()=='') return this.e('Birthday is required')
   			const res = await this.callApi('post', 'app/editContact', this.formValidate)
             console.log(res)
-			if(res.status===201){
-				this.contactLists.unshift(res.formValidate) // need to add this to vue
+			if(res.status===200){
+                this.contacts[this.index].firstName = this.formValidate.firstName
+                this.contacts[this.index].lastName = this.formValidate.lastName
+                this.contacts[this.index].email = this.formValidate.email
+                this.contacts[this.index].phone = this.formValidate.phone
+                this.contacts[this.index].birthday = this.formValidate.birthday
 				this.s('Contact has been edited successfully!')
+				// this.contactLists.unshift(res.formValidate) // need to add this to vue
+				// this.s('Contact has been edited successfully!')
 				this.formValidate.firstName = ''
                 this.formValidate.lastName = ''
                 this.formValidate.email = ''
                 this.formValidate.phone = ''
                 this.formValidate.birthday = ''
+				this.editModal = false
                 // need to reload the context/index.vue
 			} else {
 				if(res.status==422) {
@@ -410,9 +400,12 @@ export default {
         async showDetailsModal(contact, index){
             this.token = window.Laravel.csrfToken
             console.log(contact)
-            const res = await this.callApi('get', 'app/details', 2)
+            // set the contactDetails info to the current contact
+            this.$store.commit("setContactData", contact);
+            const res = await this.callApi('get', "app/details", contact)
+            consol.log(res)
             // this.addressLists = res.addresses
-            console.log(res)
+            // console.log(res)
             // if(res.status===200){
             //     this.addressLists = res.data
             //     this.showingDetailsModal = true
@@ -451,7 +444,7 @@ export default {
             this.isDeleting = true
             console.log('This is the contact data to be deleted')
             console.log(this.contactData)
-			const res = await this.callApi('post', 'app/deleteContact/', this.contactData)
+			const res = await this.callApi('post', 'app/deleteContact', this.contactData)
 			if(res.status===200){
 				this.tags.splice(this.deletingIndex , 1)
 				this.s('Tag has been deleted successfully!')

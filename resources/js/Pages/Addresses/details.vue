@@ -1,13 +1,13 @@
 <template>
 
     <div class="content">
-        <Modal
+        <!-- <Modal
         :value="detailsModalObj.showDetailsModal"
         :mask-closable="false"
         :closable="false"
-        width="360">
+        width="360"> -->
 
-        <h1>This is the Contact Details Page (addresses/index.vue)</h1>
+        <h1>This is the Contact Details Page</h1>
             <div class="container-fluid">
                 <!--~~~~~~~ TABLE ONE ~~~~~~~~~-->
                 <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
@@ -26,9 +26,9 @@
                                 <th>Action</th>
                             </tr>
                                 <!-- TABLE TITLE --><!-- ITEMS -->
-                            <tr v-for="(addresses, i) in addressLists" :key="i">
+                            <!-- <tr v-for="(addresses, i) in addressLists" :key="i"> -->
                             <!-- v-if="contactss.length" -->
-                                <td>{{addresses.firstName}}</td>
+                                <!-- <td>{{addresses.firstName}}</td>
                                 <td>{{addresses.lastName}}</td>
                                 <td>{{addresses.email}}</td>
                                 <td>{{addresses.phone}}</td>
@@ -38,27 +38,27 @@
                                     <Button type="warning" size="small" @click="$router.push({path: 'editAddress', params: { id: $route.params.id },})">Edit</Button>
                                     <Button type="error" size="small" @click="$router.push({path: 'deleteAddress', params: { id: $route.params.id },})">Delete</Button>
                                 </td>
-                            </tr>
+                            </tr> -->
                                 <!-- ITEMS -->
                         </table>
                     </div>
                 </div>
 
-                <!-- <createAddressModale></createAddressModale>
+                <!-- <createAddressModal></createAddressModal>
                 <editContactModal></editContactModal>
-                <deleteContactModale></deleteContactModale> -->
+                <deleteContactModal></deleteContactModal> -->
 
             </div>
-        </Modal>
+        <!-- </Modal> -->
     </div>
 
 </template>
 
 <script>
 // import addresses pages
-import createAddressModal from './createAddressModal'
-import editAddressModal from './editAddressModal'
-import deleteAddressModal from './deleteAddressModal'
+// import createAddressModal from './createAddressModal'
+// import editAddressModal from './editAddressModal'
+// import deleteAddressModal from './deleteAddressModal'
 
 import  { mapGetters  } from 'vuex'
 
@@ -77,9 +77,9 @@ export default {
             addressList : [],
             token: '',
 			isAdding : false,
-            addAddressModal : false,
+            createAddressModal : false,
 			editAddressModal : false,
-			isAddingAddress : false,
+			isCreatingAddress : false,
 			index : -1,
 			showDeleteModal: false,
 			isDeleing : false,
@@ -90,10 +90,14 @@ export default {
         }
     },
 
+    mounted(){
+        this.contactData = this.$store.getters.getContactData
+    },
+
     async created() {
         this.token = window.Laravel.csrfToken
         let i = contactData.id
-        const res = await this.callApi('get', '/app/details/{{i}}',)
+        const res = await this.callApi('get', '/app/details', i)
         if(res.status===200){
             this.addressLists = res.data
         } else {
@@ -103,7 +107,7 @@ export default {
     showCreateAddressModal(address, index){
         const createAddressModalObj = {
             showCreateAddressModal: true,
-            deleteUrl : 'app/createAddress',
+            createUrl : 'app/createAddress',
             addressData : address,
             deletingAddressIndex: i,
             isAddressDeleted : false,
