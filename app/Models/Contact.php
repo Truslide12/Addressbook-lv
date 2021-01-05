@@ -11,7 +11,7 @@ class Contact extends Model
 
     protected $fillable = [ 'firstName', 'lastName', 'email', 'phone', 'birthday' ];
 
-    public function addresses()
+    public function address()
     {
         return $this->hasMany('App\Models\Address');
     }

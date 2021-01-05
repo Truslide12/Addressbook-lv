@@ -36,11 +36,11 @@ const routes = [
     //     component: deleteContact,
     //     name: deleteContact,
     // },
-    {
-        path: '/details/{id}',
-        name: details,
-        component: details,
-    },
+    // {
+    //     path: '/details',
+    //     name: details,
+    //     component: details,
+    // },
     // {
     //     path: '/createAddress',
     //     component: createAddress,
