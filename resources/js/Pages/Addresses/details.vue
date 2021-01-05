@@ -92,6 +92,7 @@ export default {
 
     mounted(){
         this.contactData = this.$store.getters.getContactData
+        this.addressList = this.$store.getters.getAddressData
     },
 
     async created() {

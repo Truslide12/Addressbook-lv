@@ -7,10 +7,10 @@
 					<p class="_title0">Contacts List <Button type="success" @click="createContactModal=true"><Icon type="md-add" />Add Contact</Button></p>
 
 					<div class="_overflow _table_div">
-						<table class="_table">
+						<table class="_table" :columns="contactTable" >
 								<!-- TABLE TITLE -->
 							<tr>
-								<th>First Name</th>
+								<th >First Name</th>
                                 <th>Last Name</th>
 								<th>Email</th>
 								<th>Phone</th>
@@ -88,7 +88,7 @@
                 <!-- Edit Contact Modal -->
 				<Modal
 					v-model="editContactModal"
-					title="Edit contact"
+					title="Edit Contact"
 					:mask-closable="false"
 					:closable="false"
                 >
@@ -143,8 +143,8 @@
 					:closable="false">
                                    <!--~~~~~~~ Addresses Table ~~~~~~~~~-->
                     <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
-                        <p class="_title0">Contact Details <Button type="info" size="small" @click="$router.push({path:'createAddress', params: { id: $route.params.id },})">Add Address</Button></p>
-                        <h4>{{contactData.firstName}} {{contactData.lastName}}</h4>
+                        <Button type="info" size="small" @click="$router.push({path:'createAddress', params: { id: $route.params.id },})">Add Address</Button>
+                        <h4>{{this.contactData.firstName}} {{this.contactData.lastName}}</h4>
 
                         <div class="_overflow _table_div">
                             <table class="_table">
@@ -159,8 +159,8 @@
                                     <th>Action</th>
                                 </tr>
                                     <!-- TABLE TITLE --><!-- ITEMS -->
-                                <!-- <tr v-for="(addresses, i) in addressLists" :key="i">
-                                v-if="contactss.length"
+                                <tr v-for="(addresses, i) in addressLists" :key="i">
+                                <!-- v-if="contactss.length" -->
                                     <td>{{addresses.number}}</td>
                                     <td>{{addresses.street}}</td>
                                     <td>{{addresses.city}}</td>
@@ -177,7 +177,7 @@
                                             :loading="addresses.isDeleting">Delete
                                         </Button>
                                     </td>
-                                </tr> -->
+                                </tr>
                                     <!-- ITEMS -->
                             </table>
                         </div>
@@ -215,6 +215,13 @@ export default {
                 birthday: '',
                 addressLists : [],
             },
+            contactTable: [
+                {
+                    title: 'First Name',
+                    key: 'firstName',
+                    sortable: true,
+                },
+            ],
             contactLists : [],
             addressLists : [],
             token: '',
@@ -324,6 +331,7 @@ export default {
             this.createContactModal = false
             this.isCreatingContact = false
         },
+
         closeCreateContactModal(formValidate) {
             // handleReset (formValidate);
             this.isCreatingContact = false;
@@ -349,7 +357,7 @@ export default {
         },
 
         async editContact(){
-            console.log(formValidate)
+            console.log(this.formValidate)
             if(this.formValidate.firstName.trim()=='') return this.e('First Name is required')
             if(this.formValidate.lastName.trim()=='') return this.e('Last Name is required')
             if(this.formValidate.email.trim()=='') return this.e('Email is required')
@@ -371,7 +379,7 @@ export default {
                 this.formValidate.email = ''
                 this.formValidate.phone = ''
                 this.formValidate.birthday = ''
-				this.editModal = false
+				this.editContactModal = false
                 // need to reload the context/index.vue
 			} else {
 				if(res.status==422) {
@@ -399,12 +407,13 @@ export default {
 
         async showDetailsModal(contact, index){
             this.token = window.Laravel.csrfToken
-            console.log(contact)
             // set the contactDetails info to the current contact
-            this.$store.commit("setContactData", contact);
-            const res = await this.callApi('get', "app/details", contact)
-            consol.log(res)
-            // this.addressLists = res.addresses
+            // this.$store.commit("setContactData", contact);
+            const res = await this.callApi('get', 'app/details', contact)
+            console.log(res)
+            const addresses = await this.callApi('get', 'app/showDetails', contact)
+            console.log(addresses)
+            // this.addressLists = res.addressLists
             // console.log(res)
             // if(res.status===200){
             //     this.addressLists = res.data

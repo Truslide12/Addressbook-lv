@@ -3,7 +3,8 @@
       <!--========== Logo ========-->
         <div class="_1side_menu" >
             <div class="_1side_menu_logo">
-                <router-link to="/"><h3 style="text-align:center;">Address Book</h3></router-link>
+                <h3 style="text-align:center;">Address Book</h3>
+                <!-- <router-link to="/">Contacts</router-link> -->
             </div>
         </div>
         <div class="row">

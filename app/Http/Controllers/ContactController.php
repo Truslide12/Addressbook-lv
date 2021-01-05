@@ -46,6 +46,7 @@ class ContactController extends Controller
         ]);
         // convert birtday date to proper format
         $birthday = \Carbon\Carbon::parse($request->birthday)->format('Y/m/d');
+        // dump($request);
         return Contact::where('id', $request->id)->update([
             'firstName'=> $request->firstName,
             'lastName'=> $request->lastName,
@@ -55,26 +56,45 @@ class ContactController extends Controller
         ]);
     }
 
-    public function deleteContact($id) {
+    public function deleteContact(Request $request) {
         // validate
-        $contact = Contact::find($id);
+        $contact = Contact::find($request->id);
         $contact->delete();
 
         return response()->json('The contact successfully deleted');
     }
 
     // Addresses
-    public function details($contact) {
-        dump($contact);
-        $contactData = Contact::find($contact->id);
-        dump($contactData->addresses);
-        dump($contactData);
+    public function details(Request $request) {
+        // dump($request);
+        $contactData = Contact::findOrFail($request->id);
+        // $addressLists = Address::where('contact_id', $request->id);
+        // $data = [$contactData,$addressLists];
+        // dump($addressLists);
+        // dump($contactData);
         if($contactData) {
-            $addresses = $contactData->addresses;
-            return ($addresses);
+            // $addressLists = $contactData->addresses;
+            return ($contactData);
+            // return ($addressLists);
         } else {
-            // return redirect('contacts');
-            return (console.log('This failed'));
+            return response()->json('The contact details failed');
+            // return redirect('index');
+        }
+    }
+
+    public function showDetails(Request $request) {
+        // dump($request);
+        $addressData = Address::where('contact_id', '=', $request->id);
+        $data = $addressData;
+        // dump($addressLists);
+        dump($addressData);
+        if($addressData) {
+            // $addressLists = $contactData->addresses;
+            return ($data);
+            // return ($addressLists);
+        } else {
+            return response()->json('The contact details failed');
+            // return redirect('index');
         }
     }
 

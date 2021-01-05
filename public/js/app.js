@@ -2019,6 +2019,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   mounted: function mounted() {
     this.contactData = this.$store.getters.getContactData;
+    this.addressList = this.$store.getters.getAddressData;
   },
   created: function created() {
     var _this = this;
@@ -2304,9 +2305,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 // import contacts pages
 // import createContactModal from './createContactModal.vue'
 // import editContactModal from './editContactModal.vue'
@@ -2339,8 +2337,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         lastName: '',
         email: '',
         phone: '',
-        birthday: '',
-        addressLists: []
+        birthday: ''
       },
       ruleValidate: {
         firstName: [{
@@ -2390,9 +2387,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       websiteSettings: []
     }, "token", '');
   },
-  mounted: function mounted() {
-    this.contactData = this.$store.getter.getContactData;
-  },
+  // mounted(){
+  //     this.contactData = this.$store.getter.getContactData;
+  // },
   created: function created() {
     var _this = this;
 
@@ -2479,7 +2476,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   _this2.contactLists.unshift(res.data); // need to add this to vue
 
 
-                  _this2.s('Contact has been added successfully!');
+                  _this2.s('Contact has been edited successfully!');
 
                   _this2.contactData.firstName = '';
                   _this2.contactData.lastName = '';
@@ -2554,56 +2551,64 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
+                console.log(_this3.formValidate);
+
                 if (!(_this3.formValidate.firstName.trim() == '')) {
-                  _context3.next = 2;
+                  _context3.next = 3;
                   break;
                 }
 
                 return _context3.abrupt("return", _this3.e('First Name is required'));
 
-              case 2:
+              case 3:
                 if (!(_this3.formValidate.lastName.trim() == '')) {
-                  _context3.next = 4;
+                  _context3.next = 5;
                   break;
                 }
 
                 return _context3.abrupt("return", _this3.e('Last Name is required'));
 
-              case 4:
+              case 5:
                 if (!(_this3.formValidate.email.trim() == '')) {
-                  _context3.next = 6;
+                  _context3.next = 7;
                   break;
                 }
 
                 return _context3.abrupt("return", _this3.e('Email is required'));
 
-              case 6:
+              case 7:
                 if (!(_this3.formValidate.phone.trim() == '')) {
-                  _context3.next = 8;
+                  _context3.next = 9;
                   break;
                 }
 
                 return _context3.abrupt("return", _this3.e('Phone is required'));
 
-              case 8:
-                _context3.next = 10;
+              case 9:
+                _context3.next = 11;
                 return _this3.callApi('post', 'app/editContact', _this3.formValidate);
 
-              case 10:
+              case 11:
                 res = _context3.sent;
                 console.log(res);
 
-                if (res.status === 201) {
-                  _this3.contactLists.unshift(res.formValidate); // need to add this to vue
+                if (res.status === 200) {
+                  _this3.contacts[_this3.index].firstName = _this3.formValidate.firstName;
+                  _this3.contacts[_this3.index].lastName = _this3.formValidate.lastName;
+                  _this3.contacts[_this3.index].email = _this3.formValidate.email;
+                  _this3.contacts[_this3.index].phone = _this3.formValidate.phone;
+                  _this3.contacts[_this3.index].birthday = _this3.formValidate.birthday;
 
+                  _this3.s('Contact has been edited successfully!'); // this.contactLists.unshift(res.formValidate) // need to add this to vue
+                  // this.s('Contact has been edited successfully!')
 
-                  _this3.s('Contact has been edited successfully!');
 
                   _this3.formValidate.firstName = '';
                   _this3.formValidate.lastName = '';
                   _this3.formValidate.email = '';
                   _this3.formValidate.phone = '';
-                  _this3.formValidate.birthday = ''; // need to reload the context/index.vue
+                  _this3.formValidate.birthday = '';
+                  _this3.editContactModal = false; // need to reload the context/index.vue
                 } else {
                   if (res.status == 422) {
                     if (_this3.res.errors.firstName) {
@@ -2632,7 +2637,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this3.editContactModal = false;
 
-              case 14:
+              case 15:
               case "end":
                 return _context3.stop();
             }
@@ -2649,17 +2654,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _this4.token = window.Laravel.csrfToken;
-                console.log(contact); // set the contactDetails info to the current contact
+                _this4.token = window.Laravel.csrfToken; // set the contactDetails info to the current contact
+                // this.$store.commit("setContactData", contact);
 
-                _this4.$store.commit("setContactData", contact);
+                _context4.next = 3;
+                return _this4.callApi('get', 'app/details', contact);
 
-                _context4.next = 5;
-                return _this4.callApi('get', "app/details", contact);
-
-              case 5:
+              case 3:
                 res = _context4.sent;
-                consol.log(res); // this.addressLists = res.addresses
+                console.log(res); // this.addressLists = res.addressLists
                 // console.log(res)
                 // if(res.status===200){
                 //     this.addressLists = res.data
@@ -2668,7 +2671,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 //     this.swr(error)
                 // }
 
-              case 7:
+              case 5:
               case "end":
                 return _context4.stop();
             }
@@ -2700,21 +2703,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.deletingIndex = i;
       this.showDeletingContactModal = true;
       console.log(this.contactData);
-    } // async deleteContact(){
-    //     this.isDeleting = true
-    //     console.log('This is the contact data to be deleted')
-    //     console.log(this.contactData)
-    // 	const res = await this.callApi('post', 'app/deleteContact', this.contactData)
-    // 	if(res.status===200){
-    // 		this.tags.splice(this.deletingIndex , 1)
-    // 		this.s('Tag has been deleted successfully!')
-    // 	}else{
-    // 		this.swr()
-    // 	}
-    // 	this.isDeleting = false
-    // 	this.showDeleteConactModal = false
-    // },
+    },
+    deleteContact: function deleteContact() {
+      var _this5 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _this5.isDeleting = true;
+                console.log('This is the contact data to be deleted');
+                console.log(_this5.contactData);
+                _context5.next = 5;
+                return _this5.callApi('post', 'app/deleteContact', _this5.contactData);
+
+              case 5:
+                res = _context5.sent;
+
+                if (res.status === 200) {
+                  _this5.tags.splice(_this5.deletingIndex, 1);
+
+                  _this5.s('Tag has been deleted successfully!');
+                } else {
+                  _this5.swr();
+                }
+
+                _this5.isDeleting = false;
+                _this5.showDeleteConactModal = false;
+
+              case 9:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    }
   },
   getters: {// getContactData(state){
     //    return state.contactData
@@ -67598,15 +67624,15 @@ var render = function() {
                           [
                             _c(
                               "Button",
-                              { attrs: { type: "info", size: "small" } },
-                              [
-                                _c(
-                                  "router-link",
-                                  { attrs: { to: { path: "/details" } } },
-                                  [_vm._v("Details")]
-                                )
-                              ],
-                              1
+                              {
+                                attrs: { type: "primary", size: "small" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.showDetailsModal(contacts, i)
+                                  }
+                                }
+                              },
+                              [_vm._v("Details")]
                             ),
                             _vm._v(" "),
                             _c(
@@ -67841,7 +67867,7 @@ var render = function() {
             "Modal",
             {
               attrs: {
-                title: "Edit contact",
+                title: "Edit Contact",
                 "mask-closable": false,
                 closable: false
               },
@@ -68085,34 +68111,26 @@ var render = function() {
                 },
                 [
                   _c(
-                    "p",
-                    { staticClass: "_title0" },
-                    [
-                      _vm._v("Contact Details "),
-                      _c(
-                        "Button",
-                        {
-                          attrs: { type: "info", size: "small" },
-                          on: {
-                            click: function($event) {
-                              return _vm.$router.push({
-                                path: "createAddress",
-                                params: { id: _vm.$route.params.id }
-                              })
-                            }
-                          }
-                        },
-                        [_vm._v("Add Address")]
-                      )
-                    ],
-                    1
+                    "Button",
+                    {
+                      attrs: { type: "info", size: "small" },
+                      on: {
+                        click: function($event) {
+                          return _vm.$router.push({
+                            path: "createAddress",
+                            params: { id: _vm.$route.params.id }
+                          })
+                        }
+                      }
+                    },
+                    [_vm._v("Add Address")]
                   ),
                   _vm._v(" "),
                   _c("h4", [
                     _vm._v(
-                      _vm._s(_vm.contactData.firstName) +
+                      _vm._s(this.contactData.firstName) +
                         " " +
-                        _vm._s(_vm.contactData.lastName)
+                        _vm._s(this.contactData.lastName)
                     )
                   ]),
                   _vm._v(" "),
@@ -68184,6 +68202,30 @@ var render = function() {
                                     }
                                   },
                                   [_vm._v("Delete")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "Button",
+                                  {
+                                    attrs: {
+                                      type: "error",
+                                      size: "small",
+                                      loading: addresses.isDeleting
+                                    },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.showDeleteAddressModal(
+                                          addresses,
+                                          i
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Delete\n                                        "
+                                    )
+                                  ]
                                 )
                               ],
                               1
@@ -68194,7 +68236,8 @@ var render = function() {
                       2
                     )
                   ])
-                ]
+                ],
+                1
               )
             ]
           )
@@ -68246,27 +68289,27 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "_1side_menu" }, [
-      _c(
-        "div",
-        { staticClass: "_1side_menu_logo" },
-        [
-          _c("router-link", { attrs: { to: "/" } }, [
-            _c("h3", { staticStyle: { "text-align": "center" } }, [
-              _vm._v("Address Book")
-            ])
-          ])
-        ],
-        1
-      )
-    ]),
+    _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col" }, [_c("router-view")], 1)
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "_1side_menu" }, [
+      _c("div", { staticClass: "_1side_menu_logo" }, [
+        _c("h3", { staticStyle: { "text-align": "center" } }, [
+          _vm._v("Address Book")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -85159,7 +85202,7 @@ var routes = [// Project routes
   path: '/',
   component: _Pages_Contacts_index__WEBPACK_IMPORTED_MODULE_2__["default"],
   name: _Pages_Contacts_index__WEBPACK_IMPORTED_MODULE_2__["default"]
-}, // {
+} // {
 //     path: '/createContact',
 //     component: createContact,
 //     name: createContact,
@@ -85174,11 +85217,12 @@ var routes = [// Project routes
 //     component: deleteContact,
 //     name: deleteContact,
 // },
-{
-  path: '/details/{id}',
-  name: _Pages_Addresses_details__WEBPACK_IMPORTED_MODULE_3__["default"],
-  component: _Pages_Addresses_details__WEBPACK_IMPORTED_MODULE_3__["default"]
-} // {
+// {
+//     path: '/details',
+//     name: details,
+//     component: details,
+// },
+// {
 //     path: '/createAddress',
 //     component: createAddress,
 // },
