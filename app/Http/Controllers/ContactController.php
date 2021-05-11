@@ -71,12 +71,12 @@ class ContactController extends Controller
 
         $addressList = $contactData->addresses;
         // $data = [$contactData,$addressLists];
-        dump($addressList);
+        // dump($addressList);
         // dump($contactData);
         if($addressList) {
             // $addressLists = $contactData->addresses;
             // return ($contactData);
-            return ($addressList);
+            return response()->($addressList->toArray());
         } else {
             return response()->json('The contact details failed');
             // return redirect('index');
