@@ -66,16 +66,16 @@ class ContactController extends Controller
 
     // Addresses
     public function details(Request $request) {
-        // dump($request);
-        $contactData = Contact::find($request->id);
+        dump($request);
+        // $contactData = Contact::find($request->id);
 
-        $addressList = $contactData->addresses;
+        $addressList = Address::where('contact_id', '=', $request->id);
         // $data = [$contactData,$addressLists];
-        dump($addressList);
         // dump($contactData);
         if($addressList) {
             // $addressLists = $contactData->addresses;
             // return ($contactData);
+            dump($addressList);
             return ($addressList);
         } else {
             return response()->json('The contact details failed');
@@ -83,21 +83,21 @@ class ContactController extends Controller
         }
     }
 
-    public function showDetails(Request $request) {
-        // dump($request);
-        $addressData = Address::where('contact_id', '=', $request->id);
-        $data = $addressData;
-        // dump($addressLists);
-        dump($addressData);
-        if($addressData) {
-            // $addressLists = $contactData->addresses;
-            return ($data);
-            // return ($addressLists);
-        } else {
-            return response()->json('The contact details failed');
-            // return redirect('index');
-        }
-    }
+    // public function showDetails(Request $request) {
+    //     // dump($request);
+    //     $addressData = Address::where('contact_id', '=', $request->id);
+    //     $data = $addressData;
+    //     // dump($addressLists);
+    //     dump($addressData);
+    //     if($addressData) {
+    //         // $addressLists = $contactData->addresses;
+    //         return ($data);
+    //         // return ($addressLists);
+    //     } else {
+    //         return response()->json('The contact details failed');
+    //         // return redirect('index');
+    //     }
+    // }
 
     public function createAddress(Request $request) {
         // validate

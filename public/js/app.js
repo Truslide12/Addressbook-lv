@@ -2778,12 +2778,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   phone: contact.phone,
                   birthday: contact.birthday,
                   addresses: contact.addresses
-                }, contactDetailsData = obj;
-                console.log(contactDetailsData);
-                _context5.next = 4;
-                return _this5.callApi('get', 'app/details', contact);
+                }, contactDetailsData = obj; // console.log(contactDetailsData)
 
-              case 4:
+                _context5.next = 3;
+                return _this5.callApi('get', 'app/details?id=' + contact.id, contact);
+
+              case 3:
                 res = _context5.sent;
                 console.log(res);
 
@@ -2796,7 +2796,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this5.index = index;
 
-              case 8:
+              case 7:
               case "end":
                 return _context5.stop();
             }
