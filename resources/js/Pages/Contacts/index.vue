@@ -115,7 +115,7 @@
                     </Form>
                     <div slot="footer">
                         <Button @click="closeEditContactModal" style="margin-left: 8px">Cancel</Button>
-                        <Button type="primary" @click="editContact('formValidate')">Submit</Button>
+                        <Button type="primary" @click="editContact('formValidate', 'index')">Submit</Button>
                     </div>
 				</Modal>
 
@@ -144,10 +144,10 @@
                     <!--~~~~~~~ Addresses Table ~~~~~~~~~-->
                     <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
     					<p class="_title0">Contacts Details<Button type="success" @click="createAddressModal=true"><Icon type="md-add" />Add Contact</Button></p>
-                        <h5>{{this.contactData.firstName}}</h5>
-                        <h4>{{this.contactData.firstName}} {{this.contactData.lastName}}</h4>
-                        <h2>{{this.contactData.phone}}</h2>
-                        <h2>{{this.contactData.email}}</h2>
+                        <h5>{{this.contactDetailsData.firstName}}</h5>
+                        <h4>{{this.contactDetailsData.firstName}} {{this.contactDetailsData.lastName}}</h4>
+                        <h2>{{this.contactDetailsData.phone}}</h2>
+                        <h2>{{this.contactDetailsData.email}}</h2>
                         <div class="_overflow _table_div">
                             <table class="_table">
                                     <!-- TABLE TITLE -->
@@ -230,6 +230,7 @@ export default {
             createContactModal : false,
             isCreatingContact : false,
             formValidate: {
+                id: '',
                 firstName: '',
                 lastName: '',
                 email: '',
@@ -277,12 +278,14 @@ export default {
             deletingAddressIndex: -1,
             addressList : [],
             formValidateAddress: {
+                id: '',
                 number: '',
                 street: '',
                 city: '',
                 state: '',
                 zip: '',
                 type: '',
+                contact_id: '',
             },
             ruleValidateAddress: {
                 number: [
@@ -384,19 +387,20 @@ export default {
         },
 
         showEditContactModal(contact, index){
-            contactData = {
+            // console.log(contact)
+            let obj = {
                 id : contact.id,
                 firstName : contact.firstName,
                 lastName : contact.lastName,
                 email : contact.email,
                 phone : contact.phone,
                 birthday : contact.birthday,
-                addresses : contact.addresses,
+                // addresses : contact.addresses,
             }
-            this.addressList = contact.addresses
-            // this.formValidate = obj
-            this.editContactModal = true
+            // this.addressList = contact.addresses
+            this.formValidate = obj
             this.index = index
+            this.editContactModal = true
         },
 
         closeEditContactModal() {
@@ -405,14 +409,15 @@ export default {
         },
 
         async editContact(){
-            console.log(this.formValidate)
+            // console.log(this.formValidate)
+            console.log(this.index)
             if(this.formValidate.firstName.trim()=='') return this.e('First Name is required')
             if(this.formValidate.lastName.trim()=='') return this.e('Last Name is required')
             if(this.formValidate.email.trim()=='') return this.e('Email is required')
             if(this.formValidate.phone.trim()=='') return this.e('Phone is required')
             // if(this.formValidate.birthday.trim()=='') return this.e('Birthday is required')
   			const res = await this.callApi('post', 'app/editContact', this.formValidate)
-            console.log(res)
+            // console.log(res)
 			if(res.status===200){
                 this.contacts[this.index].firstName = this.formValidate.firstName
                 this.contacts[this.index].lastName = this.formValidate.lastName
@@ -487,28 +492,17 @@ export default {
                 birthday : contact.birthday,
                 addresses : contact.addresses
             },
-            // console.log(obj),
             contactDetailsData = obj
             console.log(contactDetailsData)
-            // this.formValidateAddress = obj
-            addressList =  await this.callApi('get', 'app/details', contact)
-            console.log(addressList)
-            this.detailsModal = true
+            const res =  await this.callApi('get', 'app/details', contact)
+            console.log(res)
+            if(res.status===200){
+                this.addressList = res.data
+                this.showDetailsModal = true
+            } else {
+                this.swr(error)
+            }
             this.index = index
-            // this.token = window.Laravel.csrfToken
-            // set the contactDetails info to the current contact
-            // this.$store.commit("setContactData", contact);
-            // const addresses = await this.callApi('get', 'app/showDetails', contact)
-            // console.log(res)
-            // console.log(addresses)
-            // this.addressList = res.addressList
-            // console.log(res)
-            // if(res.status===200){
-            //     this.addressList = res.data
-            //     this.showDetailsModal = true
-            // } else {
-            //     this.swr(error)
-            // }
         },
 
         async createAddress(formValidateAddress) {
