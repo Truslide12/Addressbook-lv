@@ -2327,6 +2327,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         birthday: '',
         addressLists: []
       },
+      contactTable: [{
+        title: 'First Name',
+        key: 'firstName',
+        sortable: true
+      }],
       contactLists: [],
       addressLists: [],
       token: '',
@@ -2649,7 +2654,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var res;
+        var res, addresses;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -2662,7 +2667,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 3:
                 res = _context4.sent;
-                console.log(res); // this.addressLists = res.addressLists
+                console.log(res);
+                _context4.next = 7;
+                return _this4.callApi('get', 'app/showDetails', contact);
+
+              case 7:
+                addresses = _context4.sent;
+                console.log(addresses); // this.addressLists = res.addressLists
                 // console.log(res)
                 // if(res.status===200){
                 //     this.addressLists = res.data
@@ -2671,7 +2682,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 //     this.swr(error)
                 // }
 
-              case 5:
+              case 9:
               case "end":
                 return _context4.stop();
             }
@@ -67603,7 +67614,10 @@ var render = function() {
               _c("div", { staticClass: "_overflow _table_div" }, [
                 _c(
                   "table",
-                  { staticClass: "_table" },
+                  {
+                    staticClass: "_table",
+                    attrs: { columns: _vm.contactTable }
+                  },
                   [
                     _vm._m(0),
                     _vm._v(" "),
