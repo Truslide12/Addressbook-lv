@@ -494,7 +494,7 @@ export default {
             },
             contactDetailsData = obj
             console.log(contactDetailsData)
-            const res =  await this.callApi('get', 'app/details', contact)
+            const res =  await this.callApi('get', 'app/details?id=' + contact.id, contact)
             console.log(res)
             if(res.status===200){
                 this.addressList = res.data
