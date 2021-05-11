@@ -76,7 +76,7 @@ class ContactController extends Controller
         if($addressList) {
             // $addressLists = $contactData->addresses;
             // return ($contactData);
-            return response()->($addressList->toArray());
+            return response()->json($addressList->toArray());
         } else {
             return response()->json('The contact details failed');
             // return redirect('index');
