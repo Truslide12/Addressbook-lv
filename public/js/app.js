@@ -2305,6 +2305,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 // import contacts pages
 // import createContactModal from './createContactModal.vue'
 // import editContactModal from './editContactModal.vue'
@@ -2325,7 +2327,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         email: '',
         phone: '',
         birthday: '',
-        addressLists: []
+        addresses: []
       },
       contactTable: [{
         title: 'First Name',
@@ -2333,11 +2335,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         sortable: true
       }],
       contactLists: [],
-      addressLists: [],
+      ///////<--- Contact Modals --->///////
       token: '',
       createContactModal: false,
       isCreatingContact: false,
       formValidate: {
+        id: '',
         firstName: '',
         lastName: '',
         email: '',
@@ -2378,17 +2381,75 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       editContactModal: false,
       isEditingContact: false,
-      createAddressModal: false,
-      editAddressModal: false,
-      isCreatingAddress: false,
-      isEditingAddress: false,
       index: -1,
       showDeletingContactModal: false,
       isDeleting: false,
       deleteItem: {},
       deletingIndex: -1,
-      showingDetailsModal: false,
+      ///////<--- Address Modals --->///////
+      contactDetailsData: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        birthday: '',
+        addresses: []
+      },
+      addressIndex: -1,
+      detailsModal: false,
+      deleteAddressItem: {},
       deletingAddressIndex: -1,
+      addressList: [],
+      formValidateAddress: {
+        id: '',
+        number: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+        type: '',
+        contact_id: ''
+      },
+      ruleValidateAddress: {
+        number: [{
+          required: true,
+          type: 'number',
+          message: 'Please enter the house number',
+          trigger: 'change'
+        }],
+        street: [{
+          required: true,
+          message: 'Please enter a street',
+          trigger: 'change'
+        }],
+        city: [{
+          required: true,
+          message: 'Please enter a city',
+          trigger: 'change'
+        }],
+        state: [{
+          required: true,
+          message: 'Please enter a state',
+          trigger: 'change'
+        }],
+        zip: [{
+          required: true,
+          type: 'number',
+          message: 'Please enter a birthday',
+          trigger: 'change'
+        }],
+        type: [{
+          required: true,
+          message: 'Please select a type',
+          trigger: 'change'
+        }]
+      },
+      createAddressModal: false,
+      editAddressModal: false,
+      isCreatingAddress: false,
+      isEditingAddress: false,
+      ///////<--- Shared Variables --->///////
       websiteSettings: []
     }, "token", '');
   },
@@ -2427,6 +2488,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }))();
   },
   methods: {
+    ////////////////////<--- Contact Modals --->////////////////////
     createContact: function createContact(formValidate) {
       var _this2 = this;
 
@@ -2531,17 +2593,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.createContactModal = false;
     },
     showEditContactModal: function showEditContactModal(contact, index) {
+      // console.log(contact)
       var obj = {
         id: contact.id,
         firstName: contact.firstName,
         lastName: contact.lastName,
         email: contact.email,
         phone: contact.phone,
-        birthday: contact.birthday
-      };
+        birthday: contact.birthday // addresses : contact.addresses,
+
+      }; // this.addressList = contact.addresses
+
       this.formValidate = obj;
-      this.editContactModal = true;
       this.index = index;
+      this.editContactModal = true;
     },
     closeEditContactModal: function closeEditContactModal() {
       this.isEditingContact = false;
@@ -2556,7 +2621,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                console.log(_this3.formValidate);
+                // console.log(this.formValidate)
+                console.log(_this3.index);
 
                 if (!(_this3.formValidate.firstName.trim() == '')) {
                   _context3.next = 3;
@@ -2595,8 +2661,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 11:
                 res = _context3.sent;
-                console.log(res);
 
+                // console.log(res)
                 if (res.status === 200) {
                   _this3.contacts[_this3.index].firstName = _this3.formValidate.firstName;
                   _this3.contacts[_this3.index].lastName = _this3.formValidate.lastName;
@@ -2642,7 +2708,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this3.editContactModal = false;
 
-              case 15:
+              case 14:
               case "end":
                 return _context3.stop();
             }
@@ -2650,39 +2716,43 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee3);
       }))();
     },
-    showDetailsModal: function showDetailsModal(contact, index) {
+    showDeleteContactModal: function showDeleteContactModal(contact, i) {
+      // console.log(contact)
+      this.contactData = contact; // console.log('delete method called')
+
+      this.deletingIndex = i;
+      this.showDeletingContactModal = true; // console.log(this.contactData)
+    },
+    deleteContact: function deleteContact() {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var res, addresses;
+        var res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _this4.token = window.Laravel.csrfToken; // set the contactDetails info to the current contact
-                // this.$store.commit("setContactData", contact);
+                _this4.isDeleting = true; // console.log('This is the contact data to be deleted')
+                // console.log(this.contactData)
 
                 _context4.next = 3;
-                return _this4.callApi('get', 'app/details', contact);
+                return _this4.callApi('post', 'app/deleteContact', _this4.contactData);
 
               case 3:
                 res = _context4.sent;
-                console.log(res);
-                _context4.next = 7;
-                return _this4.callApi('get', 'app/showDetails', contact);
+
+                if (res.status === 200) {
+                  _this4.tags.splice(_this4.deletingIndex, 1);
+
+                  _this4.s('Tag has been deleted successfully!');
+                } else {
+                  _this4.swr();
+                }
+
+                _this4.isDeleting = false;
+                _this4.showDeleteConactModal = false;
 
               case 7:
-                addresses = _context4.sent;
-                console.log(addresses); // this.addressLists = res.addressLists
-                // console.log(res)
-                // if(res.status===200){
-                //     this.addressLists = res.data
-                //     this.showingDetailsModal = true
-                // } else {
-                //     this.swr(error)
-                // }
-
-              case 9:
               case "end":
                 return _context4.stop();
             }
@@ -2690,81 +2760,216 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }, _callee4);
       }))();
     },
-    handleReset: function handleReset(name) {
-      this.$refs[name].resetFields();
-    },
-    // showDeletingModal(contact, i){
-    //     const deleteContactModalObj  =  {
-    //         showDeleteContactModal: true,
-    //         deleteUrl : 'app/deleteContact',
-    //         contactData : contact,
-    //         deletingIndex: i,
-    //         isDeleted : false,
-    //     }
-    //     this.$store.commit('setDeletingModalObj', deleteContactModalObj)
-    //     console.log('delete method called')
-    //     this.deleteItem = contact
-    //     this.deletingIndex = i
-    //     this.showDeleteContactModal = true
-    // },
-    showDeleteContactModal: function showDeleteContactModal(contact, i) {
-      console.log(contact);
-      this.contactData = contact;
-      console.log('delete method called');
-      this.deletingIndex = i;
-      this.showDeletingContactModal = true;
-      console.log(this.contactData);
-    },
-    deleteContact: function deleteContact() {
+    ////////////////////<--- Address Modals --->////////////////////
+    showDetailsModal: function showDetailsModal(contact, index) {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-        var res;
+        var obj, contactDetailsData, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                _this5.isDeleting = true;
-                console.log('This is the contact data to be deleted');
-                console.log(_this5.contactData);
-                _context5.next = 5;
-                return _this5.callApi('post', 'app/deleteContact', _this5.contactData);
+                obj = {
+                  id: contact.id,
+                  firstName: contact.firstName,
+                  lastName: contact.lastName,
+                  email: contact.email,
+                  phone: contact.phone,
+                  birthday: contact.birthday,
+                  addresses: contact.addresses
+                }, contactDetailsData = obj;
+                console.log(contactDetailsData);
+                _context5.next = 4;
+                return _this5.callApi('get', 'app/details', contact);
 
-              case 5:
+              case 4:
                 res = _context5.sent;
+                console.log(res);
 
                 if (res.status === 200) {
-                  _this5.tags.splice(_this5.deletingIndex, 1);
-
-                  _this5.s('Tag has been deleted successfully!');
+                  _this5.addressList = res.data;
+                  _this5.showDetailsModal = true;
                 } else {
-                  _this5.swr();
+                  _this5.swr(error);
                 }
 
-                _this5.isDeleting = false;
-                _this5.showDeleteConactModal = false;
+                _this5.index = index;
 
-              case 9:
+              case 8:
               case "end":
                 return _context5.stop();
             }
           }
         }, _callee5);
       }))();
+    },
+    createAddress: function createAddress(formValidateAddress) {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                if (!(_this6.contactData.firstName.trim() == '')) {
+                  _context6.next = 2;
+                  break;
+                }
+
+                return _context6.abrupt("return", _this6.e('First Name is required'));
+
+              case 2:
+                if (!(_this6.contactData.lastName.trim() == '')) {
+                  _context6.next = 4;
+                  break;
+                }
+
+                return _context6.abrupt("return", _this6.e('Last Name is required'));
+
+              case 4:
+                if (!(_this6.contactData.email.trim() == '')) {
+                  _context6.next = 6;
+                  break;
+                }
+
+                return _context6.abrupt("return", _this6.e('Email is required'));
+
+              case 6:
+                if (!(_this6.contactData.phone.trim() == '')) {
+                  _context6.next = 8;
+                  break;
+                }
+
+                return _context6.abrupt("return", _this6.e('Phone is required'));
+
+              case 8:
+                // if(this.formValidate.birthday.trim()=='') return this.e('Birthday is required')
+                _this6.isCreatingContact = true;
+                _context6.next = 11;
+                return _this6.callApi('post', 'app/createContact', _this6.contactData);
+
+              case 11:
+                res = _context6.sent;
+                console.log(res);
+
+                if (res.status === 201) {
+                  _this6.contactLists.unshift(res.data); // need to add this to vue
+
+
+                  _this6.s('Contact has been edited successfully!');
+
+                  _this6.contactData.firstName = '';
+                  _this6.contactData.lastName = '';
+                  _this6.contactData.email = '';
+                  _this6.contactData.phone = '';
+                  _this6.contactData.birthday = '';
+                } else {
+                  if (res.status == 422) {
+                    if (_this6.res.errors.firstName) {
+                      _this6.i(res.formValidate.errors.firstName[0]);
+                    }
+
+                    if (_this6.res.errors.lastName) {
+                      _this6.i(res.formValidate.errors.lastName[0]);
+                    }
+
+                    if (_this6.res.errors.email) {
+                      _this6.i(res.formValidate.errors.email[0]);
+                    }
+
+                    if (_this6.res.errors.phone) {
+                      _this6.i(res.formValidate.errors.phone[0]);
+                    }
+
+                    if (_this6.res.errors.birthday) {
+                      _this6.i(res.formValidate.errors.birthday[0]);
+                    }
+                  } else {
+                    _this6.swr();
+                  }
+                }
+
+                _this6.createContactModal = false;
+                _this6.isCreatingContact = false;
+
+              case 16:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    closeCreateAddressModal: function closeCreateAddressModal(formValidate) {
+      // handleReset (formValidate);
+      this.isCreatingAddress = false;
+      this.createAddressModal = false;
+    },
+    showDeleteAddressModal: function showDeleteAddressModal(contact, i) {
+      // console.log(contact)
+      this.contactData = contact; // console.log('delete method called')
+
+      this.deletingIndex = i;
+      this.showDeletingContactModal = true; // console.log(this.contactData)
+    },
+    deleteAddress: function deleteAddress() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _this7.isDeleting = true; // console.log('This is the contact data to be deleted')
+                // console.log(this.contactData)
+
+                _context7.next = 3;
+                return _this7.callApi('post', 'app/deleteContact', _this7.contactData);
+
+              case 3:
+                res = _context7.sent;
+
+                if (res.status === 200) {
+                  _this7.tags.splice(_this7.deletingIndex, 1);
+
+                  _this7.s('Tag has been deleted successfully!');
+                } else {
+                  _this7.swr();
+                }
+
+                _this7.isDeleting = false;
+                _this7.showDeleteConactModal = false;
+
+              case 7:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
+    ////////////////////<--- Shared Modals --->////////////////////
+    handleReset: function handleReset(name) {
+      this.$refs[name].resetFields();
     }
-  },
-  getters: {// getContactData(state){
-    //    return state.contactData
-    // },
-    // getContactLists(state){
-    // },
-    // getDeleteModalObj(state){
-    //     return state.deleteModalObj
-    // },
-    // getUserPermission(state){
-    //     return state.userPermission
-    // },
-  } // components : {
+  } //for original non-spa design//
+  // getters: {
+  //     getContactData(state){
+  //        return state.contactData
+  //     },
+  //     getContactLists(state){
+  //     },
+  //     getDeleteModalObj(state){
+  //         return state.deleteModalObj
+  //     },
+  //     getUserPermission(state){
+  //         return state.userPermission
+  //     },
+  // },
+  // components : {
   // 	deleteModal
   // },
   // computed : {
@@ -68025,7 +68230,7 @@ var render = function() {
                       attrs: { type: "primary" },
                       on: {
                         click: function($event) {
-                          return _vm.editContact("formValidate")
+                          return _vm.editContact("formValidate", "index")
                         }
                       }
                     },
@@ -68109,11 +68314,11 @@ var render = function() {
                 closable: false
               },
               model: {
-                value: _vm.showingDetailsModal,
+                value: _vm.detailsModal,
                 callback: function($$v) {
-                  _vm.showingDetailsModal = $$v
+                  _vm.detailsModal = $$v
                 },
-                expression: "showingDetailsModal"
+                expression: "detailsModal"
               }
             },
             [
@@ -68125,28 +68330,43 @@ var render = function() {
                 },
                 [
                   _c(
-                    "Button",
-                    {
-                      attrs: { type: "info", size: "small" },
-                      on: {
-                        click: function($event) {
-                          return _vm.$router.push({
-                            path: "createAddress",
-                            params: { id: _vm.$route.params.id }
-                          })
-                        }
-                      }
-                    },
-                    [_vm._v("Add Address")]
+                    "p",
+                    { staticClass: "_title0" },
+                    [
+                      _vm._v("Contacts Details"),
+                      _c(
+                        "Button",
+                        {
+                          attrs: { type: "success" },
+                          on: {
+                            click: function($event) {
+                              _vm.createAddressModal = true
+                            }
+                          }
+                        },
+                        [
+                          _c("Icon", { attrs: { type: "md-add" } }),
+                          _vm._v("Add Contact")
+                        ],
+                        1
+                      )
+                    ],
+                    1
                   ),
+                  _vm._v(" "),
+                  _c("h5", [_vm._v(_vm._s(this.contactDetailsData.firstName))]),
                   _vm._v(" "),
                   _c("h4", [
                     _vm._v(
-                      _vm._s(this.contactData.firstName) +
+                      _vm._s(this.contactDetailsData.firstName) +
                         " " +
-                        _vm._s(this.contactData.lastName)
+                        _vm._s(this.contactDetailsData.lastName)
                     )
                   ]),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v(_vm._s(this.contactDetailsData.phone))]),
+                  _vm._v(" "),
+                  _c("h2", [_vm._v(_vm._s(this.contactDetailsData.email))]),
                   _vm._v(" "),
                   _c("div", { staticClass: "_overflow _table_div" }, [
                     _c(
@@ -68169,7 +68389,7 @@ var render = function() {
                           _c("th", [_vm._v("Action")])
                         ]),
                         _vm._v(" "),
-                        _vm._l(_vm.addressLists, function(addresses, i) {
+                        _vm._l(_vm.addressList, function(addresses, i) {
                           return _c("tr", { key: i }, [
                             _c("td", [_vm._v(_vm._s(addresses.number))]),
                             _vm._v(" "),
@@ -68209,7 +68429,7 @@ var render = function() {
                                     on: {
                                       click: function($event) {
                                         return _vm.$router.push({
-                                          path: "deleteContact",
+                                          path: "deleteAddress",
                                           params: { id: _vm.$route.params.id }
                                         })
                                       }
@@ -68250,8 +68470,7 @@ var render = function() {
                       2
                     )
                   ])
-                ],
-                1
+                ]
               )
             ]
           )
