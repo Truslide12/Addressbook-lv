@@ -23,7 +23,7 @@ class CreateAddressesTable extends Migration
             $table->string('type');
             $table->timestamps();
             $table->bigInteger('contact_id')->unsigned()->index();
-            $table->foreign('contact_id')->references('id')->on('contacts'); //need to create this as an unsigned
+            $table->foreign('contact_id')->references('id')->on('contacts');
         });
     }
 

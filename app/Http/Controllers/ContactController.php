@@ -84,7 +84,7 @@ class ContactController extends Controller
     }
 
     public function showDetails(Request $request) {
-        // dump($request);
+        dump($request);
         $addressData = Address::where('contact_id', '=', $request->id);
         $data = $addressData;
         // dump($addressLists);
