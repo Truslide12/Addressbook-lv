@@ -2340,6 +2340,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       createContactModal: false,
       isCreatingContact: false,
       formValidate: {
+        id: '',
         firstName: '',
         lastName: '',
         email: '',
@@ -2401,12 +2402,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       deletingAddressIndex: -1,
       addressList: [],
       formValidateAddress: {
+        id: '',
         number: '',
         street: '',
         city: '',
         state: '',
         zip: '',
-        type: ''
+        type: '',
+        contact_id: ''
       },
       ruleValidateAddress: {
         number: [{
@@ -2590,19 +2593,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.createContactModal = false;
     },
     showEditContactModal: function showEditContactModal(contact, index) {
-      contactData = {
+      // console.log(contact)
+      var obj = {
         id: contact.id,
         firstName: contact.firstName,
         lastName: contact.lastName,
         email: contact.email,
         phone: contact.phone,
-        birthday: contact.birthday,
-        addresses: contact.addresses
-      };
-      this.addressList = contact.addresses; // this.formValidate = obj
+        birthday: contact.birthday // addresses : contact.addresses,
 
-      this.editContactModal = true;
+      }; // this.addressList = contact.addresses
+
+      this.formValidate = obj;
       this.index = index;
+      this.editContactModal = true;
     },
     closeEditContactModal: function closeEditContactModal() {
       this.isEditingContact = false;
@@ -2617,7 +2621,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                console.log(_this3.formValidate);
+                // console.log(this.formValidate)
+                console.log(_this3.index);
 
                 if (!(_this3.formValidate.firstName.trim() == '')) {
                   _context3.next = 3;
@@ -2656,8 +2661,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               case 11:
                 res = _context3.sent;
-                console.log(res);
 
+                // console.log(res)
                 if (res.status === 200) {
                   _this3.contacts[_this3.index].firstName = _this3.formValidate.firstName;
                   _this3.contacts[_this3.index].lastName = _this3.formValidate.lastName;
@@ -2703,7 +2708,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this3.editContactModal = false;
 
-              case 15:
+              case 14:
               case "end":
                 return _context3.stop();
             }
@@ -2760,7 +2765,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-        var obj, contactDetailsData;
+        var obj, contactDetailsData, res;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
@@ -2774,29 +2779,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   birthday: contact.birthday,
                   addresses: contact.addresses
                 }, contactDetailsData = obj;
-                console.log(contactDetailsData); // this.formValidateAddress = obj
-
+                console.log(contactDetailsData);
                 _context5.next = 4;
                 return _this5.callApi('get', 'app/details', contact);
 
               case 4:
-                addressList = _context5.sent;
-                console.log(addressList);
-                _this5.detailsModal = true;
-                _this5.index = index; // this.token = window.Laravel.csrfToken
-                // set the contactDetails info to the current contact
-                // this.$store.commit("setContactData", contact);
-                // const addresses = await this.callApi('get', 'app/showDetails', contact)
-                // console.log(res)
-                // console.log(addresses)
-                // this.addressList = res.addressList
-                // console.log(res)
-                // if(res.status===200){
-                //     this.addressList = res.data
-                //     this.showDetailsModal = true
-                // } else {
-                //     this.swr(error)
-                // }
+                res = _context5.sent;
+                console.log(res);
+
+                if (res.status === 200) {
+                  _this5.addressList = res.data;
+                  _this5.showDetailsModal = true;
+                } else {
+                  _this5.swr(error);
+                }
+
+                _this5.index = index;
 
               case 8:
               case "end":
@@ -68232,7 +68230,7 @@ var render = function() {
                       attrs: { type: "primary" },
                       on: {
                         click: function($event) {
-                          return _vm.editContact("formValidate")
+                          return _vm.editContact("formValidate", "index")
                         }
                       }
                     },
@@ -68356,19 +68354,19 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c("h5", [_vm._v(_vm._s(this.contactData.firstName))]),
+                  _c("h5", [_vm._v(_vm._s(this.contactDetailsData.firstName))]),
                   _vm._v(" "),
                   _c("h4", [
                     _vm._v(
-                      _vm._s(this.contactData.firstName) +
+                      _vm._s(this.contactDetailsData.firstName) +
                         " " +
-                        _vm._s(this.contactData.lastName)
+                        _vm._s(this.contactDetailsData.lastName)
                     )
                   ]),
                   _vm._v(" "),
-                  _c("h2", [_vm._v(_vm._s(this.contactData.phone))]),
+                  _c("h2", [_vm._v(_vm._s(this.contactDetailsData.phone))]),
                   _vm._v(" "),
-                  _c("h2", [_vm._v(_vm._s(this.contactData.email))]),
+                  _c("h2", [_vm._v(_vm._s(this.contactDetailsData.email))]),
                   _vm._v(" "),
                   _c("div", { staticClass: "_overflow _table_div" }, [
                     _c(

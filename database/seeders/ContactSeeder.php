@@ -13,7 +13,7 @@ class ContactTableSeeder extends Seeder
      */
     public function run()
     {
-        App\Models\Contact::factory()->create(100)
+        App\Models\Contact::factory(100)->create()
             ->each(function($contact) {
                 $contact->addresses()->save(
                     App\Models\Address::factory()->make()
