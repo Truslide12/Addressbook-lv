@@ -387,7 +387,7 @@ export default {
         },
 
         showEditContactModal(contact, index){
-            // console.log(contact)
+            console.log(contact)
             let obj = {
                 id : contact.id,
                 firstName : contact.firstName,
@@ -483,8 +483,9 @@ export default {
 		},
 ////////////////////<--- Address Modals --->////////////////////
         async showDetailsModal(contact, index){
+            // console.log(index)
             let obj = {
-                id : contact.id,
+                id : index,
                 firstName : contact.firstName,
                 lastName : contact.lastName,
                 email : contact.email,
@@ -494,7 +495,7 @@ export default {
             },
             contactDetailsData = obj
             console.log(contactDetailsData)
-            const res =  await this.callApi('get', 'app/details', contact)
+            const res =  await this.callApi('get', 'app/details', contact.id)
             console.log(res)
             if(res.status===200){
                 this.addressList = res.data

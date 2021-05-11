@@ -2593,7 +2593,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.createContactModal = false;
     },
     showEditContactModal: function showEditContactModal(contact, index) {
-      // console.log(contact)
+      console.log(contact);
       var obj = {
         id: contact.id,
         firstName: contact.firstName,
@@ -2770,8 +2770,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
+                // console.log(index)
                 obj = {
-                  id: contact.id,
+                  id: index,
                   firstName: contact.firstName,
                   lastName: contact.lastName,
                   email: contact.email,
@@ -2781,7 +2782,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 }, contactDetailsData = obj;
                 console.log(contactDetailsData);
                 _context5.next = 4;
-                return _this5.callApi('get', 'app/details', contact);
+                return _this5.callApi('get', 'app/details', contact.id);
 
               case 4:
                 res = _context5.sent;
