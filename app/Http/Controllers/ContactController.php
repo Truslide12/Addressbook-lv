@@ -67,16 +67,16 @@ class ContactController extends Controller
     // Addresses
     public function details(Request $request) {
         dump($request);
-        // $contactData = Contact::find($request->id);
+        $contactData = Contact::find($request->id);
 
-        $addressList = Address::where('contact_id', '=', $request->id);
+        $addressList = $contactData->addresses;
         // $data = [$contactData,$addressLists];
         // dump($contactData);
+        dump($addressList);
         if($addressList) {
             // $addressLists = $contactData->addresses;
             // return ($contactData);
-            dump($addressList);
-            return ($addressList);
+            return response()->$addressList->toArray();
         } else {
             return response()->json('The contact details failed');
             // return redirect('index');
