@@ -8,7 +8,7 @@ import locale from 'view-design/dist/locale/en-US';
 Vue.use(ViewUI, { locale });
 import commonajax from './comonajax';
 Vue.mixin(commonajax);
-
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 Vue.component('mainapp', require('./mainapp').default);
 

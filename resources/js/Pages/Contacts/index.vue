@@ -43,6 +43,10 @@
 							</tr>
 								<!-- ITEMS -->
 						</table>
+
+                        <!-- <div class="card-footer">
+                            <pagination :data="contacts" @pagination-change-page="created"></pagination>
+                        </div> -->
 					</div>
 				</div>
 
@@ -90,8 +94,7 @@
 					v-model="editContactModal"
 					title="Edit Contact"
 					:mask-closable="false"
-					:closable="false"
-                >
+					:closable="false">
                     <Form  ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="90">
                         <FormItem label="First Name" prop="firstName">
                             <Input v-model="formValidate.firstName" placeholder="Enter the First Name"/>
@@ -140,14 +143,20 @@
                     v-model="detailsModal"
                     title="Contact Details"
 					:mask-closable="false"
-					:closable="false">
+					:closable="false"
+                     width=80%>
                     <!--~~~~~~~ Addresses Table ~~~~~~~~~-->
                     <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
-    					<p class="_title0">Contacts Details<Button type="success" @click="createAddressModal=true"><Icon type="md-add" />Add Contact</Button></p>
-                        <h5>{{this.contactDetailsData.firstName}}</h5>
-                        <h4>{{this.contactDetailsData.firstName}} {{this.contactDetailsData.lastName}}</h4>
-                        <h2>{{this.contactDetailsData.phone}}</h2>
-                        <h2>{{this.contactDetailsData.email}}</h2>
+                        <div class="row">
+                            <div class="col-6">
+                                <h2>{{this.contactDetailsData.firstName}} {{this.contactDetailsData.lastName}}</h2>
+                                <h4>Phone: {{this.contactDetailsData.phone}}</h4>
+                                <h4>Email: {{this.contactDetailsData.email}}</h4>
+                            </div>
+                            <div class="col-6">
+                                <Button type="success" class="float:right" @click="createAddressModal=true"><Icon type="md-add" />Add Contact</Button>
+                            </div>
+                        </div>
                         <div class="_overflow _table_div">
                             <table class="_table">
                                     <!-- TABLE TITLE -->
@@ -276,6 +285,16 @@ export default {
             detailsModal: false,
             deleteAddressItem : {},
             deletingAddressIndex: -1,
+            addressData: {
+                id: '',
+                number: '',
+                street: '',
+                city: '',
+                state: '',
+                zip: '',
+                type: '',
+                contact_id: '',
+            },
             addressList : [],
             formValidateAddress: {
                 id: '',
@@ -301,7 +320,7 @@ export default {
                     { required: true, message: 'Please enter a state', trigger: 'change' }
                 ],
                 zip: [
-                    { required: true, type: 'number', message: 'Please enter a birthday', trigger: 'change' }
+                    { required: true, type: 'number', message: 'Please enter a zip code', trigger: 'change' }
                 ],
                 type: [
                     { required: true, message: 'Please select a type', trigger: 'change' }
@@ -346,7 +365,7 @@ export default {
                 'post',
                 'app/createContact',
                 this.contactData)
-            console.log(res)
+            // console.log(res)
 			if(res.status===201){
 				this.contactLists.unshift(res.data) // need to add this to vue
 				this.s('Contact has been edited successfully!')
@@ -408,32 +427,31 @@ export default {
             this.editContactModal = false;
         },
 
-        async editContact(){
+        async editContact(contact, index){
             // console.log(this.formValidate)
-            console.log(this.index)
+            // console.log(this.index)
             if(this.formValidate.firstName.trim()=='') return this.e('First Name is required')
             if(this.formValidate.lastName.trim()=='') return this.e('Last Name is required')
             if(this.formValidate.email.trim()=='') return this.e('Email is required')
             if(this.formValidate.phone.trim()=='') return this.e('Phone is required')
             // if(this.formValidate.birthday.trim()=='') return this.e('Birthday is required')
-  			const res = await this.callApi('post', 'app/editContact', this.formValidate)
+            // The below code is updating the contact but not
+  			const res = await this.callApi('post', 'app/editContact', this.formValidate) //?id=' + contact.id
             // console.log(res)
 			if(res.status===200){
-                this.contacts[this.index].firstName = this.formValidate.firstName
-                this.contacts[this.index].lastName = this.formValidate.lastName
-                this.contacts[this.index].email = this.formValidate.email
-                this.contacts[this.index].phone = this.formValidate.phone
-                this.contacts[this.index].birthday = this.formValidate.birthday
+                // this.contacts[this.index].firstName = this.formValidate.firstName
+                // this.contacts[this.index].lastName = this.formValidate.lastName
+                // this.contacts[this.index].email = this.formValidate.email
+                // this.contacts[this.index].phone = this.formValidate.phone
+                // this.contacts[this.index].birthday = this.formValidate.birthday
 				this.s('Contact has been edited successfully!')
-				// this.contactLists.unshift(res.formValidate) // need to add this to vue
-				// this.s('Contact has been edited successfully!')
 				this.formValidate.firstName = ''
                 this.formValidate.lastName = ''
                 this.formValidate.email = ''
                 this.formValidate.phone = ''
                 this.formValidate.birthday = ''
 				this.editContactModal = false
-                // need to reload the context/index.vue
+                window.location.reload();
 			} else {
 				if(res.status==422) {
 					if (this.res.errors.firstName){
@@ -451,11 +469,11 @@ export default {
                     if (this.res.errors.birthday){
 						this.i(res.formValidate.errors.birthday[0])
 					}
+                    this.editContactModal = false;
                 } else {
                     this.swr()
-                }
+                    this.editContactModal = false;                }
             }
-            this.editContactModal = false;
         },
 
         showDeleteContactModal(contact, i){
@@ -494,11 +512,12 @@ export default {
             },
             contactDetailsData = obj
             // console.log(contactDetailsData)
-            const res =  await this.callApi('get' , 'app/details?id=' + contact.id , contact)
-            console.log(res)
+            const res =  await this.callApi('get' , 'app/details?id=' + contact.id , contactDetailsData)
+            // console.log(res)
             if(res.status===200){
                 this.addressList = res.data
-                this.showDetailsModal = true
+                this.contactDetailsData = obj
+                this.detailsModal = true
             } else {
                 this.swr(error)
             }
@@ -506,79 +525,152 @@ export default {
         },
 
         async createAddress(formValidateAddress) {
-            if(this.contactData.firstName.trim()=='') return this.e('First Name is required')
-            if(this.contactData.lastName.trim()=='') return this.e('Last Name is required')
-            if(this.contactData.email.trim()=='') return this.e('Email is required')
-            if(this.contactData.phone.trim()=='') return this.e('Phone is required')
-            // if(this.formValidate.birthday.trim()=='') return this.e('Birthday is required')
+            if(this.AddressData.number.trim()=='') return this.e('Street Number is required')
+            if(this.AddressData.street.trim()=='') return this.e('Street Name is required')
+            if(this.AddressData.city.trim()=='') return this.e('City is required')
+            if(this.AddressData.state.trim()=='') return this.e('State is required')
+            if(this.AddressData.zip.trim()=='') return this.e('Zip code is required')
+            if(this.AddressData.type.trim()=='') return this.e('Location Type is required')
 
-            this.isCreatingContact = true
+            this.isCreatingAddress = true
 			const res = await this.callApi(
                 'post',
-                'app/createContact',
-                this.contactData)
-            console.log(res)
+                'app/createAddress',
+                this.AddressData)
+            // console.log(res)
 			if(res.status===201){
-				this.contactLists.unshift(res.data) // need to add this to vue
-				this.s('Contact has been edited successfully!')
-				this.contactData.firstName = ''
-                this.contactData.lastName = ''
-                this.contactData.email = ''
-                this.contactData.phone = ''
-                this.contactData.birthday = ''
+				this.AddressList.unshift(res.data)
+				this.s('Address has been created successfully!')
+				this.AddressData.number = ''
+                this.AddressData.street = ''
+                this.AddressData.city = ''
+                this.AddressData.state = ''
+                this.AddressData.zip = ''
+                this.AddressData.type = 'home'
 			} else {
 				if(res.status==422) {
-					if (this.res.errors.firstName){
-						this.i(res.formValidate.errors.firstName[0])
+					if (this.res.errors.number){
+						this.i(res.formValidateAddress.errors.number[0])
                     }
-                    if (this.res.errors.lastName){
-						this.i(res.formValidate.errors.lastName[0])
+                    if (this.res.errors.street){
+						this.i(res.formValidateAddress.errors.street[0])
                     }
-                    if (this.res.errors.email){
-						this.i(res.formValidate.errors.email[0])
+                    if (this.res.errors.city){
+						this.i(res.formValidateAddress.errors.city[0])
                     }
-                    if (this.res.errors.phone){
-						this.i(res.formValidate.errors.phone[0])
+                    if (this.res.errors.state){
+						this.i(res.formValidateAddress.errors.state[0])
                     }
-                    if (this.res.errors.birthday){
-						this.i(res.formValidate.errors.birthday[0])
+                    if (this.res.errors.zip){
+						this.i(res.formValidateAddress.errors.zip[0])
 					}
 				} else {
 					this.swr()
                 }
             }
-            this.createContactModal = false
-            this.isCreatingContact = false
+            this.createAddressModal = false
+            this.isCreatingAddress = false
         },
 
         closeCreateAddressModal(formValidate) {
-            // handleReset (formValidate);
+            // handleReset (formValidateAddress);
             this.isCreatingAddress = false;
             this.createAddressModal = false;
         },
 
-        showDeleteAddressModal(contact, i){
+        showEditAddressModal(address, index){
             // console.log(contact)
-            this.contactData = contact
+            let obj = {
+                id : address.id,
+                number : address.number,
+                street : address.street,
+                city : address.city,
+                state : address.state,
+                zip : address.zip,
+                type : address.type,
+            }
+            // this.addressList = contact.addresses
+            this.formValidateAddress = obj
+            this.index = index
+            this.editAddressModal = true
+        },
+
+        closeEditAddressModal() {
+            this.isEditingAddress = false;
+            this.editAddressModal = false;
+        },
+
+        async editAddress(){
+            if(this.AddressData.number.trim()=='') return this.e('Street Number is required')
+            if(this.AddressData.street.trim()=='') return this.e('Street Name is required')
+            if(this.AddressData.city.trim()=='') return this.e('City is required')
+            if(this.AddressData.state.trim()=='') return this.e('State is required')
+            if(this.AddressData.zip.trim()=='') return this.e('Zip code is required')
+            if(this.AddressData.type.trim()=='') return this.e('Location Type is required')
+
+  			const res = await this.callApi('post', 'app/editAddress', this.formValidateAddress)
+            // console.log(res)
+			if(res.status===200){
+                this.addresses[this.index].number = this.formValidateAddress.number
+                this.addresses[this.index].street = this.formValidateAddress.street
+                this.addresses[this.index].city = this.formValidateAddress.city
+                this.addresses[this.index].state = this.formValidateAddress.state
+                this.addresses[this.index].zip = this.formValidateAddress.zip
+				this.s('Contact has been edited successfully!')
+				this.addressesList.unshift(res.formValidateAddress) // need to add this to vue
+				this.formValidateAddress.number = ''
+                this.formValidateAddress.street = ''
+                this.formValidateAddress.city = ''
+                this.formValidateAddress.state = ''
+                this.formValidateAddress.zip = ''
+				this.editAddressModal = false
+                // need to reload the context/index.vue
+			} else {
+				if(res.status==422) {
+					if (this.res.errors.number){
+						this.i(res.formValidateAddress.errors.number[0])
+                    }
+                    if (this.res.errors.street){
+						this.i(res.formValidateAddress.errors.street[0])
+                    }
+                    if (this.res.errors.city){
+						this.i(res.formValidateAddress.errors.city[0])
+                    }
+                    if (this.res.errors.state){
+						this.i(res.formValidateAddress.errors.state[0])
+                    }
+                    if (this.res.errors.zip){
+						this.i(res.formValidateAddress.errors.zip[0])
+					}
+                } else {
+                    this.swr()
+                }
+            }
+            this.editAddressModal = false;
+        },
+
+        showDeleteAddressModal(address, i){
+            // console.log(contact)
+            this.addressData = address
             // console.log('delete method called')
-            this.deletingIndex = i
-            this.showDeletingContactModal = true
+            this.deletingAddressIndex = i
+            this.showDeletingAddressModal = true
             // console.log(this.contactData)
         },
 
         async deleteAddress(){
-            this.isDeleting = true
+            this.isDeletingAddress = true
             // console.log('This is the contact data to be deleted')
             // console.log(this.contactData)
-            const res = await this.callApi('post', 'app/deleteContact', this.contactData)
+            const res = await this.callApi('post', 'app/deleteAddress', this.addressData)
             if(res.status===200){
-                this.tags.splice(this.deletingIndex , 1)
+                this.tags.splice(this.deletingAddressIndex , 1)
                 this.s('Tag has been deleted successfully!')
             }else{
                 this.swr()
             }
-            this.isDeleting = false
-            this.showDeleteConactModal = false
+            this.isDeletingAddress = false
+            this.showDeleteAddressModal = false
         },
 ////////////////////<--- Shared Modals --->////////////////////
         handleReset (name) {

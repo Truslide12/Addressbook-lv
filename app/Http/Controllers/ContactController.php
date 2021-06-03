@@ -12,6 +12,8 @@ class ContactController extends Controller
     // Contacts
     public function index() {
         return Contact::orderBy('id', 'asc')->get();
+        // $contacts = Contact::latest()->paginate(5);
+        // return response()->json($contacts);
     }
 
     public function createContact(Request $request) {
@@ -37,23 +39,23 @@ class ContactController extends Controller
 
     public function editContact(Request $request) {
         // validate
-        dump($request);
-        // $this->validate($request, [
-        //     'firstName' => 'required',
-        //     'lastName' => 'required',
-        //     'email' => 'required',
-        //     'phone' => 'required',
-        //     'birthday' => 'required'
-        // ]);
-        // // convert birtday date to proper format
-        // $birthday = \Carbon\Carbon::parse($request->birthday)->format('Y/m/d');
-        // return Contact::where('id', $request->id)->update([
-        //     'firstName'=> $request->firstName,
-        //     'lastName'=> $request->lastName,
-        //     'email'=> $request->email,
-        //     'phone'=> $request->phone,
-        //     'birthday'=> $birthday,
-        // ]);
+        // dump($request);
+         $this->validate($request, [
+             'firstName' => 'required',
+             'lastName' => 'required',
+             'email' => 'required',
+             'phone' => 'required',
+             'birthday' => 'required'
+        ]);
+        // convert birtday date to proper format
+         $birthday = \Carbon\Carbon::parse($request->birthday)->format('Y/m/d');
+         return Contact::where('id', $request->id)->update([
+             'firstName'=> $request->firstName,
+             'lastName'=> $request->lastName,
+             'email'=> $request->email,
+             'phone'=> $request->phone,
+             'birthday'=> $birthday,
+         ]);
     }
 
     public function deleteContact(Request $request) {
@@ -72,7 +74,7 @@ class ContactController extends Controller
         $addressList = $contactData->addresses;
         // $data = [$contactData,$addressLists];
         // dump($contactData);
-        dump($addressList);
+        // dump($addressList);
         if($addressList) {
             // $addressLists = $contactData->addresses;
             // return ($contactData);
@@ -82,22 +84,6 @@ class ContactController extends Controller
             // return redirect('index');
         }
     }
-
-    // public function showDetails(Request $request) {
-    //     // dump($request);
-    //     $addressData = Address::where('contact_id', '=', $request->id);
-    //     $data = $addressData;
-    //     // dump($addressLists);
-    //     dump($addressData);
-    //     if($addressData) {
-    //         // $addressLists = $contactData->addresses;
-    //         return ($data);
-    //         // return ($addressLists);
-    //     } else {
-    //         return response()->json('The contact details failed');
-    //         // return redirect('index');
-    //     }
-    // }
 
     public function createAddress(Request $request) {
         // validate
