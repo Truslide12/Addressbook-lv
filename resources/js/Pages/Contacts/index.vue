@@ -479,7 +479,6 @@ export default {
             this.isDeleting = true
 			const res = await this.callApi('post', 'app/deleteContact', this.contactData)
 			if(res.status===200){
-				// this.tags.splice(this.contactData.id , 1)
 				this.s('Tag has been deleted successfully!')
 			}else{
 				this.swr()
@@ -528,7 +527,6 @@ export default {
                 this.AddressData)
             // console.log(res)
 			if(res.status===201){
-				this.AddressList.unshift(res.data)
 				this.s('Address has been created successfully!')
 				this.AddressData.number = ''
                 this.AddressData.street = ''
@@ -536,6 +534,7 @@ export default {
                 this.AddressData.state = ''
                 this.AddressData.zip = ''
                 this.AddressData.type = 'home'
+                window.location.reload();
 			} else {
 				if(res.status==422) {
 					if (this.res.errors.number){
@@ -600,20 +599,14 @@ export default {
   			const res = await this.callApi('post', 'app/editAddress', this.formValidateAddress)
             // console.log(res)
 			if(res.status===200){
-                this.addresses[this.index].number = this.formValidateAddress.number
-                this.addresses[this.index].street = this.formValidateAddress.street
-                this.addresses[this.index].city = this.formValidateAddress.city
-                this.addresses[this.index].state = this.formValidateAddress.state
-                this.addresses[this.index].zip = this.formValidateAddress.zip
-				this.s('Contact has been edited successfully!')
-				this.addressesList.unshift(res.formValidateAddress) // need to add this to vue
+				this.s('Address has been edited successfully!')
 				this.formValidateAddress.number = ''
                 this.formValidateAddress.street = ''
                 this.formValidateAddress.city = ''
                 this.formValidateAddress.state = ''
                 this.formValidateAddress.zip = ''
 				this.editAddressModal = false
-                // need to reload the context/index.vue
+                window.location.reload();
 			} else {
 				if(res.status==422) {
 					if (this.res.errors.number){
@@ -653,8 +646,9 @@ export default {
             // console.log(this.contactData)
             const res = await this.callApi('post', 'app/deleteAddress', this.addressData)
             if(res.status===200){
-                this.tags.splice(this.deletingAddressIndex , 1)
                 this.s('Tag has been deleted successfully!')
+                //window.location.reload(); // need to reload the modal
+                //showDeleteContactModal(this, i)
             }else{
                 this.swr()
             }

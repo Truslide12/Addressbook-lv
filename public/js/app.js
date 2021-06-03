@@ -2746,7 +2746,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 res = _context4.sent;
 
                 if (res.status === 200) {
-                  // this.tags.splice(this.contactData.id , 1)
                   _this4.s('Tag has been deleted successfully!');
                 } else {
                   _this4.swr();
@@ -2875,8 +2874,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 // console.log(res)
                 if (res.status === 201) {
-                  _this6.AddressList.unshift(res.data);
-
                   _this6.s('Address has been created successfully!');
 
                   _this6.AddressData.number = '';
@@ -2885,6 +2882,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   _this6.AddressData.state = '';
                   _this6.AddressData.zip = '';
                   _this6.AddressData.type = 'home';
+                  window.location.reload();
                 } else {
                   if (res.status == 422) {
                     if (_this6.res.errors.number) {
@@ -3012,23 +3010,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 // console.log(res)
                 if (res.status === 200) {
-                  _this7.addresses[_this7.index].number = _this7.formValidateAddress.number;
-                  _this7.addresses[_this7.index].street = _this7.formValidateAddress.street;
-                  _this7.addresses[_this7.index].city = _this7.formValidateAddress.city;
-                  _this7.addresses[_this7.index].state = _this7.formValidateAddress.state;
-                  _this7.addresses[_this7.index].zip = _this7.formValidateAddress.zip;
-
-                  _this7.s('Contact has been edited successfully!');
-
-                  _this7.addressesList.unshift(res.formValidateAddress); // need to add this to vue
-
+                  _this7.s('Address has been edited successfully!');
 
                   _this7.formValidateAddress.number = '';
                   _this7.formValidateAddress.street = '';
                   _this7.formValidateAddress.city = '';
                   _this7.formValidateAddress.state = '';
                   _this7.formValidateAddress.zip = '';
-                  _this7.editAddressModal = false; // need to reload the context/index.vue
+                  _this7.editAddressModal = false;
+                  window.location.reload();
                 } else {
                   if (res.status == 422) {
                     if (_this7.res.errors.number) {
@@ -3091,9 +3081,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 res = _context8.sent;
 
                 if (res.status === 200) {
-                  _this8.tags.splice(_this8.deletingAddressIndex, 1);
+                  _this8.s('Tag has been deleted successfully!'); //window.location.reload(); // need to reload the modal
+                  //showDeleteContactModal(this, i)
 
-                  _this8.s('Tag has been deleted successfully!');
                 } else {
                   _this8.swr();
                 }
