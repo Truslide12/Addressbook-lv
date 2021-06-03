@@ -497,10 +497,11 @@ export default {
                 addresses : contact.addresses
             },
             console.log('showDetailsModal', contact);
-            contactDetailsData = obj
+            // contactDetailsData = obj
             // console.log(contactDetailsData)
-            const res =  await this.callApi('get' , 'app/details?id=' + contact.id , contactDetailsData)
+            // const res =  await this.callApi('get' , 'app/details?id=' + contact.id , contactDetailsData)
             // console.log(res)
+            /*
             if(res.status===200){
                 this.addressList = res.data
                 this.contactDetailsData = obj
@@ -508,6 +509,7 @@ export default {
             } else {
                 this.swr(error)
             }
+            */
             this.index = index
         },
 
