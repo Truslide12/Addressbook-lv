@@ -2608,10 +2608,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         lastName: contact.lastName,
         email: contact.email,
         phone: contact.phone,
-        birthday: contact.birthday // addresses : contact.addresses,
-
-      }; // this.addressList = contact.addresses
-
+        birthday: contact.birthday
+      };
       this.formValidate = obj;
       this.index = index;
       this.editContactModal = true;

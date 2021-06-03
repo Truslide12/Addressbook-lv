@@ -404,9 +404,7 @@ export default {
                 email : contact.email,
                 phone : contact.phone,
                 birthday : contact.birthday,
-                // addresses : contact.addresses,
             }
-            // this.addressList = contact.addresses
             this.formValidate = obj
             this.index = index
             this.editContactModal = true
