@@ -133,7 +133,7 @@
 
 					</div>
 					<div slot="footer">
-						<Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="deleteContact(contact, i)" >Delete</Button>
+						<Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="deleteContact(contactData, i)" >Delete</Button>
 					</div>
                 </Modal>
 
@@ -201,16 +201,6 @@
 </template>
 
 <script>
-// import contacts pages
-// import createContactModal from './createContactModal.vue'
-// import editContactModal from './editContactModal.vue'
-// import deleteContactModal from './deleteContactModal.vue'
-
-// import addresses pages
-// import detailsModal from '../Addresses/detailsModal.vue'
-// import createAddressModal from '../Addresses/createAddressModal.vue'
-// import editAddressModal from '../Addresses/editAddressModal.vue'
-// import deleteAddressModal from '../Addresses/deleteAddressModal.vue'
 
 import  { mapGetters  } from 'vuex'
 
@@ -367,13 +357,13 @@ export default {
                 this.contactData)
             // console.log(res)
 			if(res.status===201){
-				this.contactLists.unshift(res.data) // need to add this to vue
 				this.s('Contact has been edited successfully!')
 				this.contactData.firstName = ''
                 this.contactData.lastName = ''
                 this.contactData.email = ''
                 this.contactData.phone = ''
                 this.contactData.birthday = ''
+                window.location.reload();
 			} else {
 				if(res.status==422) {
 					if (this.res.errors.firstName){
@@ -487,17 +477,16 @@ export default {
 
         async deleteContact(){
             this.isDeleting = true
-            // console.log('This is the contact data to be deleted')
-            // console.log(this.contactData)
 			const res = await this.callApi('post', 'app/deleteContact', this.contactData)
 			if(res.status===200){
-				this.tags.splice(this.deletingIndex , 1)
+				// this.tags.splice(this.contactData.id , 1)
 				this.s('Tag has been deleted successfully!')
 			}else{
 				this.swr()
 			}
 			this.isDeleting = false
-			this.showDeleteConactModal = false
+            this.showDeleteConactModal = false
+            window.location.reload();
 		},
 ////////////////////<--- Address Modals --->////////////////////
         async showDetailsModal(contact, index){

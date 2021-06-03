@@ -2316,15 +2316,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-// import contacts pages
-// import createContactModal from './createContactModal.vue'
-// import editContactModal from './editContactModal.vue'
-// import deleteContactModal from './deleteContactModal.vue'
-// import addresses pages
-// import detailsModal from '../Addresses/detailsModal.vue'
-// import createAddressModal from '../Addresses/createAddressModal.vue'
-// import editAddressModal from '../Addresses/editAddressModal.vue'
-// import deleteAddressModal from '../Addresses/deleteAddressModal.vue'
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2559,9 +2550,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 // console.log(res)
                 if (res.status === 201) {
-                  _this2.contactLists.unshift(res.data); // need to add this to vue
-
-
                   _this2.s('Contact has been edited successfully!');
 
                   _this2.contactData.firstName = '';
@@ -2569,6 +2557,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                   _this2.contactData.email = '';
                   _this2.contactData.phone = '';
                   _this2.contactData.birthday = '';
+                  window.location.reload();
                 } else {
                   if (res.status == 422) {
                     if (_this2.res.errors.firstName) {
@@ -2749,9 +2738,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                _this4.isDeleting = true; // console.log('This is the contact data to be deleted')
-                // console.log(this.contactData)
-
+                _this4.isDeleting = true;
                 _context4.next = 3;
                 return _this4.callApi('post', 'app/deleteContact', _this4.contactData);
 
@@ -2759,8 +2746,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
                 res = _context4.sent;
 
                 if (res.status === 200) {
-                  _this4.tags.splice(_this4.deletingIndex, 1);
-
+                  // this.tags.splice(this.contactData.id , 1)
                   _this4.s('Tag has been deleted successfully!');
                 } else {
                   _this4.swr();
@@ -2768,8 +2754,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
                 _this4.isDeleting = false;
                 _this4.showDeleteConactModal = false;
+                window.location.reload();
 
-              case 7:
+              case 8:
               case "end":
                 return _context4.stop();
             }
@@ -69057,7 +69044,7 @@ var render = function() {
                       },
                       on: {
                         click: function($event) {
-                          return _vm.deleteContact(_vm.contact, _vm.i)
+                          return _vm.deleteContact(_vm.contactData, _vm.i)
                         }
                       }
                     },

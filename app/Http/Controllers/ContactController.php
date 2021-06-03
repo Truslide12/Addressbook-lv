@@ -60,6 +60,7 @@ class ContactController extends Controller
 
     public function deleteContact(Request $request) {
         // validate
+        // console.log($request);
         $contact = Contact::find($request->id);
         $contact->delete();
 
