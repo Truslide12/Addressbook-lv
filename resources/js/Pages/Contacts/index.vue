@@ -496,7 +496,7 @@ export default {
                 birthday : contact.birthday,
                 addresses : contact.addresses
             },
-            console.log('showDetailsModal', contact);
+            console.log('showDetailsModal', contact)
             contactDetailsData = obj
             // console.log(contactDetailsData)
             const res =  await this.callApi('get' , 'app/details?id=' + contact.id , contactDetailsData)
