@@ -487,20 +487,21 @@ export default {
 		},
 ////////////////////<--- Address Modals --->////////////////////
         async showDetailsModal(contact, index){
-            let obj = {
-                id : contact.id,
-                firstName : contact.firstName,
-                lastName : contact.lastName,
-                email : contact.email,
-                phone : contact.phone,
-                birthday : contact.birthday,
-                addresses : contact.addresses
-            },
-            console.log('showDetailsModal', contact)
-            contactDetailsData = obj
+            // let obj = {
+            //     id : contact.id,
+            //     firstName : contact.firstName,
+            //     lastName : contact.lastName,
+            //     email : contact.email,
+            //     phone : contact.phone,
+            //     birthday : contact.birthday,
+            //     addresses : contact.addresses
+            // },
+            console.log('showDetailsModal', contact);
+            // contactDetailsData = obj
             // console.log(contactDetailsData)
-            const res =  await this.callApi('get' , 'app/details?id=' + contact.id , contactDetailsData)
+            // const res =  await this.callApi('get' , 'app/details?id=' + contact.id , contactDetailsData)
             // console.log(res)
+            /*
             if(res.status===200){
                 this.addressList = res.data
                 this.contactDetailsData = obj
@@ -508,6 +509,7 @@ export default {
             } else {
                 this.swr(error)
             }
+            */
             this.index = index
         },
 

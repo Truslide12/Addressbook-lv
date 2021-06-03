@@ -2099,9 +2099,1035 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/index.vue?vue&type=script&lang=js& ***!
   \********************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/resources/js/Pages/Contacts/index.vue: Unexpected token, expected \";\" (499:19)\n\n\u001b[0m \u001b[90m 497 | \u001b[39m                addresses \u001b[33m:\u001b[39m contact\u001b[33m.\u001b[39maddresses\u001b[0m\n\u001b[0m \u001b[90m 498 | \u001b[39m            }\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 499 | \u001b[39m            console\u001b[33m.\u001b[39mlog(\u001b[32m'showDetailsModal'\u001b[39m\u001b[33m,\u001b[39m contact)\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 500 | \u001b[39m            contactDetailsData \u001b[33m=\u001b[39m obj\u001b[0m\n\u001b[0m \u001b[90m 501 | \u001b[39m            \u001b[90m// console.log(contactDetailsData)\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 502 | \u001b[39m            \u001b[36mconst\u001b[39m res \u001b[33m=\u001b[39m  await \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcallApi(\u001b[32m'get'\u001b[39m \u001b[33m,\u001b[39m \u001b[32m'app/details?id='\u001b[39m \u001b[33m+\u001b[39m contact\u001b[33m.\u001b[39mid \u001b[33m,\u001b[39m contactDetailsData)\u001b[0m\n    at Parser._raise (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:766:17)\n    at Parser.raiseWithData (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:759:17)\n    at Parser.raise (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:753:17)\n    at Parser.unexpected (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:8966:16)\n    at Parser.semicolon (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:8948:40)\n    at Parser.parseVarStatement (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:11907:10)\n    at Parser.parseStatementContent (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:11498:21)\n    at Parser.parseStatement (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:11431:17)\n    at Parser.parseBlockOrModuleBlockBody (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:12013:25)\n    at Parser.parseBlockBody (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:11999:10)\n    at Parser.parseBlock (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:11983:10)\n    at Parser.parseFunctionBody (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10963:24)\n    at Parser.parseFunctionBodyAndFinish (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10946:10)\n    at Parser.parseMethod (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10883:10)\n    at Parser.parseObjectMethod (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10808:19)\n    at Parser.parseObjPropValue (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10841:23)\n    at Parser.parsePropertyDefinition (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10772:10)\n    at Parser.parseObjectLike (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10664:25)\n    at Parser.parseExprAtom (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10198:23)\n    at Parser.parseExprSubscripts (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9844:23)\n    at Parser.parseUpdate (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9824:21)\n    at Parser.parseMaybeUnary (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9813:17)\n    at Parser.parseExprOps (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9683:23)\n    at Parser.parseMaybeConditional (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9657:23)\n    at Parser.parseMaybeAssign (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9620:21)\n    at /Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9586:39\n    at Parser.allowInAnd (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:11303:12)\n    at Parser.parseMaybeAssignAllowIn (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9586:17)\n    at Parser.parseObjectProperty (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10816:101)\n    at Parser.parseObjPropValue (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10841:100)\n    at Parser.parsePropertyDefinition (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10772:10)\n    at Parser.parseObjectLike (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10664:25)\n    at Parser.parseExprAtom (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:10198:23)\n    at Parser.parseExprSubscripts (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9844:23)\n    at Parser.parseUpdate (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9824:21)\n    at Parser.parseMaybeUnary (/Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/node_modules/@babel/parser/lib/index.js:9813:17)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return _defineProperty({
+      contactData: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        birthday: '',
+        addresses: []
+      },
+      contactTable: [{
+        title: 'First Name',
+        key: 'firstName',
+        sortable: true
+      }],
+      contactLists: [],
+      ///////<--- Contact Modals --->///////
+      token: '',
+      createContactModal: false,
+      isCreatingContact: false,
+      formValidate: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        birthday: ''
+      },
+      ruleValidate: {
+        firstName: [{
+          required: true,
+          message: 'The first name cannot be empty',
+          trigger: 'blur'
+        }],
+        lastName: [{
+          required: true,
+          message: 'The last name cannot be empty',
+          trigger: 'blur'
+        }],
+        email: [{
+          required: true,
+          message: 'Email cannot be empty',
+          trigger: 'blur'
+        }, {
+          type: 'email',
+          message: 'Incorrect email format',
+          trigger: 'blur'
+        }],
+        phone: [{
+          required: true,
+          message: 'Please enter a phone number',
+          trigger: 'change'
+        }],
+        date: [{
+          required: true,
+          type: 'date',
+          message: 'Please select a birthday',
+          trigger: 'change'
+        }]
+      },
+      editContactModal: false,
+      isEditingContact: false,
+      index: -1,
+      showDeletingContactModal: false,
+      isDeleting: false,
+      deleteItem: {},
+      deletingIndex: -1,
+      ///////<--- Address Modals --->///////
+      contactDetailsData: {
+        id: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        birthday: '',
+        addresses: []
+      },
+      addressIndex: -1,
+      detailsModal: false,
+      deleteAddressItem: {},
+      deletingAddressIndex: -1,
+      addressData: {
+        id: '',
+        number: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+        type: '',
+        contact_id: ''
+      },
+      addressList: [],
+      formValidateAddress: {
+        id: '',
+        number: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+        type: '',
+        contact_id: ''
+      },
+      ruleValidateAddress: {
+        number: [{
+          required: true,
+          type: 'number',
+          message: 'Please enter the house number',
+          trigger: 'change'
+        }],
+        street: [{
+          required: true,
+          message: 'Please enter a street',
+          trigger: 'change'
+        }],
+        city: [{
+          required: true,
+          message: 'Please enter a city',
+          trigger: 'change'
+        }],
+        state: [{
+          required: true,
+          message: 'Please enter a state',
+          trigger: 'change'
+        }],
+        zip: [{
+          required: true,
+          type: 'number',
+          message: 'Please enter a zip code',
+          trigger: 'change'
+        }],
+        type: [{
+          required: true,
+          message: 'Please select a type',
+          trigger: 'change'
+        }]
+      },
+      createAddressModal: false,
+      editAddressModal: false,
+      isCreatingAddress: false,
+      isEditingAddress: false,
+      ///////<--- Shared Variables --->///////
+      websiteSettings: []
+    }, "token", '');
+  },
+  // mounted(){
+  //     this.contactData = this.$store.getter.getContactData;
+  // },
+  created: function created() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _this.token = window.Laravel.csrfToken;
+              _context.next = 3;
+              return _this.callApi('get', 'app/index');
+
+            case 3:
+              res = _context.sent;
+
+              // console.log(res)
+              if (res.status === 200) {
+                _this.contactLists = res.data;
+              } else {
+                _this.swr(error);
+              }
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
+  methods: {
+    ////////////////////<--- Contact Modals --->////////////////////
+    createContact: function createContact(formValidate) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!(_this2.contactData.firstName.trim() == '')) {
+                  _context2.next = 2;
+                  break;
+                }
+
+                return _context2.abrupt("return", _this2.e('First Name is required'));
+
+              case 2:
+                if (!(_this2.contactData.lastName.trim() == '')) {
+                  _context2.next = 4;
+                  break;
+                }
+
+                return _context2.abrupt("return", _this2.e('Last Name is required'));
+
+              case 4:
+                if (!(_this2.contactData.email.trim() == '')) {
+                  _context2.next = 6;
+                  break;
+                }
+
+                return _context2.abrupt("return", _this2.e('Email is required'));
+
+              case 6:
+                if (!(_this2.contactData.phone.trim() == '')) {
+                  _context2.next = 8;
+                  break;
+                }
+
+                return _context2.abrupt("return", _this2.e('Phone is required'));
+
+              case 8:
+                // if(this.formValidate.birthday.trim()=='') return this.e('Birthday is required')
+                _this2.isCreatingContact = true;
+                _context2.next = 11;
+                return _this2.callApi('post', 'app/createContact', _this2.contactData);
+
+              case 11:
+                res = _context2.sent;
+
+                // console.log(res)
+                if (res.status === 201) {
+                  _this2.s('Contact has been edited successfully!');
+
+                  _this2.contactData.firstName = '';
+                  _this2.contactData.lastName = '';
+                  _this2.contactData.email = '';
+                  _this2.contactData.phone = '';
+                  _this2.contactData.birthday = '';
+                  window.location.reload();
+                } else {
+                  if (res.status == 422) {
+                    if (_this2.res.errors.firstName) {
+                      _this2.i(res.formValidate.errors.firstName[0]);
+                    }
+
+                    if (_this2.res.errors.lastName) {
+                      _this2.i(res.formValidate.errors.lastName[0]);
+                    }
+
+                    if (_this2.res.errors.email) {
+                      _this2.i(res.formValidate.errors.email[0]);
+                    }
+
+                    if (_this2.res.errors.phone) {
+                      _this2.i(res.formValidate.errors.phone[0]);
+                    }
+
+                    if (_this2.res.errors.birthday) {
+                      _this2.i(res.formValidate.errors.birthday[0]);
+                    }
+                  } else {
+                    _this2.swr();
+                  }
+                }
+
+                _this2.createContactModal = false;
+                _this2.isCreatingContact = false;
+
+              case 15:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    closeCreateContactModal: function closeCreateContactModal(formValidate) {
+      // handleReset (formValidate);
+      this.isCreatingContact = false;
+      this.createContactModal = false;
+    },
+    showEditContactModal: function showEditContactModal(contact, index) {
+      // console.log(contact)
+      var obj = {
+        id: contact.id,
+        firstName: contact.firstName,
+        lastName: contact.lastName,
+        email: contact.email,
+        phone: contact.phone,
+        birthday: contact.birthday
+      };
+      this.formValidate = obj;
+      this.index = index;
+      this.editContactModal = true;
+    },
+    closeEditContactModal: function closeEditContactModal() {
+      this.isEditingContact = false;
+      this.editContactModal = false;
+    },
+    editContact: function editContact(contact, index) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!(_this3.formValidate.firstName.trim() == '')) {
+                  _context3.next = 2;
+                  break;
+                }
+
+                return _context3.abrupt("return", _this3.e('First Name is required'));
+
+              case 2:
+                if (!(_this3.formValidate.lastName.trim() == '')) {
+                  _context3.next = 4;
+                  break;
+                }
+
+                return _context3.abrupt("return", _this3.e('Last Name is required'));
+
+              case 4:
+                if (!(_this3.formValidate.email.trim() == '')) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                return _context3.abrupt("return", _this3.e('Email is required'));
+
+              case 6:
+                if (!(_this3.formValidate.phone.trim() == '')) {
+                  _context3.next = 8;
+                  break;
+                }
+
+                return _context3.abrupt("return", _this3.e('Phone is required'));
+
+              case 8:
+                _context3.next = 10;
+                return _this3.callApi('post', 'app/editContact', _this3.formValidate);
+
+              case 10:
+                res = _context3.sent;
+
+                //?id=' + contact.id
+                // console.log(res)
+                if (res.status === 200) {
+                  // this.contacts[this.index].firstName = this.formValidate.firstName
+                  // this.contacts[this.index].lastName = this.formValidate.lastName
+                  // this.contacts[this.index].email = this.formValidate.email
+                  // this.contacts[this.index].phone = this.formValidate.phone
+                  // this.contacts[this.index].birthday = this.formValidate.birthday
+                  _this3.s('Contact has been edited successfully!');
+
+                  _this3.formValidate.firstName = '';
+                  _this3.formValidate.lastName = '';
+                  _this3.formValidate.email = '';
+                  _this3.formValidate.phone = '';
+                  _this3.formValidate.birthday = '';
+                  _this3.editContactModal = false;
+                  window.location.reload();
+                } else {
+                  if (res.status == 422) {
+                    if (_this3.res.errors.firstName) {
+                      _this3.i(res.formValidate.errors.firstName[0]);
+                    }
+
+                    if (_this3.res.errors.lastName) {
+                      _this3.i(res.formValidate.errors.lastName[0]);
+                    }
+
+                    if (_this3.res.errors.email) {
+                      _this3.i(res.formValidate.errors.email[0]);
+                    }
+
+                    if (_this3.res.errors.phone) {
+                      _this3.i(res.formValidate.errors.phone[0]);
+                    }
+
+                    if (_this3.res.errors.birthday) {
+                      _this3.i(res.formValidate.errors.birthday[0]);
+                    }
+
+                    _this3.editContactModal = false;
+                  } else {
+                    _this3.swr();
+
+                    _this3.editContactModal = false;
+                  }
+                }
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    showDeleteContactModal: function showDeleteContactModal(contact, i) {
+      // console.log(contact)
+      this.contactData = contact; // console.log('delete method called')
+
+      this.deletingIndex = i;
+      this.showDeletingContactModal = true; // console.log(this.contactData)
+    },
+    deleteContact: function deleteContact() {
+      var _this4 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _this4.isDeleting = true;
+                _context4.next = 3;
+                return _this4.callApi('post', 'app/deleteContact', _this4.contactData);
+
+              case 3:
+                res = _context4.sent;
+
+                if (res.status === 200) {
+                  _this4.s('Tag has been deleted successfully!');
+                } else {
+                  _this4.swr();
+                }
+
+                _this4.isDeleting = false;
+                _this4.showDeleteConactModal = false;
+                window.location.reload();
+
+              case 8:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    ////////////////////<--- Address Modals --->////////////////////
+    showDetailsModal: function showDetailsModal(contact, index) {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                // let obj = {
+                //     id : contact.id,
+                //     firstName : contact.firstName,
+                //     lastName : contact.lastName,
+                //     email : contact.email,
+                //     phone : contact.phone,
+                //     birthday : contact.birthday,
+                //     addresses : contact.addresses
+                // },
+                console.log('showDetailsModal', contact); // contactDetailsData = obj
+                // console.log(contactDetailsData)
+                // const res =  await this.callApi('get' , 'app/details?id=' + contact.id , contactDetailsData)
+                // console.log(res)
+
+                /*
+                if(res.status===200){
+                    this.addressList = res.data
+                    this.contactDetailsData = obj
+                    this.detailsModal = true
+                } else {
+                    this.swr(error)
+                }
+                */
+
+                _this5.index = index;
+
+              case 2:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }))();
+    },
+    createAddress: function createAddress(formValidateAddress) {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                if (!(_this6.AddressData.number.trim() == '')) {
+                  _context6.next = 2;
+                  break;
+                }
+
+                return _context6.abrupt("return", _this6.e('Street Number is required'));
+
+              case 2:
+                if (!(_this6.AddressData.street.trim() == '')) {
+                  _context6.next = 4;
+                  break;
+                }
+
+                return _context6.abrupt("return", _this6.e('Street Name is required'));
+
+              case 4:
+                if (!(_this6.AddressData.city.trim() == '')) {
+                  _context6.next = 6;
+                  break;
+                }
+
+                return _context6.abrupt("return", _this6.e('City is required'));
+
+              case 6:
+                if (!(_this6.AddressData.state.trim() == '')) {
+                  _context6.next = 8;
+                  break;
+                }
+
+                return _context6.abrupt("return", _this6.e('State is required'));
+
+              case 8:
+                if (!(_this6.AddressData.zip.trim() == '')) {
+                  _context6.next = 10;
+                  break;
+                }
+
+                return _context6.abrupt("return", _this6.e('Zip code is required'));
+
+              case 10:
+                if (!(_this6.AddressData.type.trim() == '')) {
+                  _context6.next = 12;
+                  break;
+                }
+
+                return _context6.abrupt("return", _this6.e('Location Type is required'));
+
+              case 12:
+                _this6.isCreatingAddress = true;
+                _context6.next = 15;
+                return _this6.callApi('post', 'app/createAddress', _this6.AddressData);
+
+              case 15:
+                res = _context6.sent;
+
+                // console.log(res)
+                if (res.status === 201) {
+                  _this6.s('Address has been created successfully!');
+
+                  _this6.AddressData.number = '';
+                  _this6.AddressData.street = '';
+                  _this6.AddressData.city = '';
+                  _this6.AddressData.state = '';
+                  _this6.AddressData.zip = '';
+                  _this6.AddressData.type = 'home';
+                  window.location.reload();
+                } else {
+                  if (res.status == 422) {
+                    if (_this6.res.errors.number) {
+                      _this6.i(res.formValidateAddress.errors.number[0]);
+                    }
+
+                    if (_this6.res.errors.street) {
+                      _this6.i(res.formValidateAddress.errors.street[0]);
+                    }
+
+                    if (_this6.res.errors.city) {
+                      _this6.i(res.formValidateAddress.errors.city[0]);
+                    }
+
+                    if (_this6.res.errors.state) {
+                      _this6.i(res.formValidateAddress.errors.state[0]);
+                    }
+
+                    if (_this6.res.errors.zip) {
+                      _this6.i(res.formValidateAddress.errors.zip[0]);
+                    }
+                  } else {
+                    _this6.swr();
+                  }
+                }
+
+                _this6.createAddressModal = false;
+                _this6.isCreatingAddress = false;
+
+              case 19:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6);
+      }))();
+    },
+    closeCreateAddressModal: function closeCreateAddressModal(formValidate) {
+      // handleReset (formValidateAddress);
+      this.isCreatingAddress = false;
+      this.createAddressModal = false;
+    },
+    showEditAddressModal: function showEditAddressModal(address, index) {
+      // console.log(contact)
+      var obj = {
+        id: address.id,
+        number: address.number,
+        street: address.street,
+        city: address.city,
+        state: address.state,
+        zip: address.zip,
+        type: address.type
+      }; // this.addressList = contact.addresses
+
+      this.formValidateAddress = obj;
+      this.index = index;
+      this.editAddressModal = true;
+    },
+    closeEditAddressModal: function closeEditAddressModal() {
+      this.isEditingAddress = false;
+      this.editAddressModal = false;
+    },
+    editAddress: function editAddress() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                if (!(_this7.AddressData.number.trim() == '')) {
+                  _context7.next = 2;
+                  break;
+                }
+
+                return _context7.abrupt("return", _this7.e('Street Number is required'));
+
+              case 2:
+                if (!(_this7.AddressData.street.trim() == '')) {
+                  _context7.next = 4;
+                  break;
+                }
+
+                return _context7.abrupt("return", _this7.e('Street Name is required'));
+
+              case 4:
+                if (!(_this7.AddressData.city.trim() == '')) {
+                  _context7.next = 6;
+                  break;
+                }
+
+                return _context7.abrupt("return", _this7.e('City is required'));
+
+              case 6:
+                if (!(_this7.AddressData.state.trim() == '')) {
+                  _context7.next = 8;
+                  break;
+                }
+
+                return _context7.abrupt("return", _this7.e('State is required'));
+
+              case 8:
+                if (!(_this7.AddressData.zip.trim() == '')) {
+                  _context7.next = 10;
+                  break;
+                }
+
+                return _context7.abrupt("return", _this7.e('Zip code is required'));
+
+              case 10:
+                if (!(_this7.AddressData.type.trim() == '')) {
+                  _context7.next = 12;
+                  break;
+                }
+
+                return _context7.abrupt("return", _this7.e('Location Type is required'));
+
+              case 12:
+                _context7.next = 14;
+                return _this7.callApi('post', 'app/editAddress', _this7.formValidateAddress);
+
+              case 14:
+                res = _context7.sent;
+
+                // console.log(res)
+                if (res.status === 200) {
+                  _this7.s('Address has been edited successfully!');
+
+                  _this7.formValidateAddress.number = '';
+                  _this7.formValidateAddress.street = '';
+                  _this7.formValidateAddress.city = '';
+                  _this7.formValidateAddress.state = '';
+                  _this7.formValidateAddress.zip = '';
+                  _this7.editAddressModal = false;
+                  window.location.reload();
+                } else {
+                  if (res.status == 422) {
+                    if (_this7.res.errors.number) {
+                      _this7.i(res.formValidateAddress.errors.number[0]);
+                    }
+
+                    if (_this7.res.errors.street) {
+                      _this7.i(res.formValidateAddress.errors.street[0]);
+                    }
+
+                    if (_this7.res.errors.city) {
+                      _this7.i(res.formValidateAddress.errors.city[0]);
+                    }
+
+                    if (_this7.res.errors.state) {
+                      _this7.i(res.formValidateAddress.errors.state[0]);
+                    }
+
+                    if (_this7.res.errors.zip) {
+                      _this7.i(res.formValidateAddress.errors.zip[0]);
+                    }
+                  } else {
+                    _this7.swr();
+                  }
+                }
+
+                _this7.editAddressModal = false;
+
+              case 17:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
+    showDeleteAddressModal: function showDeleteAddressModal(address, i) {
+      // console.log(contact)
+      this.addressData = address; // console.log('delete method called')
+
+      this.deletingAddressIndex = i;
+      this.showDeletingAddressModal = true; // console.log(this.contactData)
+    },
+    deleteAddress: function deleteAddress() {
+      var _this8 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+        var res;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _this8.isDeletingAddress = true; // console.log('This is the contact data to be deleted')
+                // console.log(this.contactData)
+
+                _context8.next = 3;
+                return _this8.callApi('post', 'app/deleteAddress', _this8.addressData);
+
+              case 3:
+                res = _context8.sent;
+
+                if (res.status === 200) {
+                  _this8.s('Tag has been deleted successfully!'); //window.location.reload(); // need to reload the modal
+                  //showDeleteContactModal(this, i)
+
+                } else {
+                  _this8.swr();
+                }
+
+                _this8.isDeletingAddress = false;
+                _this8.showDeleteAddressModal = false;
+
+              case 7:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8);
+      }))();
+    },
+    ////////////////////<--- Shared Modals --->////////////////////
+    handleReset: function handleReset(name) {
+      this.$refs[name].resetFields();
+    }
+  } //for original non-spa design//
+  // getters: {
+  //     getContactData(state){
+  //        return state.contactData
+  //     },
+  //     getContactLists(state){
+  //     },
+  //     getDeleteModalObj(state){
+  //         return state.deleteModalObj
+  //     },
+  //     getUserPermission(state){
+  //         return state.userPermission
+  //     },
+  // },
+  // components : {
+  // 	deleteModal
+  // },
+  // computed : {
+  // 	...mapGetters(['getDeleteModalObj'])
+  // },
+  // watch : {
+  // 	getDeleteModalObj(obj){
+  // 		if(obj.isDeleted){
+  // 			this.tags.splice(obj.deletingIndex,1)
+  // 		}
+  // 	}
+  // },
+
+});
 
 /***/ }),
 
