@@ -3156,6 +3156,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       contacts: [],
       currentContact: {},
+      modalContactDetails: null,
       modalContactEdit: null,
       modalContactAdd: null
     };
@@ -3168,6 +3169,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     initModals: function initModals() {
       this.modalContactEdit = new bootstrap.Modal(document.getElementById('modalEdit'), {});
       this.modalContactAdd = new bootstrap.Modal(document.getElementById('modalAdd'), {});
+      this.modalContactDetails = new bootstrap.Modal(document.getElementById('modalDetails'), {});
     },
     getContacts: function getContacts() {
       var _this = this;
@@ -3276,55 +3278,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         }, _callee3, null, [[1, 7]]);
       }))();
     },
-    modalAddSubmit: function modalAddSubmit() {
+    btnDetails: function btnDetails(id) {
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 _context4.prev = 0;
                 _context4.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this4.currentContact);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/contacts/".concat(id));
 
               case 3:
-                _this4.modalContactAdd.hide();
+                response = _context4.sent;
+                _this4.currentContact = response.data;
 
-                _this4.getContacts();
+                _this4.modalContactDetails.show();
 
-                _context4.next = 10;
+                _context4.next = 11;
                 break;
 
-              case 7:
-                _context4.prev = 7;
+              case 8:
+                _context4.prev = 8;
                 _context4.t0 = _context4["catch"](0);
                 alert(_context4.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[0, 7]]);
+        }, _callee4, null, [[0, 8]]);
       }))();
     },
-    modalEditSubmit: function modalEditSubmit() {
+    modalAddSubmit: function modalAddSubmit() {
       var _this5 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 _context5.prev = 0;
                 _context5.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/contacts/".concat(_this5.currentContact.id), _this5.currentContact);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this5.currentContact);
 
               case 3:
-                _this5.modalContactEdit.hide();
+                response = _context5.sent;
 
-                _this5.getContacts();
+                if (response.data.errors) {
+                  alert('All fields are required');
+                } else {
+                  _this5.modalContactAdd.hide();
+
+                  _this5.getContacts();
+                }
 
                 _context5.next = 10;
                 break;
@@ -3340,6 +3351,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             }
           }
         }, _callee5, null, [[0, 7]]);
+      }))();
+    },
+    modalEditSubmit: function modalEditSubmit() {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.prev = 0;
+                _context6.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/contacts/".concat(_this6.currentContact.id), _this6.currentContact);
+
+              case 3:
+                _this6.modalContactEdit.hide();
+
+                _this6.getContacts();
+
+                _context6.next = 10;
+                break;
+
+              case 7:
+                _context6.prev = 7;
+                _context6.t0 = _context6["catch"](0);
+                alert(_context6.t0);
+
+              case 10:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[0, 7]]);
       }))();
     }
   }
@@ -69985,6 +70029,57 @@ var render = function() {
                 ])
               ])
             ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal",
+              attrs: { id: "modalDetails", tabindex: "-1" }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _vm._v(
+                      "\n              Name: " +
+                        _vm._s(_vm.currentContact.firstName) +
+                        " " +
+                        _vm._s(_vm.currentContact.lastName) +
+                        " "
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n              Email: " +
+                        _vm._s(_vm.currentContact.email) +
+                        " "
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n              Phone: " +
+                        _vm._s(_vm.currentContact.phone) +
+                        " "
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n              Birthday: " +
+                        _vm._s(_vm.currentContact.birthday) +
+                        "              \n              "
+                    ),
+                    _vm._m(4),
+                    _c("hr", { staticClass: "mb-2" }),
+                    _vm._v(" "),
+                    _c("small", [_vm._v("[ addresses go here ]")]),
+                    _vm._v(" "),
+                    _c("p")
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(5)
+                ])
+              ])
+            ]
           )
         ],
         1
@@ -70045,6 +70140,46 @@ var staticRenderFns = [
           "aria-label": "Close"
         }
       })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Contact Details")]),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-bs-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "mt-2" }, [
+      _c("strong", [_vm._v("Addresses")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-sm btn-secondary",
+          attrs: { type: "button", "data-bs-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
     ])
   }
 ]

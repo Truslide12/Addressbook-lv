@@ -6,6 +6,7 @@ export default {
 		return {
       contacts: [],
       currentContact: {},
+      modalContactDetails: null,
       modalContactEdit: null,
       modalContactAdd: null,
     }
@@ -18,6 +19,7 @@ export default {
     initModals() {
       this.modalContactEdit = new bootstrap.Modal(document.getElementById('modalEdit'), {});
       this.modalContactAdd = new bootstrap.Modal(document.getElementById('modalAdd'), {});
+      this.modalContactDetails = new bootstrap.Modal(document.getElementById('modalDetails'), {});
     },
     async getContacts() {
       try {
@@ -50,11 +52,24 @@ export default {
         }
       }
     },
+    async btnDetails(id) {
+      try {
+        const response = await axios.get(`/api/contacts/${id}`);
+        this.currentContact = response.data;
+        this.modalContactDetails.show();
+      } catch (err) {
+        alert(err);
+      }
+    },
     async modalAddSubmit() {
       try {
-        await axios.post(`/api/contacts`, this.currentContact);
-        this.modalContactAdd.hide();
-        this.getContacts();
+        const response = await axios.post(`/api/contacts`, this.currentContact);
+        if (response.data.errors) {
+          alert('All fields are required');
+        } else {
+          this.modalContactAdd.hide();
+          this.getContacts();
+        }
       } catch (err) {
         alert(err);
       }
@@ -178,6 +193,32 @@ export default {
             <div class="modal-footer">
               <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="button" class="btn btn-sm btn-primary" @click="modalAddSubmit()">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Details -->
+      <div id="modalDetails" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Contact Details</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              Name: {{ currentContact.firstName }} {{ currentContact.lastName }} <br>
+              Email: {{ currentContact.email }} <br>
+              Phone: {{ currentContact.phone }} <br>
+              Birthday: {{ currentContact.birthday }}              
+              <p class="mt-2">
+                <strong>Addresses</strong>
+                <hr class="mb-2">
+                <small>[ addresses go here ]</small>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
