@@ -5,12 +5,20 @@ export default {
 	data() {
 		return {
       contacts: [],
+      currentContact: {},
+      modalContactEdit: null,
+      modalContactAdd: null,
     }
   },
   mounted() {
     this.getContacts();
+    this.initModals();
   },
   methods: {
+    initModals() {
+      this.modalContactEdit = new bootstrap.Modal(document.getElementById('modalEdit'), {});
+      this.modalContactAdd = new bootstrap.Modal(document.getElementById('modalAdd'), {});
+    },
     async getContacts() {
       try {
         const response = await axios.get('/api/contacts');
@@ -18,7 +26,48 @@ export default {
       } catch (err) {
         alert(err);
       }
-    }
+    },
+    btnCreate() {
+      this.currentContact = {};
+      this.modalContactAdd.show();
+    },
+    async btnEdit(id) {
+      try {
+        const response = await axios.get(`/api/contacts/${id}`);
+        this.currentContact = response.data;
+        this.modalContactEdit.show();
+      } catch (err) {
+        alert(err);
+      }
+    },
+    async btnDelete(id) {
+      if (confirm('Are you sure you want to delete this item?')) {
+        try {
+          await axios.delete(`/api/contacts/${id}`);
+          this.getContacts();
+        } catch (err) {
+          alert(err);
+        }
+      }
+    },
+    async modalAddSubmit() {
+      try {
+        await axios.post(`/api/contacts`, this.currentContact);
+        this.modalContactAdd.hide();
+        this.getContacts();
+      } catch (err) {
+        alert(err);
+      }
+    },
+    async modalEditSubmit() {
+      try {
+        await axios.put(`/api/contacts/${this.currentContact.id}`, this.currentContact);
+        this.modalContactEdit.hide();
+        this.getContacts();
+      } catch (err) {
+        alert(err);
+      }
+    },
   },
 }
 </script>
@@ -49,14 +98,90 @@ export default {
         <td>{{ contact.phone }}</td>
         <td>{{ contact.birthday }}</td>
         <td>
-            <Button type="button" size="small" @click="btnDetails(contact.id)">Details</Button>
-            <Button type="button" size="small" @click="btnEdit(contact.id)">Edit</Button>
-            <Button type="button" size="small" @click="btnDelete(contact.id)">Delete</Button>
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-sm btn-secondary" @click="btnDetails(contact.id)">Details</button>
+            <button type="button" class="btn btn-sm btn-secondary" @click="btnEdit(contact.id)">Edit</button>
+            <button type="button" class="btn btn-sm btn-secondary" @click="btnDelete(contact.id)">Delete</button>
+          </div>
         </td>
       </tr>
       </table>
-      
 
+      <!-- Modal Edit -->
+      <div id="modalEdit" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Edit Contact</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">First</label>
+                <input v-model="currentContact.firstName" type="text" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Last</label>
+                <input v-model="currentContact.lastName" type="text" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input v-model="currentContact.email" type="email" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input v-model="currentContact.phone" type="tel" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Birthday</label>
+                <input v-model="currentContact.birthday" type="text" class="form-control" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-sm btn-primary" @click="modalEditSubmit()">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Add -->
+      <div id="modalAdd" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Add Contact</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label class="form-label">First</label>
+                <input v-model="currentContact.firstName" type="text" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Last</label>
+                <input v-model="currentContact.lastName" type="text" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input v-model="currentContact.email" type="email" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Phone</label>
+                <input v-model="currentContact.phone" type="tel" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Birthday</label>
+                <input v-model="currentContact.birthday" type="text" class="form-control" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-sm btn-primary" @click="modalAddSubmit()">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
   </div>
