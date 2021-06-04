@@ -3,7 +3,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 // contact routes
-import index from './Pages/Contacts/index'
+import index from './Pages/Contacts/index';
+import lightsOut from './Pages/Contacts/lights-out';
 // import createContact from './Pages/Contacts/createContact'
 // import editContact from './Pages/Contacts/editContact'
 // import deleteContact from './Pages/Contacts/deleteContact'
@@ -20,6 +21,11 @@ const routes = [
         path: '/',
         component: index,
         name: index,
+    },
+    {
+        path: '/lights-out',
+        component: lightsOut,
+        name: 'lights-out',
     },
     // {
     //     path: '/createContact',
