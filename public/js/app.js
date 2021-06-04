@@ -3140,12 +3140,60 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      contacts: []
+    };
   },
-  mounted: function mounted() {},
-  methods: {}
+  mounted: function mounted() {
+    this.getContacts();
+  },
+  methods: {
+    getContacts: function getContacts() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/contacts');
+
+              case 3:
+                response = _context.sent;
+                _this.contacts = response.data;
+                _context.next = 10;
+                break;
+
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                alert(_context.t0);
+
+              case 10:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 7]]);
+      }))();
+    }
+  }
 });
 
 /***/ }),
@@ -69288,19 +69336,123 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "content" }, [
+      _c(
+        "div",
+        { staticClass: "container-fluid" },
+        [
+          _c("h1", { staticClass: "mt-0 pt-0 pb-2" }, [_vm._v("Contacts")]),
+          _vm._v(" "),
+          _c("hr", { staticClass: "mb-3" }),
+          _vm._v(" "),
+          _c(
+            "Button",
+            {
+              attrs: { type: "success" },
+              on: {
+                click: function($event) {
+                  return _vm.btnCreate()
+                }
+              }
+            },
+            [_vm._v("New Contact")]
+          ),
+          _vm._v(" "),
+          _c(
+            "table",
+            { staticClass: "_table mt-3" },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.contacts, function(contact) {
+                return _c("tr", { key: contact.id }, [
+                  _c("td", [_vm._v(_vm._s(contact.id))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(contact.firstName))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(contact.lastName))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(contact.email))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(contact.phone))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(contact.birthday))]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    [
+                      _c(
+                        "Button",
+                        {
+                          attrs: { type: "button", size: "small" },
+                          on: {
+                            click: function($event) {
+                              return _vm.btnDetails(contact.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Details")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "Button",
+                        {
+                          attrs: { type: "button", size: "small" },
+                          on: {
+                            click: function($event) {
+                              return _vm.btnEdit(contact.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Edit")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "Button",
+                        {
+                          attrs: { type: "button", size: "small" },
+                          on: {
+                            click: function($event) {
+                              return _vm.btnDelete(contact.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Delete")]
+                      )
+                    ],
+                    1
+                  )
+                ])
+              })
+            ],
+            2
+          )
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "content" }, [
-        _c("div", { staticClass: "container-fluid" }, [
-          _c("h1", [_vm._v("Lights Out!")])
-        ])
-      ])
+    return _c("tr", [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("First")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Last")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Phone")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Birthday")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Actions")])
     ])
   }
 ]
