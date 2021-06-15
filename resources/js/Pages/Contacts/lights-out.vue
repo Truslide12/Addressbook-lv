@@ -210,11 +210,36 @@ export default {
               Name: {{ currentContact.firstName }} {{ currentContact.lastName }} <br>
               Email: {{ currentContact.email }} <br>
               Phone: {{ currentContact.phone }} <br>
-              Birthday: {{ currentContact.birthday }}              
+              Birthday: {{ currentContact.birthday }}
               <p class="mt-2">
                 <strong>Addresses</strong>
                 <hr class="mb-2">
-                <small>[ addresses go here ]</small>
+                <Button type="success" @click="btnCreateAddress()">New Address</Button>
+                <table class="_table mt-3">
+                    <tr>
+                        <th>ID</th>
+                        <th>Numnber</th>
+                        <th>Street</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Zip</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tr v-for="address in addresses" :key="address.id">
+                        <td>{{ address.id }}</td>
+                        <td>{{ address.number }}</td>
+                        <td>{{ address.street }}</td>
+                        <td>{{ address.city }}</td>
+                        <td>{{ address.state }}</td>
+                        <td>{{ address.zip }}</td>
+                        <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-sm btn-secondary" @click="btnEdit(address.id)">Edit</button>
+                            <button type="button" class="btn btn-sm btn-secondary" @click="btnDelete(address.id)">Delete</button>
+                        </div>
+                        </td>
+                    </tr>
+                </table>
               </p>
             </div>
             <div class="modal-footer">

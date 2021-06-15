@@ -10,10 +10,8 @@ use Carbon\Carbon;
 class ContactController extends Controller
 {
     // Contacts
-    public function index() {
-        return Contact::orderBy('id', 'asc')->get();
-        // $contacts = Contact::latest()->paginate(5);
-        // return response()->json($contacts);
+    public function getIndex() {
+        return response()->json(Model::orderBy('lastName')->get());
     }
 
     public function createContact(Request $request) {
@@ -58,21 +56,20 @@ class ContactController extends Controller
          ]);
     }
 
-    public function deleteContact(Request $request) {
-        // validate
-        // console.log($request);
-        $contact = Contact::find($request->id);
-        $contact->delete();
-
-        return response()->json('The contact successfully deleted');
+    public function deleteContact(Request $request, Model $contact) {
+            if (empty($contact)) {
+                return response()->json(['errors' => 'Contact not found']);
+            }
+            $contact->delete();
+            return response()->json(['success' => true]);
     }
 
     // Addresses
     public function details(Request $request) {
         // dump($request);
-        $contactData = Contact::find($request->id);
+        $currentContact = Contact::find($request->id);
 
-        $addressList = $contactData->addresses;
+        $addressList = $currentContact->addresses;
         // $data = [$contactData,$addressLists];
         // dump($contactData);
         // dump($addressList);
@@ -124,11 +121,11 @@ class ContactController extends Controller
         ]);
     }
 
-    public function deleteAddress($id) {
-        // validate
-        $address = Address::find($id);
+    public function deleteAddress(Request $request, Model $address) {
+        if (empty($address)) {
+            return response()->json(['errors' => 'Address not found']);
+        }
         $address->delete();
-
-        return response()->json('The address successfully deleted');
+        return response()->json(['success' => true]);
     }
 }

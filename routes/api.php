@@ -23,6 +23,14 @@ Route::prefix('contacts')->group(function () {
     Route::post('/', [ApiContactsController::class, 'postItem']);
 });
 
+Route::prefix('addresses')->group(function () {
+    Route::get('/', [ApiContactsController::class, 'getAddressIndex']);
+    Route::get('/{address}', [ApiContactsController::class, 'getAddressItem']);
+    Route::put('/{address}', [ApiContactsController::class, 'putAddressItem']);
+    Route::delete('/{address}', [ApiContactsController::class, 'deleteAddressItem']);
+    Route::post('/', [ApiContactsController::class, 'postAddressItem']);
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
