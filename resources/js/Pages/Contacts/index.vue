@@ -223,9 +223,24 @@ export default {
 
         async modalAddressAddSubmit() {
             try {
+                this.currentAddress.contact_id = this.currentContact.id;
                 const response = await axios.post(`/api/addresses`, this.currentAddress);
                 if (response.data.errors) {
-                alert('All fields are required');
+                    alert('All fields are required');
+                } else {
+                this.modalAddressAdd.hide();
+                this.btnDetails(this.currentContact.id);
+                }
+            } catch (err) {
+                alert(err);
+            }
+        },
+        async modalAddressEditSubmit() {
+            try {
+                const response = await axios.put(`/api/addresses`, this.currentAddress);
+                // console.log(response)
+                if (response.data.errors) {
+                    alert('All fields are required');
                 } else {
                 this.modalAddressAdd.hide();
                 this.btnDetails();
@@ -380,6 +395,7 @@ export default {
                                             <th>City</th>
                                             <th>State</th>
                                             <th>Zip</th>
+                                            <th>Type</th>
                                             <th>Actions</th>
                                         </tr>
                                         <tr v-for="address in currentContact.addresses" :key="address.id">
@@ -389,6 +405,7 @@ export default {
                                             <td>{{ address.city }}</td>
                                             <td>{{ address.state }}</td>
                                             <td>{{ address.zip }}</td>
+                                            <td>{{ address.type }}</td>
                                             <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <button type="button" class="btn btn-sm btn-secondary" @click="btnEditAddress(address.id)">Edit</button>
@@ -409,38 +426,52 @@ export default {
                 <!-- Add Address Modal -->
                 <div id="modalAddressAdd" class="modal" tabindex="-1">
                     <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h5 class="modal-title">Address</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Address</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Number</label>
+                                    <input v-model="currentAddress.number" type="number" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Street</label>
+                                    <input v-model="currentAddress.street" type="text" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">City</label>
+                                    <input v-model="currentAddress.city" type="text" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">State</label>
+                                    <input v-model="currentAddress.state" type="text" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Zip</label>
+                                    <input v-model="currentAddress.zip" type="number" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-12 control-label" for="month">Type</label>
+                                    <div class="col-md-4 col-sm-12">
+                                        <select v-model="currentAddress.type" type="text" class="form-control">
+                                            <option value="home">Home</option>
+                                            <option value="home">Work</option>
+                                            <option value="home">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Contact ID</label>
+                                    <input v-model="currentContact.id" type="number" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-sm btn-primary" @click="modalAddressAddSubmit()">Save Address</button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label class="form-label">Number</label>
-                                <input v-model="currentAddress.number" type="number" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Street</label>
-                                <input v-model="currentAddress.street" type="text" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">City</label>
-                                <input v-model="currentAddress.city" type="text" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">State</label>
-                                <input v-model="currentAddress.state" type="text" class="form-control" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Zip</label>
-                                <input v-model="currentAddress.zip" type="number" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-sm btn-primary" @click="modalAddressAddSubmit()">Save Changes</button>
-                        </div>
-                    </div>
                     </div>
                 </div>
 
@@ -472,6 +503,20 @@ export default {
                             <div class="mb-3">
                                 <label class="form-label">Zip</label>
                                 <input v-model="currentAddress.zip" type="number" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 col-sm-12 control-label" for="month">Type</label>
+                                <div class="col-md-4 col-sm-12">
+                                    <select v-model="currentAddress.type" type="text" class="form-control">
+                                        <option value="home">Home</option>
+                                        <option value="home">Work</option>
+                                        <option value="home">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Contact ID</label>
+                                <input v-model="currentContact.id" type="number" class="form-control" required>
                             </div>
                         </div>
                         <div class="modal-footer">

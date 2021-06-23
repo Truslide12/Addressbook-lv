@@ -76,16 +76,7 @@ class ContactController extends Controller
     public function getAddressIndex(Request $request) {
         $currentContact = getContact($request->id);
         return response()->json($currentContact);
-        // $currentContact = Contact::find($request->id);
-        // $addresses = $currentContact->addresses;
-        // if($addresses) {
-        //     // $addressLists = $contactData->addresses;
-        //     // return ($contactData);
-        //     return response()->json($addresses->toArray());
-        // } else {
-        //     return response()->json('The contact details failed');
-        //     // return redirect('index');
-        // }
+
     }
 
     // Get a Contact
@@ -96,18 +87,19 @@ class ContactController extends Controller
         return response()->json($address);
     }
     public function postAddress(Request $request) {
-        $validator = Validator::make($request->all(), [
-            'number' => 'required',
-            'Street' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'zip' => 'required',
-            'type' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()]);
-        }
-        // Create item
+        // dd($request);
+        // $validator = Validator::make($request->all(), [
+        //     'number' => 'required',
+        //     'street' => 'required',
+        //     'city' => 'required',
+        //     'state' => 'required',
+        //     'zip' => 'required',
+        //     'type' => 'required',
+        // ]);
+        // if ($validator->fails()) {
+        //     return response()->json(['errors' => $validator->errors()]);
+        // }
+        // // Create item
         $pkg = $request->all();
         return response()->json(Address::create($pkg));
     }

@@ -17,16 +17,16 @@ use App\Http\Controllers\ContactController;
 */
 
 Route::prefix('contacts')->group(function () {
-    // Route::get('/', [ApiContactsController::class, 'getIndex']);
-    // Route::get('/{contact}', [ApiContactsController::class, 'getItem']);
-    // Route::put('/{contact}', [ApiContactsController::class, 'putItem']);
-    // Route::delete('/{contact}', [ApiContactsController::class, 'deleteItem']);
-    // Route::post('/', [ApiContactsController::class, 'postItem']);
     Route::get('/', [ContactController::class, 'getContactIndex']);
     Route::get('/{contact}', [ContactController::class, 'getContact']);
     Route::put('/{contact}', [ContactController::class, 'putContact']);
     Route::delete('/{contact}', [ContactController::class, 'deleteContact']);
     Route::post('/', [ContactController::class, 'postContact']);
+    // Route::get('/', [ApiContactsController::class, 'getIndex']);
+    // Route::get('/{contact}', [ApiContactsController::class, 'getItem']);
+    // Route::put('/{contact}', [ApiContactsController::class, 'putItem']);
+    // Route::delete('/{contact}', [ApiContactsController::class, 'deleteItem']);
+    // Route::post('/', [ApiContactsController::class, 'postItem']);
 });
 
 Route::prefix('addresses')->group(function () {

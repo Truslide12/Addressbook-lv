@@ -2385,10 +2385,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context9.prev = _context9.next) {
               case 0:
                 _context9.prev = 0;
-                _context9.next = 3;
+                _this9.currentAddress.contact_id = _this9.currentContact.id;
+                _context9.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/addresses", _this9.currentAddress);
 
-              case 3:
+              case 4:
                 response = _context9.sent;
 
                 if (response.data.errors) {
@@ -2396,23 +2397,64 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 } else {
                   _this9.modalAddressAdd.hide();
 
-                  _this9.btnDetails();
+                  _this9.btnDetails(_this9.currentContact.id);
                 }
 
-                _context9.next = 10;
+                _context9.next = 11;
                 break;
 
-              case 7:
-                _context9.prev = 7;
+              case 8:
+                _context9.prev = 8;
                 _context9.t0 = _context9["catch"](0);
                 alert(_context9.t0);
 
-              case 10:
+              case 11:
               case "end":
                 return _context9.stop();
             }
           }
-        }, _callee9, null, [[0, 7]]);
+        }, _callee9, null, [[0, 8]]);
+      }))();
+    },
+    modalAddressEditSubmit: function modalAddressEditSubmit() {
+      var _this10 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                _context10.prev = 0;
+                _context10.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/addresses", _this10.currentAddress);
+
+              case 3:
+                response = _context10.sent;
+
+                // console.log(response)
+                if (response.data.errors) {
+                  alert('All fields are required');
+                } else {
+                  _this10.modalAddressAdd.hide();
+
+                  _this10.btnDetails();
+                }
+
+                _context10.next = 10;
+                break;
+
+              case 7:
+                _context10.prev = 7;
+                _context10.t0 = _context10["catch"](0);
+                alert(_context10.t0);
+
+              case 10:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, null, [[0, 7]]);
       }))();
     }
   }
@@ -68560,6 +68602,8 @@ var render = function() {
                                   _vm._v(" "),
                                   _c("td", [_vm._v(_vm._s(address.zip))]),
                                   _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(address.type))]),
+                                  _vm._v(" "),
                                   _c("td", [
                                     _c(
                                       "div",
@@ -68794,6 +68838,99 @@ var render = function() {
                           }
                         }
                       })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-4 col-sm-12 control-label",
+                          attrs: { for: "month" }
+                        },
+                        [_vm._v("Type")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 col-sm-12" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.currentAddress.type,
+                                expression: "currentAddress.type"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.currentAddress,
+                                  "type",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Home")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Work")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Other")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Contact ID")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.id,
+                            expression: "currentContact.id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", required: "" },
+                        domProps: { value: _vm.currentContact.id },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "id",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
                     ])
                   ]),
                   _vm._v(" "),
@@ -68818,7 +68955,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Save Changes")]
+                      [_vm._v("Save Address")]
                     )
                   ])
                 ])
@@ -68996,6 +69133,99 @@ var render = function() {
                           }
                         }
                       })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-4 col-sm-12 control-label",
+                          attrs: { for: "month" }
+                        },
+                        [_vm._v("Type")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 col-sm-12" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.currentAddress.type,
+                                expression: "currentAddress.type"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.currentAddress,
+                                  "type",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Home")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Work")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Other")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Contact ID")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.id,
+                            expression: "currentContact.id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", required: "" },
+                        domProps: { value: _vm.currentContact.id },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "id",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
                     ])
                   ]),
                   _vm._v(" "),
@@ -69121,6 +69351,8 @@ var staticRenderFns = [
       _c("th", [_vm._v("State")]),
       _vm._v(" "),
       _c("th", [_vm._v("Zip")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Type")]),
       _vm._v(" "),
       _c("th", [_vm._v("Actions")])
     ])
