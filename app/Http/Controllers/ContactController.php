@@ -3,59 +3,67 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Contact;
-use App\Models\Address;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Contact as Model;
+use App\Models\Address as Address;
 use Carbon\Carbon;
 
 class ContactController extends Controller
 {
-    // Contacts
-    public function getIndex() {
+    // Get all Contacts
+    public function getContactIndex() {
         return response()->json(Model::orderBy('lastName')->get());
     }
-
-    public function createContact(Request $request) {
+    // Get a Contact
+    public function getContact(Request $request, Model $contact) {
+        if (empty($contact)) {
+            return response()->json(['errors' => 'Contact not found']);
+        }
+        return response()->json($contact);
+    }
+    // create contact
+    public function postContact(Request $request) {
         // validate
-        $this->validate($request, [
+        $validator = Validator::make($request->all(), [
             'firstName' => 'required',
             'lastName' => 'required',
             'email' => 'required',
             'phone' => 'required',
             'birthday' => 'required'
         ]);
-        // convert birtday date to proper format
-        $birthday = \Carbon\Carbon::parse($request->birthday)->format('Y/m/d');
-        // create contact in database
-        return Contact::create([
-            'firstName'=> $request->firstName,
-            'lastName'=> $request->lastName,
-            'email'=> $request->email,
-            'phone'=> $request->phone,
-            'birthday'=> $birthday,
-        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+        // Create item
+        $pkg = $request->all();
+        $pkg['birthday'] = \Carbon\Carbon::parse($request->birthday)->format('Y-m-d');
+        return response()->json(Model::create($pkg));
     }
+    // edit contact
+    public function putContact(Request $request, Model $contact) {
+            if (empty($contact)) {
+                return response()->json(['errors' => 'Contact not found']);
+            }
 
-    public function editContact(Request $request) {
-        // validate
-        // dump($request);
-         $this->validate($request, [
-             'firstName' => 'required',
-             'lastName' => 'required',
-             'email' => 'required',
-             'phone' => 'required',
-             'birthday' => 'required'
-        ]);
-        // convert birtday date to proper format
-         $birthday = \Carbon\Carbon::parse($request->birthday)->format('Y/m/d');
-         return Contact::where('id', $request->id)->update([
-             'firstName'=> $request->firstName,
-             'lastName'=> $request->lastName,
-             'email'=> $request->email,
-             'phone'=> $request->phone,
-             'birthday'=> $birthday,
-         ]);
+            $validator = Validator::make($request->all(), [
+                'firstName' => 'required',
+                'lastName' => 'required',
+                'email' => 'required',
+                'phone' => 'required',
+                'birthday' => 'required'
+            ]);
+            if ($validator->fails()) {
+                return response()->json(['errors' => $validator->errors()]);
+            }
+            // Contact update
+            $pkg = $request->all();
+            $pkg['birthday'] = \Carbon\Carbon::parse($request->birthday)->format('Y-m-d');
+
+            $contact->fill($pkg);
+            $contact->save();
+            return response()->json($contact);
     }
-
+    // delete Contact
     public function deleteContact(Request $request, Model $contact) {
             if (empty($contact)) {
                 return response()->json(['errors' => 'Contact not found']);
@@ -65,27 +73,30 @@ class ContactController extends Controller
     }
 
     // Addresses
-    public function details(Request $request) {
-        // dump($request);
-        $currentContact = Contact::find($request->id);
-
-        $addressList = $currentContact->addresses;
-        // $data = [$contactData,$addressLists];
-        // dump($contactData);
-        // dump($addressList);
-        if($addressList) {
-            // $addressLists = $contactData->addresses;
-            // return ($contactData);
-            return response()->json($addressList->toArray());
-        } else {
-            return response()->json('The contact details failed');
-            // return redirect('index');
-        }
+    public function getAddressIndex(Request $request) {
+        $currentContact = getContact($request->id);
+        return response()->json($currentContact);
+        // $currentContact = Contact::find($request->id);
+        // $addresses = $currentContact->addresses;
+        // if($addresses) {
+        //     // $addressLists = $contactData->addresses;
+        //     // return ($contactData);
+        //     return response()->json($addresses->toArray());
+        // } else {
+        //     return response()->json('The contact details failed');
+        //     // return redirect('index');
+        // }
     }
 
-    public function createAddress(Request $request) {
-        // validate
-        $this->validate($request, [
+    // Get a Contact
+    public function getAddress(Request $request, Address $address) {
+        if (empty($address)) {
+            return response()->json(['errors' => 'Address not found']);
+        }
+        return response()->json($address);
+    }
+    public function postAddress(Request $request) {
+        $validator = Validator::make($request->all(), [
             'number' => 'required',
             'Street' => 'required',
             'city' => 'required',
@@ -93,35 +104,38 @@ class ContactController extends Controller
             'zip' => 'required',
             'type' => 'required',
         ]);
-        return Address::create([
-            'number'=> $request->firstName,
-            'street'=> $request->lastName,
-            'city'=> $request->email,
-            'state'=> $request->phone,
-            'zip'=> $request->birthday,
-            'type'=> $request->type,
-        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+        // Create item
+        $pkg = $request->all();
+        return response()->json(Address::create($pkg));
     }
 
-    public function editAddress(Request $request) {
+    public function putAddress(Request $request, Address $address) {
+        if (empty($address)) {
+            return response()->json(['errors' => 'Address not found']);
+        }
         // validate
-        $this->validate($request, [
-            'firstName' => 'required',
-            'lastName' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'birthday' => 'required'
+        $validator = Validator::make($request->all(), [
+            'number' => 'required',
+            'Street' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
+            'type' => 'required',
         ]);
-        return Address::where('id', $request->id)->update([
-            'firstName'=> $request->firstName,
-            'lastName'=> $request->lastName,
-            'email'=> $request->email,
-            'phone'=> $request->phone,
-            'birthday'=> $request->birthday,
-        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
+        // Mass assignment update
+        $pkg = $request->all();
+        $address->fill($pkg);
+        $address->save();
+        return response()->json($address);
     }
 
-    public function deleteAddress(Request $request, Model $address) {
+    public function deleteAddress(Request $request, Address $address) {
         if (empty($address)) {
             return response()->json(['errors' => 'Address not found']);
         }
