@@ -87,7 +87,7 @@ class ContactController extends Controller
         return response()->json($address);
     }
     public function postAddress(Request $request) {
-        // dd($request);
+        // need to get validation working
         // $validator = Validator::make($request->all(), [
         //     'number' => 'required',
         //     'street' => 'required',
@@ -109,17 +109,17 @@ class ContactController extends Controller
             return response()->json(['errors' => 'Address not found']);
         }
         // validate
-        $validator = Validator::make($request->all(), [
-            'number' => 'required',
-            'Street' => 'required',
-            'city' => 'required',
-            'state' => 'required',
-            'zip' => 'required',
-            'type' => 'required',
-        ]);
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()]);
-        }
+        // $validator = Validator::make($request->all(), [
+        //     'number' => 'required',
+        //     'Street' => 'required',
+        //     'city' => 'required',
+        //     'state' => 'required',
+        //     'zip' => 'required',
+        //     'type' => 'required',
+        // ]);
+        // if ($validator->fails()) {
+        //     return response()->json(['errors' => $validator->errors()]);
+        // }
         // Mass assignment update
         $pkg = $request->all();
         $address->fill($pkg);

@@ -2427,18 +2427,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 _context10.prev = 0;
                 _context10.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/addresses", _this10.currentAddress);
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/addresses/".concat(_this10.currentAddress.id), _this10.currentAddress);
 
               case 3:
                 response = _context10.sent;
 
-                // console.log(response)
+                // console.log(response);
                 if (response.data.errors) {
                   alert('All fields are required');
                 } else {
-                  _this10.modalAddressAdd.hide();
+                  _this10.modalAddressEdit.hide();
 
-                  _this10.btnDetails();
+                  _this10.btnDetails(_this10.currentContact.id);
                 }
 
                 _context10.next = 10;

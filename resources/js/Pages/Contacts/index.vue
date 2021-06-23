@@ -237,13 +237,14 @@ export default {
         },
         async modalAddressEditSubmit() {
             try {
-                const response = await axios.put(`/api/addresses`, this.currentAddress);
-                // console.log(response)
+                // console.log(this.currentAddress);
+                const response = await axios.put(`/api/addresses/${this.currentAddress.id}`, this.currentAddress);
+                // console.log(response);
                 if (response.data.errors) {
                     alert('All fields are required');
                 } else {
-                this.modalAddressAdd.hide();
-                this.btnDetails();
+                this.modalAddressEdit.hide();
+                this.btnDetails(this.currentContact.id);
                 }
             } catch (err) {
                 alert(err);
