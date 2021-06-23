@@ -1911,189 +1911,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-// import addresses pages
-// import createAddressModal from './createAddressModal'
-// import editAddressModal from './editAddressModal'
-// import deleteAddressModal from './deleteAddressModal'
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      contactData: {
-        id: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        birthday: '',
-        address: []
-      },
-      addressList: [],
-      token: '',
-      isAdding: false,
-      createAddressModal: false,
-      editAddressModal: false,
-      isCreatingAddress: false,
-      index: -1,
-      showDeleteModal: false,
-      isDeleing: false,
-      deleteItem: {},
-      deletingIndex: -1,
-      deletingAddressIndex: -1,
-      websiteSettings: []
-    };
-  },
-  mounted: function mounted() {
-    this.contactData = this.$store.getters.getContactData;
-    this.addressList = this.$store.getters.getAddressData;
-  },
-  created: function created() {
-    var _this = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var i, res;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _this.token = window.Laravel.csrfToken;
-              i = contactData.id;
-              _context.next = 4;
-              return _this.callApi('get', '/app/details', i);
-
-            case 4:
-              res = _context.sent;
-
-              if (res.status === 200) {
-                _this.addressLists = res.data;
-              } else {
-                _this.swr(error);
-              }
-
-            case 6:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
-  },
-  showCreateAddressModal: function showCreateAddressModal(address, index) {
-    var createAddressModalObj = {
-      showCreateAddressModal: true,
-      createUrl: 'app/createAddress',
-      addressData: address,
-      deletingAddressIndex: i,
-      isAddressDeleted: false
-    };
-    this.editAddressData = editAddressModalObj;
-    this.editModal = true;
-    this.index = index;
-  },
-  showEditAddressModal: function showEditAddressModal(address, index) {
-    var editAddressModalObj = {
-      showEditAddressModal: true,
-      deleteUrl: 'app/editAddress',
-      addressData: address,
-      deletingAddressIndex: i,
-      isAddressDeleted: false
-    };
-    this.editData = editContactModalObj;
-    this.editModal = true;
-    this.index = index;
-  },
-  showDeletingModal: function showDeletingModal(contact, i) {
-    var deleteContactModalObj = {
-      showDeleteModal: true,
-      deleteUrl: 'app/deleteContact',
-      contactData: contact,
-      deletingIndex: i,
-      isDeleted: false
-    };
-    this.$store.commit('setDeletingModalObj', deleteContactModalObj);
-    console.log('delete method called');
-    this.deleteItem = contact;
-    this.deletingIndex = i;
-    this.showDeleteModal = true;
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/index.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/index.vue?vue&type=script&lang=js& ***!
@@ -2158,6 +1975,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         phone: '',
         birthday: ''
       },
+      // may not need, just use currentContact?
       ruleValidate: {
         firstName: [{
           required: true,
@@ -2190,10 +2008,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           trigger: 'change'
         }]
       },
-      editContactModal: false,
-      index: -1,
-      deleteItem: {},
-      deletingIndex: -1,
+      modalContactAdd: false,
+      modalContactEdit: false,
+      modalContactDetails: false,
       ///////<--- Address Modals --->///////
       addresses: [],
       currentAddress: {
@@ -2250,11 +2067,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           trigger: 'change'
         }]
       },
-      createAddressModal: false,
-      editAddressModal: false,
-      deleteAddressModal: false,
-      deleteAddressItem: {},
-      deletingAddressIndex: -1
+      modalAddressAdd: false,
+      modalAddressEdit: false
     };
   },
   mounted: function mounted() {
@@ -2269,654 +2083,380 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.modalAddressAdd = new bootstrap.Modal(document.getElementById('modalAddressAdd'), {});
       this.modalAddressEdit = new bootstrap.Modal(document.getElementById('modalAddressEdit'), {});
     },
+    ////////////////////<--- Contact Functions --->////////////////////
     getContacts: function getContacts() {
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var res;
+        var response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this.token = window.Laravel.csrfToken;
+                _context.prev = 0;
                 _context.next = 3;
-                return _this.callApi('get', 'app/index');
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/contacts');
 
               case 3:
-                res = _context.sent;
+                response = _context.sent;
+                _this.contacts = response.data;
+                _context.next = 10;
+                break;
 
-                if (res.status === 200) {
-                  _this.contacts = res.data;
-                } else {
-                  _this.swr(error);
-                }
+              case 7:
+                _context.prev = 7;
+                _context.t0 = _context["catch"](0);
+                alert(_context.t0);
 
-              case 5:
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 7]]);
       }))();
     },
-    methods: {
-      ////////////////////<--- Contact Modals --->////////////////////
-      createContact: function createContact(formValidate) {
-        var _this2 = this;
+    btnCreateContact: function btnCreateContact() {
+      this.currentContact = {};
+      this.modalContactAdd.show();
+    },
+    btnEditContact: function btnEditContact(id) {
+      var _this2 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-          var res;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  if (!(_this2.contactData.firstName.trim() == '')) {
-                    _context2.next = 2;
-                    break;
-                  }
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/contacts/".concat(id));
 
-                  return _context2.abrupt("return", _this2.e('First Name is required'));
+              case 3:
+                response = _context2.sent;
+                _this2.currentContact = response.data;
 
-                case 2:
-                  if (!(_this2.contactData.lastName.trim() == '')) {
-                    _context2.next = 4;
-                    break;
-                  }
+                _this2.modalContactEdit.show();
 
-                  return _context2.abrupt("return", _this2.e('Last Name is required'));
+                _context2.next = 11;
+                break;
 
-                case 4:
-                  if (!(_this2.contactData.email.trim() == '')) {
-                    _context2.next = 6;
-                    break;
-                  }
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                alert(_context2.t0);
 
-                  return _context2.abrupt("return", _this2.e('Email is required'));
-
-                case 6:
-                  if (!(_this2.contactData.phone.trim() == '')) {
-                    _context2.next = 8;
-                    break;
-                  }
-
-                  return _context2.abrupt("return", _this2.e('Phone is required'));
-
-                case 8:
-                  // if(this.formValidate.birthday.trim()=='') return this.e('Birthday is required')
-                  _this2.isCreatingContact = true;
-                  _context2.next = 11;
-                  return _this2.callApi('post', 'app/createContact', _this2.contactData);
-
-                case 11:
-                  res = _context2.sent;
-
-                  // console.log(res)
-                  if (res.status === 201) {
-                    _this2.s('Contact has been edited successfully!');
-
-                    _this2.contactData.firstName = '';
-                    _this2.contactData.lastName = '';
-                    _this2.contactData.email = '';
-                    _this2.contactData.phone = '';
-                    _this2.contactData.birthday = '';
-                    window.location.reload();
-                  } else {
-                    if (res.status == 422) {
-                      if (_this2.res.errors.firstName) {
-                        _this2.i(res.formValidate.errors.firstName[0]);
-                      }
-
-                      if (_this2.res.errors.lastName) {
-                        _this2.i(res.formValidate.errors.lastName[0]);
-                      }
-
-                      if (_this2.res.errors.email) {
-                        _this2.i(res.formValidate.errors.email[0]);
-                      }
-
-                      if (_this2.res.errors.phone) {
-                        _this2.i(res.formValidate.errors.phone[0]);
-                      }
-
-                      if (_this2.res.errors.birthday) {
-                        _this2.i(res.formValidate.errors.birthday[0]);
-                      }
-                    } else {
-                      _this2.swr();
-                    }
-                  }
-
-                  _this2.createContactModal = false;
-                  _this2.isCreatingContact = false;
-
-                case 15:
-                case "end":
-                  return _context2.stop();
-              }
+              case 11:
+              case "end":
+                return _context2.stop();
             }
-          }, _callee2);
-        }))();
-      },
-      closeCreateContactModal: function closeCreateContactModal(formValidate) {
-        // handleReset (formValidate);
-        this.isCreatingContact = false;
-        this.createContactModal = false;
-      },
-      showEditContactModal: function showEditContactModal(contact, index) {
-        // console.log(contact)
-        var obj = {
-          id: contact.id,
-          firstName: contact.firstName,
-          lastName: contact.lastName,
-          email: contact.email,
-          phone: contact.phone,
-          birthday: contact.birthday
-        };
-        this.formValidate = obj;
-        this.index = index;
-        this.editContactModal = true;
-      },
-      closeEditContactModal: function closeEditContactModal() {
-        this.isEditingContact = false;
-        this.editContactModal = false;
-      },
-      editContact: function editContact(contact, index) {
-        var _this3 = this;
+          }
+        }, _callee2, null, [[0, 8]]);
+      }))();
+    },
+    btnDeleteContact: function btnDeleteContact(id) {
+      var _this3 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-          var res;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  if (!(_this3.formValidate.firstName.trim() == '')) {
-                    _context3.next = 2;
-                    break;
-                  }
-
-                  return _context3.abrupt("return", _this3.e('First Name is required'));
-
-                case 2:
-                  if (!(_this3.formValidate.lastName.trim() == '')) {
-                    _context3.next = 4;
-                    break;
-                  }
-
-                  return _context3.abrupt("return", _this3.e('Last Name is required'));
-
-                case 4:
-                  if (!(_this3.formValidate.email.trim() == '')) {
-                    _context3.next = 6;
-                    break;
-                  }
-
-                  return _context3.abrupt("return", _this3.e('Email is required'));
-
-                case 6:
-                  if (!(_this3.formValidate.phone.trim() == '')) {
-                    _context3.next = 8;
-                    break;
-                  }
-
-                  return _context3.abrupt("return", _this3.e('Phone is required'));
-
-                case 8:
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                if (!confirm('Are you sure you want to delete this item?')) {
                   _context3.next = 10;
-                  return _this3.callApi('post', 'app/editContact', _this3.formValidate);
+                  break;
+                }
 
-                case 10:
-                  res = _context3.sent;
+                _context3.prev = 1;
+                _context3.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/contacts/".concat(id));
 
-                  //?id=' + contact.id
-                  // console.log(res)
-                  if (res.status === 200) {
-                    // this.contacts[this.index].firstName = this.formValidate.firstName
-                    // this.contacts[this.index].lastName = this.formValidate.lastName
-                    // this.contacts[this.index].email = this.formValidate.email
-                    // this.contacts[this.index].phone = this.formValidate.phone
-                    // this.contacts[this.index].birthday = this.formValidate.birthday
-                    _this3.s('Contact has been edited successfully!');
+              case 4:
+                _this3.getContacts();
 
-                    _this3.formValidate.firstName = '';
-                    _this3.formValidate.lastName = '';
-                    _this3.formValidate.email = '';
-                    _this3.formValidate.phone = '';
-                    _this3.formValidate.birthday = '';
-                    _this3.editContactModal = false;
-                    window.location.reload();
-                  } else {
-                    if (res.status == 422) {
-                      if (_this3.res.errors.firstName) {
-                        _this3.i(res.formValidate.errors.firstName[0]);
-                      }
+                _context3.next = 10;
+                break;
 
-                      if (_this3.res.errors.lastName) {
-                        _this3.i(res.formValidate.errors.lastName[0]);
-                      }
+              case 7:
+                _context3.prev = 7;
+                _context3.t0 = _context3["catch"](1);
+                alert(_context3.t0);
 
-                      if (_this3.res.errors.email) {
-                        _this3.i(res.formValidate.errors.email[0]);
-                      }
-
-                      if (_this3.res.errors.phone) {
-                        _this3.i(res.formValidate.errors.phone[0]);
-                      }
-
-                      if (_this3.res.errors.birthday) {
-                        _this3.i(res.formValidate.errors.birthday[0]);
-                      }
-
-                      _this3.editContactModal = false;
-                    } else {
-                      _this3.swr();
-
-                      _this3.editContactModal = false;
-                    }
-                  }
-
-                case 12:
-                case "end":
-                  return _context3.stop();
-              }
+              case 10:
+              case "end":
+                return _context3.stop();
             }
-          }, _callee3);
-        }))();
-      },
-      showDeleteContactModal: function showDeleteContactModal(contact, i) {
-        // console.log(contact)
-        this.contactData = contact; // console.log('delete method called')
+          }
+        }, _callee3, null, [[1, 7]]);
+      }))();
+    },
+    modalAddSubmit: function modalAddSubmit() {
+      var _this4 = this;
 
-        this.deletingIndex = i;
-        this.showDeletingContactModal = true; // console.log(this.contactData)
-      },
-      deleteContact: function deleteContact() {
-        var _this4 = this;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/contacts", _this4.currentContact);
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-          var res;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-            while (1) {
-              switch (_context4.prev = _context4.next) {
-                case 0:
-                  _this4.isDeleting = true;
-                  _context4.next = 3;
-                  return _this4.callApi('post', 'app/deleteContact', _this4.contactData);
+              case 3:
+                response = _context4.sent;
 
-                case 3:
-                  res = _context4.sent;
+                if (response.data.errors) {
+                  alert('All fields are required');
+                } else {
+                  _this4.modalContactAdd.hide();
 
-                  if (res.status === 200) {
-                    _this4.s('Tag has been deleted successfully!');
-                  } else {
-                    _this4.swr();
-                  }
+                  _this4.getContacts();
+                }
 
-                  _this4.isDeleting = false;
-                  _this4.showDeleteConactModal = false;
-                  window.location.reload();
+                _context4.next = 10;
+                break;
 
-                case 8:
-                case "end":
-                  return _context4.stop();
-              }
+              case 7:
+                _context4.prev = 7;
+                _context4.t0 = _context4["catch"](0);
+                alert(_context4.t0);
+
+              case 10:
+              case "end":
+                return _context4.stop();
             }
-          }, _callee4);
-        }))();
-      },
-      ////////////////////<--- Address Modals --->////////////////////
-      showDetailsModal: function showDetailsModal(contact, index) {
-        var _this5 = this;
+          }
+        }, _callee4, null, [[0, 7]]);
+      }))();
+    },
+    modalEditSubmit: function modalEditSubmit() {
+      var _this5 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
-            while (1) {
-              switch (_context5.prev = _context5.next) {
-                case 0:
-                  // const res =  await this.callApi('get' , 'app/details?id=' + contact.id , contact)
-                  // console.log(res)
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/contacts/".concat(_this5.currentContact.id), _this5.currentContact);
 
-                  /*
-                  if(res.status===200){
-                      this.addressList = res.data
-                      this.contactDetailsData = obj
-                      this.detailsModal = true
-                  } else {
-                      this.swr(error)
-                  }
-                  */
-                  _this5.index = index;
+              case 3:
+                _this5.modalContactEdit.hide();
 
-                case 1:
-                case "end":
-                  return _context5.stop();
-              }
+                _this5.getContacts();
+
+                _context5.next = 10;
+                break;
+
+              case 7:
+                _context5.prev = 7;
+                _context5.t0 = _context5["catch"](0);
+                alert(_context5.t0);
+
+              case 10:
+              case "end":
+                return _context5.stop();
             }
-          }, _callee5);
-        }))();
-      },
-      createAddress: function createAddress(formValidateAddress) {
-        var _this6 = this;
+          }
+        }, _callee5, null, [[0, 7]]);
+      }))();
+    },
+    ////////////////////<--- Address Modals --->////////////////////
+    btnDetails: function btnDetails(id) {
+      var _this6 = this;
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
-          var res;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
-            while (1) {
-              switch (_context6.prev = _context6.next) {
-                case 0:
-                  if (!(_this6.AddressData.number.trim() == '')) {
-                    _context6.next = 2;
-                    break;
-                  }
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.prev = 0;
+                _context6.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/contacts/".concat(id));
 
-                  return _context6.abrupt("return", _this6.e('Street Number is required'));
+              case 3:
+                response = _context6.sent;
+                _this6.currentContact = response.data;
 
-                case 2:
-                  if (!(_this6.AddressData.street.trim() == '')) {
-                    _context6.next = 4;
-                    break;
-                  }
+                _this6.modalContactDetails.show();
 
-                  return _context6.abrupt("return", _this6.e('Street Name is required'));
+                _context6.next = 11;
+                break;
 
-                case 4:
-                  if (!(_this6.AddressData.city.trim() == '')) {
-                    _context6.next = 6;
-                    break;
-                  }
+              case 8:
+                _context6.prev = 8;
+                _context6.t0 = _context6["catch"](0);
+                alert(_context6.t0);
 
-                  return _context6.abrupt("return", _this6.e('City is required'));
-
-                case 6:
-                  if (!(_this6.AddressData.state.trim() == '')) {
-                    _context6.next = 8;
-                    break;
-                  }
-
-                  return _context6.abrupt("return", _this6.e('State is required'));
-
-                case 8:
-                  if (!(_this6.AddressData.zip.trim() == '')) {
-                    _context6.next = 10;
-                    break;
-                  }
-
-                  return _context6.abrupt("return", _this6.e('Zip code is required'));
-
-                case 10:
-                  if (!(_this6.AddressData.type.trim() == '')) {
-                    _context6.next = 12;
-                    break;
-                  }
-
-                  return _context6.abrupt("return", _this6.e('Location Type is required'));
-
-                case 12:
-                  _this6.isCreatingAddress = true;
-                  _context6.next = 15;
-                  return _this6.callApi('post', 'app/createAddress', _this6.AddressData);
-
-                case 15:
-                  res = _context6.sent;
-
-                  // console.log(res)
-                  if (res.status === 201) {
-                    _this6.s('Address has been created successfully!');
-
-                    _this6.AddressData.number = '';
-                    _this6.AddressData.street = '';
-                    _this6.AddressData.city = '';
-                    _this6.AddressData.state = '';
-                    _this6.AddressData.zip = '';
-                    _this6.AddressData.type = 'home';
-                    window.location.reload();
-                  } else {
-                    if (res.status == 422) {
-                      if (_this6.res.errors.number) {
-                        _this6.i(res.formValidateAddress.errors.number[0]);
-                      }
-
-                      if (_this6.res.errors.street) {
-                        _this6.i(res.formValidateAddress.errors.street[0]);
-                      }
-
-                      if (_this6.res.errors.city) {
-                        _this6.i(res.formValidateAddress.errors.city[0]);
-                      }
-
-                      if (_this6.res.errors.state) {
-                        _this6.i(res.formValidateAddress.errors.state[0]);
-                      }
-
-                      if (_this6.res.errors.zip) {
-                        _this6.i(res.formValidateAddress.errors.zip[0]);
-                      }
-                    } else {
-                      _this6.swr();
-                    }
-                  }
-
-                  _this6.createAddressModal = false;
-                  _this6.isCreatingAddress = false;
-
-                case 19:
-                case "end":
-                  return _context6.stop();
-              }
+              case 11:
+              case "end":
+                return _context6.stop();
             }
-          }, _callee6);
-        }))();
-      },
-      closeCreateAddressModal: function closeCreateAddressModal(formValidate) {
-        // handleReset (formValidateAddress);
-        this.isCreatingAddress = false;
-        this.createAddressModal = false;
-      },
-      showEditAddressModal: function showEditAddressModal(address, index) {
-        // console.log(contact)
-        var obj = {
-          id: address.id,
-          number: address.number,
-          street: address.street,
-          city: address.city,
-          state: address.state,
-          zip: address.zip,
-          type: address.type
-        }; // this.addressList = contact.addresses
+          }
+        }, _callee6, null, [[0, 8]]);
+      }))();
+    },
+    btnCreateAddress: function btnCreateAddress() {
+      this.currentAddress = {};
+      this.modalAddressAdd.show();
+    },
+    btnEditAddress: function btnEditAddress(id) {
+      var _this7 = this;
 
-        this.formValidateAddress = obj;
-        this.index = index;
-        this.editAddressModal = true;
-      },
-      closeEditAddressModal: function closeEditAddressModal() {
-        this.isEditingAddress = false;
-        this.editAddressModal = false;
-      },
-      editAddress: function editAddress() {
-        var _this7 = this;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.prev = 0;
+                _context7.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/addresses/".concat(id));
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
-          var res;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
-            while (1) {
-              switch (_context7.prev = _context7.next) {
-                case 0:
-                  if (!(_this7.AddressData.number.trim() == '')) {
-                    _context7.next = 2;
-                    break;
-                  }
+              case 3:
+                response = _context7.sent;
+                _this7.currentAddress = response.data;
 
-                  return _context7.abrupt("return", _this7.e('Street Number is required'));
+                _this7.modalAddressEdit.show();
 
-                case 2:
-                  if (!(_this7.AddressData.street.trim() == '')) {
-                    _context7.next = 4;
-                    break;
-                  }
+                _context7.next = 11;
+                break;
 
-                  return _context7.abrupt("return", _this7.e('Street Name is required'));
+              case 8:
+                _context7.prev = 8;
+                _context7.t0 = _context7["catch"](0);
+                alert(_context7.t0);
 
-                case 4:
-                  if (!(_this7.AddressData.city.trim() == '')) {
-                    _context7.next = 6;
-                    break;
-                  }
-
-                  return _context7.abrupt("return", _this7.e('City is required'));
-
-                case 6:
-                  if (!(_this7.AddressData.state.trim() == '')) {
-                    _context7.next = 8;
-                    break;
-                  }
-
-                  return _context7.abrupt("return", _this7.e('State is required'));
-
-                case 8:
-                  if (!(_this7.AddressData.zip.trim() == '')) {
-                    _context7.next = 10;
-                    break;
-                  }
-
-                  return _context7.abrupt("return", _this7.e('Zip code is required'));
-
-                case 10:
-                  if (!(_this7.AddressData.type.trim() == '')) {
-                    _context7.next = 12;
-                    break;
-                  }
-
-                  return _context7.abrupt("return", _this7.e('Location Type is required'));
-
-                case 12:
-                  _context7.next = 14;
-                  return _this7.callApi('post', 'app/editAddress', _this7.formValidateAddress);
-
-                case 14:
-                  res = _context7.sent;
-
-                  // console.log(res)
-                  if (res.status === 200) {
-                    _this7.s('Address has been edited successfully!');
-
-                    _this7.formValidateAddress.number = '';
-                    _this7.formValidateAddress.street = '';
-                    _this7.formValidateAddress.city = '';
-                    _this7.formValidateAddress.state = '';
-                    _this7.formValidateAddress.zip = '';
-                    _this7.editAddressModal = false;
-                    window.location.reload();
-                  } else {
-                    if (res.status == 422) {
-                      if (_this7.res.errors.number) {
-                        _this7.i(res.formValidateAddress.errors.number[0]);
-                      }
-
-                      if (_this7.res.errors.street) {
-                        _this7.i(res.formValidateAddress.errors.street[0]);
-                      }
-
-                      if (_this7.res.errors.city) {
-                        _this7.i(res.formValidateAddress.errors.city[0]);
-                      }
-
-                      if (_this7.res.errors.state) {
-                        _this7.i(res.formValidateAddress.errors.state[0]);
-                      }
-
-                      if (_this7.res.errors.zip) {
-                        _this7.i(res.formValidateAddress.errors.zip[0]);
-                      }
-                    } else {
-                      _this7.swr();
-                    }
-                  }
-
-                  _this7.editAddressModal = false;
-
-                case 17:
-                case "end":
-                  return _context7.stop();
-              }
+              case 11:
+              case "end":
+                return _context7.stop();
             }
-          }, _callee7);
-        }))();
-      },
-      showDeleteAddressModal: function showDeleteAddressModal(address, i) {
-        // console.log(contact)
-        this.addressData = address; // console.log('delete method called')
+          }
+        }, _callee7, null, [[0, 8]]);
+      }))();
+    },
+    btnDeleteAddress: function btnDeleteAddress(id) {
+      var _this8 = this;
 
-        this.deletingAddressIndex = i;
-        this.showDeletingAddressModal = true; // console.log(this.contactData)
-      },
-      deleteAddress: function deleteAddress() {
-        var _this8 = this;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                if (!confirm('Are you sure you want to delete this address?')) {
+                  _context8.next = 10;
+                  break;
+                }
 
-        return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee8() {
-          var res;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee8$(_context8) {
-            while (1) {
-              switch (_context8.prev = _context8.next) {
-                case 0:
-                  _this8.isDeletingAddress = true; // console.log('This is the contact data to be deleted')
-                  // console.log(this.contactData)
+                _context8.prev = 1;
+                _context8.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/addresses/".concat(id));
 
-                  _context8.next = 3;
-                  return _this8.callApi('post', 'app/deleteAddress', _this8.addressData);
+              case 4:
+                _this8.btnDetails(_this8.currentContact.id);
 
-                case 3:
-                  res = _context8.sent;
+                _context8.next = 10;
+                break;
 
-                  if (res.status === 200) {
-                    _this8.s('Tag has been deleted successfully!'); //window.location.reload(); // need to reload the modal
-                    //showDeleteContactModal(this, i)
+              case 7:
+                _context8.prev = 7;
+                _context8.t0 = _context8["catch"](1);
+                alert(_context8.t0);
 
-                  } else {
-                    _this8.swr();
-                  }
-
-                  _this8.isDeletingAddress = false;
-                  _this8.showDeleteAddressModal = false;
-
-                case 7:
-                case "end":
-                  return _context8.stop();
-              }
+              case 10:
+              case "end":
+                return _context8.stop();
             }
-          }, _callee8);
-        }))();
-      },
-      ////////////////////<--- Shared Modals --->////////////////////
-      handleReset: function handleReset(name) {
-        this.$refs[name].resetFields();
-      }
-    } //for original non-spa design//
-    // getters: {
-    //     getContactData(state){
-    //        return state.contactData
-    //     },
-    //     getContactLists(state){
-    //     },
-    //     getDeleteModalObj(state){
-    //         return state.deleteModalObj
-    //     },
-    //     getUserPermission(state){
-    //         return state.userPermission
-    //     },
-    // },
-    // components : {
-    // 	deleteModal
-    // },
-    // computed : {
-    // 	...mapGetters(['getDeleteModalObj'])
-    // },
-    // watch : {
-    // 	getDeleteModalObj(obj){
-    // 		if(obj.isDeleted){
-    // 			this.tags.splice(obj.deletingIndex,1)
-    // 		}
-    // 	}
-    // },
+          }
+        }, _callee8, null, [[1, 7]]);
+      }))();
+    },
+    modalAddressAddSubmit: function modalAddressAddSubmit() {
+      var _this9 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee9() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.prev = 0;
+                _this9.currentAddress.contact_id = _this9.currentContact.id;
+                _context9.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/addresses", _this9.currentAddress);
+
+              case 4:
+                response = _context9.sent;
+
+                if (response.data.errors) {
+                  alert('All fields are required');
+                } else {
+                  _this9.modalAddressAdd.hide();
+
+                  _this9.btnDetails(_this9.currentContact.id);
+                }
+
+                _context9.next = 11;
+                break;
+
+              case 8:
+                _context9.prev = 8;
+                _context9.t0 = _context9["catch"](0);
+                alert(_context9.t0);
+
+              case 11:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9, null, [[0, 8]]);
+      }))();
+    },
+    modalAddressEditSubmit: function modalAddressEditSubmit() {
+      var _this10 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee10() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                _context10.prev = 0;
+                _context10.next = 3;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.put("/api/addresses/".concat(_this10.currentAddress.id), _this10.currentAddress);
+
+              case 3:
+                response = _context10.sent;
+
+                // console.log(response);
+                if (response.data.errors) {
+                  alert('All fields are required');
+                } else {
+                  _this10.modalAddressEdit.hide();
+
+                  _this10.btnDetails(_this10.currentContact.id);
+                }
+
+                _context10.next = 10;
+                break;
+
+              case 7:
+                _context10.prev = 7;
+                _context10.t0 = _context10["catch"](0);
+                alert(_context10.t0);
+
+              case 10:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, null, [[0, 7]]);
+      }))();
+    }
   }
 });
 
@@ -68461,96 +68001,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&":
-/*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008& ***!
-  \***************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [
-    _c("h1", [_vm._v("This is the Contact Details Page")]),
-    _vm._v(" "),
-    _c("div", { staticClass: "container-fluid" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20"
-        },
-        [
-          _c(
-            "p",
-            { staticClass: "_title0" },
-            [
-              _vm._v("Contact Details "),
-              _c(
-                "Button",
-                {
-                  attrs: { type: "info", size: "small" },
-                  on: {
-                    click: function($event) {
-                      return _vm.$router.push({
-                        path: "createAddress",
-                        params: { id: _vm.$route.params.id }
-                      })
-                    }
-                  }
-                },
-                [_vm._v("Add Address")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm._m(0)
-        ]
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "_overflow _table_div" }, [
-      _c("table", { staticClass: "_table" }, [
-        _vm._v(" -->\n                            "),
-        _vm._v(" "),
-        _c("tr", [
-          _c("th", [_vm._v("Number")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Street")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("City")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("State")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Zip")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Type")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Action")])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Contacts/index.vue?vue&type=template&id=33783eff&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Pages/Contacts/index.vue?vue&type=template&id=33783eff& ***!
@@ -68572,705 +68022,1239 @@ var render = function() {
         "div",
         { staticClass: "container-fluid" },
         [
+          _c("h1", { staticClass: "mt-0 pt-0 pb-2" }, [_vm._v("Contacts")]),
+          _vm._v(" "),
+          _c("hr", { staticClass: "mb-3" }),
+          _vm._v(" "),
+          _c(
+            "Button",
+            {
+              attrs: { type: "success" },
+              on: {
+                click: function($event) {
+                  return _vm.btnCreateContact()
+                }
+              }
+            },
+            [_vm._v("New Contact")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "_overflow _table_div" }, [
+            _c(
+              "table",
+              { staticClass: "_table", attrs: { columns: _vm.contactTable } },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _vm._l(_vm.contacts, function(contact) {
+                  return _c("tr", { key: contact.id }, [
+                    _c("td", [_vm._v(_vm._s(contact.id))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(contact.firstName))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(contact.lastName))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(contact.email))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(contact.phone))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(contact.birthday))]),
+                    _vm._v(" "),
+                    _c(
+                      "td",
+                      [
+                        _c(
+                          "Button",
+                          {
+                            attrs: { type: "primary", size: "small" },
+                            on: {
+                              click: function($event) {
+                                return _vm.btnDetails(contact.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Details")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "Button",
+                          {
+                            attrs: { type: "warning", size: "small" },
+                            on: {
+                              click: function($event) {
+                                return _vm.btnEditContact(contact.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Edit")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-sm btn-secondary",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.btnDeleteContact(contact.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Delete")]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ]),
+          _vm._v(" "),
           _c(
             "div",
             {
-              staticClass:
-                "_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20"
+              staticClass: "modal",
+              attrs: { id: "modalContactAdd", tabindex: "-1" }
             },
             [
-              _c(
-                "p",
-                { staticClass: "_title0" },
-                [
-                  _vm._v("Contacts List "),
-                  _c(
-                    "Button",
-                    {
-                      attrs: { type: "success" },
-                      on: {
-                        click: function($event) {
-                          _vm.createContactModal = true
+              _c("div", { staticClass: "modal-dialog" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("First")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.firstName,
+                            expression: "currentContact.firstName"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentContact.firstName },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "firstName",
+                              $event.target.value
+                            )
+                          }
                         }
-                      }
-                    },
-                    [
-                      _c("Icon", { attrs: { type: "md-add" } }),
-                      _vm._v("Add Contact")
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "_overflow _table_div" }, [
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Last")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.lastName,
+                            expression: "currentContact.lastName"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentContact.lastName },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "lastName",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Email")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.email,
+                            expression: "currentContact.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "email", required: "" },
+                        domProps: { value: _vm.currentContact.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "email",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Phone")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.phone,
+                            expression: "currentContact.phone"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "tel", required: "" },
+                        domProps: { value: _vm.currentContact.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "phone",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Birthday")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.birthday,
+                            expression: "currentContact.birthday"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentContact.birthday },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "birthday",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-secondary",
+                        attrs: { type: "button", "data-bs-dismiss": "modal" }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.modalAddSubmit()
+                          }
+                        }
+                      },
+                      [_vm._v("Save Changes")]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal",
+              attrs: { id: "modalContactEdit", tabindex: "-1" }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("First")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.firstName,
+                            expression: "currentContact.firstName"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentContact.firstName },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "firstName",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Last")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.lastName,
+                            expression: "currentContact.lastName"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentContact.lastName },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "lastName",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Email")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.email,
+                            expression: "currentContact.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "email", required: "" },
+                        domProps: { value: _vm.currentContact.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "email",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Phone")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.phone,
+                            expression: "currentContact.phone"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "tel", required: "" },
+                        domProps: { value: _vm.currentContact.phone },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "phone",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Birthday")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.birthday,
+                            expression: "currentContact.birthday"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentContact.birthday },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "birthday",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-secondary",
+                        attrs: { type: "button", "data-bs-dismiss": "modal" }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.modalEditSubmit()
+                          }
+                        }
+                      },
+                      [_vm._v("Save Changes")]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal",
+              attrs: { id: "modalContactDetails", tabindex: "-1" }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog" }, [
                 _c(
-                  "table",
+                  "div",
                   {
-                    staticClass: "_table",
-                    attrs: { columns: _vm.contactTable }
+                    staticClass: "modal-content",
+                    staticStyle: { width: "175%" }
                   },
                   [
-                    _vm._m(0),
+                    _vm._m(3),
                     _vm._v(" "),
-                    _vm._l(_vm.contactLists, function(contacts, i) {
-                      return _c("tr", { key: i }, [
-                        _c("td", [_vm._v(_vm._s(contacts.firstName))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(contacts.lastName))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(contacts.email))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(contacts.phone))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(contacts.birthday))]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          [
-                            _c(
-                              "Button",
-                              {
-                                attrs: { type: "primary", size: "small" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.showDetailsModal(contacts, i)
-                                  }
+                    _c("div", { staticClass: "modal-body" }, [
+                      _vm._v(
+                        "\n                                Name: " +
+                          _vm._s(_vm.currentContact.firstName) +
+                          " " +
+                          _vm._s(_vm.currentContact.lastName) +
+                          " "
+                      ),
+                      _c("br"),
+                      _vm._v(
+                        "\n                                Email: " +
+                          _vm._s(_vm.currentContact.email) +
+                          " "
+                      ),
+                      _c("br"),
+                      _vm._v(
+                        "\n                                Phone: " +
+                          _vm._s(_vm.currentContact.phone) +
+                          " "
+                      ),
+                      _c("br"),
+                      _vm._v(
+                        "\n                                Birthday: " +
+                          _vm._s(_vm.currentContact.birthday) +
+                          "\n                                "
+                      ),
+                      _c(
+                        "div",
+                        { staticClass: "mt-2" },
+                        [
+                          _c("strong", [_vm._v("Addresses")]),
+                          _vm._v(" "),
+                          _c("hr", { staticClass: "mb-2" }),
+                          _vm._v(" "),
+                          _c(
+                            "Button",
+                            {
+                              attrs: { type: "success" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.btnCreateAddress()
                                 }
-                              },
-                              [_vm._v("Details")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "Button",
-                              {
-                                attrs: { type: "warning", size: "small" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.showEditContactModal(contacts, i)
-                                  }
-                                }
-                              },
-                              [_vm._v("Edit")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "Button",
-                              {
-                                attrs: {
-                                  type: "error",
-                                  size: "small",
-                                  loading: contacts.isDeleting
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.showDeleteContactModal(
-                                      contacts,
-                                      i
+                              }
+                            },
+                            [_vm._v("New Address")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "table",
+                            { staticClass: "_table mt-3" },
+                            [
+                              _vm._m(4),
+                              _vm._v(" "),
+                              _vm._l(_vm.currentContact.addresses, function(
+                                address
+                              ) {
+                                return _c("tr", { key: address.id }, [
+                                  _c("td", [_vm._v(_vm._s(address.id))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(address.number))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(address.street))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(address.city))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(address.state))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(address.zip))]),
+                                  _vm._v(" "),
+                                  _c("td", [_vm._v(_vm._s(address.type))]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "btn-group",
+                                        attrs: {
+                                          role: "group",
+                                          "aria-label": "Basic example"
+                                        }
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-sm btn-secondary",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.btnEditAddress(
+                                                  address.id
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Edit")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-sm btn-secondary",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.btnDeleteAddress(
+                                                  address.id
+                                                )
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Delete")]
+                                        )
+                                      ]
                                     )
-                                  }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "Delete\n                                    "
-                                )
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ])
-                    })
-                  ],
-                  2
+                                  ])
+                                ])
+                              })
+                            ],
+                            2
+                          )
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(5)
+                  ]
                 )
               ])
             ]
           ),
           _vm._v(" "),
           _c(
-            "Modal",
+            "div",
             {
-              attrs: {
-                title: "Create New Contact",
-                "mask-closable": false,
-                closable: false
-              },
-              model: {
-                value: _vm.createContactModal,
-                callback: function($$v) {
-                  _vm.createContactModal = $$v
-                },
-                expression: "createContactModal"
-              }
+              staticClass: "modal",
+              attrs: { id: "modalAddressAdd", tabindex: "-1" }
             },
             [
-              _c(
-                "Form",
-                {
-                  ref: "contactData",
-                  attrs: {
-                    model: _vm.contactData,
-                    rules: _vm.ruleValidate,
-                    "label-width": 90
-                  }
-                },
-                [
-                  _c(
-                    "FormItem",
-                    { attrs: { label: "First Name", prop: "firstName" } },
-                    [
-                      _c("Input", {
-                        attrs: { placeholder: "Enter the First Name" },
-                        model: {
-                          value: _vm.contactData.firstName,
-                          callback: function($$v) {
-                            _vm.$set(_vm.contactData, "firstName", $$v)
-                          },
-                          expression: "contactData.firstName"
-                        }
-                      })
-                    ],
-                    1
-                  ),
+              _c("div", { staticClass: "modal-dialog" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(6),
                   _vm._v(" "),
-                  _c(
-                    "FormItem",
-                    { attrs: { label: "Last Name", prop: "lastName" } },
-                    [
-                      _c("Input", {
-                        attrs: { placeholder: "Enter the Last Name" },
-                        model: {
-                          value: _vm.contactData.lastName,
-                          callback: function($$v) {
-                            _vm.$set(_vm.contactData, "lastName", $$v)
-                          },
-                          expression: "contactData.lastName"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "FormItem",
-                    { attrs: { label: "E-mail", prop: "mail" } },
-                    [
-                      _c("Input", {
-                        attrs: { placeholder: "Enter their e-mail" },
-                        model: {
-                          value: _vm.contactData.email,
-                          callback: function($$v) {
-                            _vm.$set(_vm.contactData, "email", $$v)
-                          },
-                          expression: "contactData.email"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "FormItem",
-                    { attrs: { label: "Phone", prop: "phone" } },
-                    [
-                      _c("Input", {
-                        attrs: { placeholder: "Enter their phone number" },
-                        model: {
-                          value: _vm.contactData.phone,
-                          callback: function($$v) {
-                            _vm.$set(_vm.contactData, "phone", $$v)
-                          },
-                          expression: "contactData.phone"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("FormItem", { attrs: { label: "Birthday" } }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c(
-                        "div",
-                        { staticClass: "col" },
-                        [
-                          _c("DatePicker", {
-                            attrs: {
-                              format: "yyyy/MM/dd",
-                              type: "date",
-                              placeholder: "Select date"
-                            },
-                            model: {
-                              value: _vm.contactData.birthday,
-                              callback: function($$v) {
-                                _vm.$set(_vm.contactData, "birthday", $$v)
-                              },
-                              expression: "contactData.birthday"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { slot: "footer" }, slot: "footer" },
-                [
-                  _c(
-                    "Button",
-                    {
-                      staticStyle: { "margin-left": "8px" },
-                      attrs: {
-                        type: "default",
-                        disabled: _vm.isCreatingAddress,
-                        loading: _vm.isCreatingAddress
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.closeCreateContactModal(_vm.formValidate)
-                        }
-                      }
-                    },
-                    [_vm._v("Cancel")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "Button",
-                    {
-                      attrs: {
-                        type: "primary",
-                        disabled: _vm.isCreatingContact,
-                        loading: _vm.isCreatingContact
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.createContact("formValidate")
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(
-                          _vm.isCreatingContact ? "Creating.." : "Add Contact"
-                        )
-                      )
-                    ]
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "Modal",
-            {
-              attrs: {
-                title: "Edit Contact",
-                "mask-closable": false,
-                closable: false
-              },
-              model: {
-                value: _vm.editContactModal,
-                callback: function($$v) {
-                  _vm.editContactModal = $$v
-                },
-                expression: "editContactModal"
-              }
-            },
-            [
-              _c(
-                "Form",
-                {
-                  ref: "formValidate",
-                  attrs: {
-                    model: _vm.formValidate,
-                    rules: _vm.ruleValidate,
-                    "label-width": 90
-                  }
-                },
-                [
-                  _c(
-                    "FormItem",
-                    { attrs: { label: "First Name", prop: "firstName" } },
-                    [
-                      _c("Input", {
-                        attrs: { placeholder: "Enter the First Name" },
-                        model: {
-                          value: _vm.formValidate.firstName,
-                          callback: function($$v) {
-                            _vm.$set(_vm.formValidate, "firstName", $$v)
-                          },
-                          expression: "formValidate.firstName"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "FormItem",
-                    { attrs: { label: "Last Name", prop: "lastName" } },
-                    [
-                      _c("Input", {
-                        attrs: { placeholder: "Enter the Last Name" },
-                        model: {
-                          value: _vm.formValidate.lastName,
-                          callback: function($$v) {
-                            _vm.$set(_vm.formValidate, "lastName", $$v)
-                          },
-                          expression: "formValidate.lastName"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "FormItem",
-                    { attrs: { label: "E-mail", prop: "mail" } },
-                    [
-                      _c("Input", {
-                        attrs: { placeholder: "Enter their e-mail" },
-                        model: {
-                          value: _vm.formValidate.email,
-                          callback: function($$v) {
-                            _vm.$set(_vm.formValidate, "email", $$v)
-                          },
-                          expression: "formValidate.email"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "FormItem",
-                    { attrs: { label: "Phone", prop: "phone" } },
-                    [
-                      _c("Input", {
-                        attrs: { placeholder: "Enter their phone number" },
-                        model: {
-                          value: _vm.formValidate.phone,
-                          callback: function($$v) {
-                            _vm.$set(_vm.formValidate, "phone", $$v)
-                          },
-                          expression: "formValidate.phone"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("FormItem", { attrs: { label: "Birthday" } }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c(
-                        "div",
-                        { staticClass: "col" },
-                        [
-                          _c("DatePicker", {
-                            attrs: {
-                              format: "yyyy/MM/dd",
-                              type: "date",
-                              placeholder: "Select date"
-                            },
-                            model: {
-                              value: _vm.formValidate.birthday,
-                              callback: function($$v) {
-                                _vm.$set(_vm.formValidate, "birthday", $$v)
-                              },
-                              expression: "formValidate.birthday"
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { slot: "footer" }, slot: "footer" },
-                [
-                  _c(
-                    "Button",
-                    {
-                      staticStyle: { "margin-left": "8px" },
-                      on: { click: _vm.closeEditContactModal }
-                    },
-                    [_vm._v("Cancel")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "Button",
-                    {
-                      attrs: { type: "primary" },
-                      on: {
-                        click: function($event) {
-                          return _vm.editContact("formValidate", "index")
-                        }
-                      }
-                    },
-                    [_vm._v("Submit")]
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "Modal",
-            {
-              attrs: { width: "360" },
-              model: {
-                value: _vm.showDeletingContactModal,
-                callback: function($$v) {
-                  _vm.showDeletingContactModal = $$v
-                },
-                expression: "showDeletingContactModal"
-              }
-            },
-            [
-              _c(
-                "p",
-                {
-                  staticStyle: { color: "#f60", "text-align": "center" },
-                  attrs: { slot: "header" },
-                  slot: "header"
-                },
-                [
-                  _c("Icon", { attrs: { type: "ios-information-circle" } }),
-                  _vm._v(" "),
-                  _c("span", [_vm._v("Delete confirmation")])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticStyle: { "text-align": "center" } }, [
-                _c("p", [
-                  _vm._v("Are you sure you want to delete this Contact?")
-                ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { attrs: { slot: "footer" }, slot: "footer" },
-                [
-                  _c(
-                    "Button",
-                    {
-                      attrs: {
-                        type: "error",
-                        size: "large",
-                        long: "",
-                        loading: _vm.isDeleting,
-                        disabled: _vm.isDeleting
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.deleteContact(_vm.contactData, _vm.i)
-                        }
-                      }
-                    },
-                    [_vm._v("Delete")]
-                  )
-                ],
-                1
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "Modal",
-            {
-              attrs: {
-                title: "Contact Details",
-                "mask-closable": false,
-                closable: false,
-                width: "80%"
-              },
-              model: {
-                value: _vm.detailsModal,
-                callback: function($$v) {
-                  _vm.detailsModal = $$v
-                },
-                expression: "detailsModal"
-              }
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20"
-                },
-                [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-6" }, [
-                      _c("h2", [
-                        _vm._v(
-                          _vm._s(this.contactDetailsData.firstName) +
-                            " " +
-                            _vm._s(this.contactDetailsData.lastName)
-                        )
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Number")
                       ]),
                       _vm._v(" "),
-                      _c("h4", [
-                        _vm._v(
-                          "Phone: " + _vm._s(this.contactDetailsData.phone)
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("h4", [
-                        _vm._v(
-                          "Email: " + _vm._s(this.contactDetailsData.email)
-                        )
-                      ])
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAddress.number,
+                            expression: "currentAddress.number"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", required: "" },
+                        domProps: { value: _vm.currentAddress.number },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentAddress,
+                              "number",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "col-6" },
-                      [
-                        _c(
-                          "Button",
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Street")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
                           {
-                            staticClass: "float:right",
-                            attrs: { type: "success" },
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAddress.street,
+                            expression: "currentAddress.street"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentAddress.street },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentAddress,
+                              "street",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("City")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAddress.city,
+                            expression: "currentAddress.city"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentAddress.city },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentAddress,
+                              "city",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("State")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAddress.state,
+                            expression: "currentAddress.state"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentAddress.state },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentAddress,
+                              "state",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Zip")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAddress.zip,
+                            expression: "currentAddress.zip"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", required: "" },
+                        domProps: { value: _vm.currentAddress.zip },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentAddress,
+                              "zip",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-4 col-sm-12 control-label",
+                          attrs: { for: "month" }
+                        },
+                        [_vm._v("Type")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 col-sm-12" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.currentAddress.type,
+                                expression: "currentAddress.type"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
                             on: {
-                              click: function($event) {
-                                _vm.createAddressModal = true
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.currentAddress,
+                                  "type",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
                               }
                             }
                           },
                           [
-                            _c("Icon", { attrs: { type: "md-add" } }),
-                            _vm._v("Add Contact")
-                          ],
-                          1
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Home")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Work")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Other")
+                            ])
+                          ]
                         )
-                      ],
-                      1
-                    )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Contact ID")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.id,
+                            expression: "currentContact.id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", required: "" },
+                        domProps: { value: _vm.currentContact.id },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "id",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "_overflow _table_div" }, [
+                  _c("div", { staticClass: "modal-footer" }, [
                     _c(
-                      "table",
-                      { staticClass: "_table" },
-                      [
-                        _c("tr", [
-                          _c("th", [_vm._v("Number")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Street")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("City")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("State")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Zip")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Type")]),
-                          _vm._v(" "),
-                          _c("th", [_vm._v("Action")])
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.addressList, function(addresses, i) {
-                          return _c("tr", { key: i }, [
-                            _c("td", [_vm._v(_vm._s(addresses.number))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(addresses.street))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(addresses.city))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(addresses.state))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(addresses.zip))]),
-                            _vm._v(" "),
-                            _c("td", [_vm._v(_vm._s(addresses.type))]),
-                            _vm._v(" "),
-                            _c(
-                              "td",
-                              [
-                                _c(
-                                  "Button",
-                                  {
-                                    attrs: { type: "warning", size: "small" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.showEditAddressModal(
-                                          addresses,
-                                          i
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Edit")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "Button",
-                                  {
-                                    attrs: { type: "error", size: "small" },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.$router.push({
-                                          path: "deleteAddress",
-                                          params: { id: _vm.$route.params.id }
-                                        })
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Delete")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "Button",
-                                  {
-                                    attrs: {
-                                      type: "error",
-                                      size: "small",
-                                      loading: addresses.isDeleting
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.showDeleteAddressModal(
-                                          addresses,
-                                          i
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Delete\n                                        "
-                                    )
-                                  ]
-                                )
-                              ],
-                              1
-                            )
-                          ])
-                        })
-                      ],
-                      2
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-secondary",
+                        attrs: { type: "button", "data-bs-dismiss": "modal" }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.modalAddressAddSubmit()
+                          }
+                        }
+                      },
+                      [_vm._v("Save Address")]
                     )
                   ])
-                ]
-              )
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal",
+              attrs: { id: "modalAddressEdit", tabindex: "-1" }
+            },
+            [
+              _c("div", { staticClass: "modal-dialog" }, [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-body" }, [
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Number")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAddress.number,
+                            expression: "currentAddress.number"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", required: "" },
+                        domProps: { value: _vm.currentAddress.number },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentAddress,
+                              "number",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Street")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAddress.street,
+                            expression: "currentAddress.street"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentAddress.street },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentAddress,
+                              "street",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("City")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAddress.city,
+                            expression: "currentAddress.city"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentAddress.city },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentAddress,
+                              "city",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("State")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAddress.state,
+                            expression: "currentAddress.state"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", required: "" },
+                        domProps: { value: _vm.currentAddress.state },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentAddress,
+                              "state",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Zip")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentAddress.zip,
+                            expression: "currentAddress.zip"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", required: "" },
+                        domProps: { value: _vm.currentAddress.zip },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentAddress,
+                              "zip",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-4 col-sm-12 control-label",
+                          attrs: { for: "month" }
+                        },
+                        [_vm._v("Type")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4 col-sm-12" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.currentAddress.type,
+                                expression: "currentAddress.type"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.currentAddress,
+                                  "type",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Home")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Work")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "home" } }, [
+                              _vm._v("Other")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-3" }, [
+                      _c("label", { staticClass: "form-label" }, [
+                        _vm._v("Contact ID")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.currentContact.id,
+                            expression: "currentContact.id"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "number", required: "" },
+                        domProps: { value: _vm.currentContact.id },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.currentContact,
+                              "id",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-secondary",
+                        attrs: { type: "button", "data-bs-dismiss": "modal" }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-primary",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.modalAddressEditSubmit()
+                          }
+                        }
+                      },
+                      [_vm._v("Save Changes")]
+                    )
+                  ])
+                ])
+              ])
             ]
           )
         ],
@@ -69285,6 +69269,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
       _c("th", [_vm._v("First Name")]),
       _vm._v(" "),
       _c("th", [_vm._v("Last Name")]),
@@ -69296,6 +69282,128 @@ var staticRenderFns = [
       _c("th", [_vm._v("Birthday")]),
       _vm._v(" "),
       _c("th", [_vm._v("Action")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Add Contact")]),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-bs-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Edit Contact")]),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-bs-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Contact Details")]),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-bs-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [_vm._v("ID")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Numnber")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Street")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("City")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("State")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Zip")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Type")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("Actions")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-sm btn-secondary",
+          attrs: { type: "button", "data-bs-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Address")]),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-bs-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h5", { staticClass: "modal-title" }, [_vm._v("Edit Address")]),
+      _vm._v(" "),
+      _c("button", {
+        staticClass: "btn-close",
+        attrs: {
+          type: "button",
+          "data-bs-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      })
     ])
   }
 ]
@@ -69857,14 +69965,9 @@ var render = function() {
                     _vm._v(
                       "\n              Birthday: " +
                         _vm._s(_vm.currentContact.birthday) +
-                        "              \n              "
+                        "\n              "
                     ),
-                    _vm._m(4),
-                    _c("hr", { staticClass: "mb-2" }),
-                    _vm._v(" "),
-                    _c("small", [_vm._v("[ addresses go here ]")]),
-                    _vm._v(" "),
-                    _c("p")
+                    _vm._m(4)
                   ]),
                   _vm._v(" "),
                   _vm._m(5)
@@ -69954,8 +70057,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "mt-2" }, [
-      _c("strong", [_vm._v("Addresses")])
+    return _c("div", { staticClass: "mt-2" }, [
+      _c("strong", [_vm._v("Addresses")]),
+      _vm._v(" "),
+      _c("hr", { staticClass: "mb-2" }),
+      _vm._v(" "),
+      _c("small", [_vm._v("[ addresses go here ]")])
     ])
   },
   function() {
@@ -86518,75 +86625,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/Pages/Addresses/details.vue":
-/*!**************************************************!*\
-  !*** ./resources/js/Pages/Addresses/details.vue ***!
-  \**************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./details.vue?vue&type=template&id=4d03d008& */ "./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&");
-/* harmony import */ var _details_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./details.vue?vue&type=script&lang=js& */ "./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _details_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/Pages/Addresses/details.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js&":
-/*!***************************************************************************!*\
-  !*** ./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./details.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/details.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008& ***!
-  \*********************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./details.vue?vue&type=template&id=4d03d008& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Pages/Addresses/details.vue?vue&type=template&id=4d03d008&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_details_vue_vue_type_template_id_4d03d008___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
 /***/ "./resources/js/Pages/Contacts/index.vue":
 /*!***********************************************!*\
   !*** ./resources/js/Pages/Contacts/index.vue ***!
@@ -86961,7 +86999,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _Pages_Contacts_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Pages/Contacts/index */ "./resources/js/Pages/Contacts/index.vue");
 /* harmony import */ var _Pages_Contacts_lights_out__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Pages/Contacts/lights-out */ "./resources/js/Pages/Contacts/lights-out.vue");
-/* harmony import */ var _Pages_Addresses_details__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Pages/Addresses/details */ "./resources/js/Pages/Addresses/details.vue");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]); // contact routes
@@ -86971,8 +87008,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 // import editContact from './Pages/Contacts/editContact'
 // import deleteContact from './Pages/Contacts/deleteContact'
 // address routes
-
- // import createAddress from './Pages/Addresses/createAddress'
+// import details from './Pages/Addresses/details'
+// import createAddress from './Pages/Addresses/createAddress'
 // import editAddress from './Pages/Addresses/editAddress'
 // import deleteAddress from './Pages/Addresses/deleteAddress'
 
@@ -87188,7 +87225,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/ec2-user/_learn/addressbook-lv/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/djkinjo/Desktop/UCLA_Projects/php-vue/ab-lv/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

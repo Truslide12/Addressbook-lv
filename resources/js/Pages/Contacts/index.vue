@@ -47,7 +47,7 @@ export default {
                 email: '',
                 phone: '',
                 birthday: '',
-            },
+            }, // may not need, just use currentContact?
             ruleValidate: {
                 firstName: [
                     { required: true, message: 'The first name cannot be empty', trigger: 'blur' }
@@ -66,10 +66,9 @@ export default {
                     { required: true, type: 'date', message: 'Please select a birthday', trigger: 'change' }
                 ],
             },
-			editContactModal : false,
-			index : -1,
-			deleteItem: {},
-            deletingIndex: -1,
+            modalContactAdd : false,
+            modalContactEdit : false,
+            modalContactDetails : false,
             ///////<--- Address Modals --->///////
             addresses : [],
             currentAddress: {
@@ -112,39 +111,34 @@ export default {
                     { required: true, message: 'Please select a type', trigger: 'change' }
                 ],
             },
-            createAddressModal : false,
-            editAddressModal : false,
-            deleteAddressModal : false,
-            deleteAddressItem : {},
-            deletingAddressIndex: -1,
+            modalAddressAdd : false,
+            modalAddressEdit : false,
         }
     },
 
-  mounted() {
-    this.getContacts();
-    this.initModals();
-  },
-
-  methods: {
-    initModals() {
-        this.modalContactAdd = new bootstrap.Modal(document.getElementById('modalContactAdd'), {});
-        this.modalContactEdit = new bootstrap.Modal(document.getElementById('modalContactEdit'), {});
-        this.modalContactDetails = new bootstrap.Modal(document.getElementById('modalContactDetails'), {});
-        this.modalAddressAdd = new bootstrap.Modal(document.getElementById('modalAddressAdd'), {});
-        this.modalAddressEdit = new bootstrap.Modal(document.getElementById('modalAddressEdit'), {});
+    mounted() {
+        this.getContacts();
+        this.initModals();
     },
 
-    async getContacts() {
-        this.token = window.Laravel.csrfToken
-        const res = await this.callApi('get', 'app/index',)
-        if(res.status===200){
-            this.contacts = res.data
-        } else {
-            this.swr(error)
-        }
-    },
+    methods: {
+        initModals() {
+            this.modalContactAdd = new bootstrap.Modal(document.getElementById('modalContactAdd'), {});
+            this.modalContactEdit = new bootstrap.Modal(document.getElementById('modalContactEdit'), {});
+            this.modalContactDetails = new bootstrap.Modal(document.getElementById('modalContactDetails'), {});
+            this.modalAddressAdd = new bootstrap.Modal(document.getElementById('modalAddressAdd'), {});
+            this.modalAddressEdit = new bootstrap.Modal(document.getElementById('modalAddressEdit'), {});
+        },
 
-    ////////////////////<--- Contact Modals --->////////////////////
+    ////////////////////<--- Contact Functions --->////////////////////
+        async getContacts() {
+            try {
+                const response = await axios.get('/api/contacts');
+                this.contacts = response.data;
+            } catch (err) {
+                alert(err);
+            }
+        },
         btnCreateContact(){
             this.currentContact = {};
             this.modalContactAdd.show();
@@ -157,7 +151,7 @@ export default {
             } catch (err) {
                 alert(err);
             }
-            },
+        },
         async btnDeleteContact(id) {
             if (confirm('Are you sure you want to delete this item?')) {
                 try {
@@ -167,7 +161,30 @@ export default {
                 alert(err);
                 }
             }
-            },
+        },
+        async modalAddSubmit() {
+            try {
+                const response = await axios.post(`/api/contacts`, this.currentContact);
+                if (response.data.errors) {
+                alert('All fields are required');
+                } else {
+                this.modalContactAdd.hide();
+                this.getContacts();
+                }
+            } catch (err) {
+                alert(err);
+            }
+        },
+        async modalEditSubmit() {
+            try {
+                await axios.put(`/api/contacts/${this.currentContact.id}`, this.currentContact);
+                this.modalContactEdit.hide();
+                this.getContacts();
+            } catch (err) {
+                alert(err);
+            }
+        },
+    ////////////////////<--- Address Modals --->////////////////////
         async btnDetails(id) {
             try {
                 const response = await axios.get(`/api/contacts/${id}`);
@@ -177,449 +194,339 @@ export default {
                 alert(err);
             }
         },
-        async createContact(formValidate) {
-            if(this.currentContact.firstName.trim()=='') return this.e('First Name is required')
-            if(this.currentContact.lastName.trim()=='') return this.e('Last Name is required')
-            if(this.currentContact.email.trim()=='') return this.e('Email is required')
-            if(this.currentContact.phone.trim()=='') return this.e('Phone is required')
 
-            this.isCreatingContact = true
-			const res = await this.callApi(
-                'post',
-                'app/createContact',
-                this.currentContact)
-
-			if(res.status===201){
-				this.s('Contact has been edited successfully!')
-				this.currentContact.firstName = ''
-                this.currentContact.lastName = ''
-                this.currentContact.email = ''
-                this.currentContact.phone = ''
-                this.currentContact.birthday = ''
-                window.location.reload();
-			} else {
-				if(res.status==422) {
-					if (this.res.errors.firstName){
-						this.i(res.formValidate.errors.firstName[0])
-                    }
-                    if (this.res.errors.lastName){
-						this.i(res.formValidate.errors.lastName[0])
-                    }
-                    if (this.res.errors.email){
-						this.i(res.formValidate.errors.email[0])
-                    }
-                    if (this.res.errors.phone){
-						this.i(res.formValidate.errors.phone[0])
-                    }
-                    if (this.res.errors.birthday){
-						this.i(res.formValidate.errors.birthday[0])
-					}
-				} else {
-					this.swr()
-                }
-            }
-            this.createContactModal = false
-            this.isCreatingContact = false
-        },
-
-        async editContact(contact, index){
-
-            if(this.formValidate.firstName.trim()=='') return this.e('First Name is required')
-            if(this.formValidate.lastName.trim()=='') return this.e('Last Name is required')
-            if(this.formValidate.email.trim()=='') return this.e('Email is required')
-            if(this.formValidate.phone.trim()=='') return this.e('Phone is required')
-  			const res = await this.callApi('post', 'app/editContact', this.formValidate) //?id=' + contact.id
-            // console.log(res)
-			if(res.status===200){
-                // this.contacts[this.index].firstName = this.formValidate.firstName
-                // this.contacts[this.index].lastName = this.formValidate.lastName
-                // this.contacts[this.index].email = this.formValidate.email
-                // this.contacts[this.index].phone = this.formValidate.phone
-                // this.contacts[this.index].birthday = this.formValidate.birthday
-				this.s('Contact has been edited successfully!')
-				this.formValidate.firstName = ''
-                this.formValidate.lastName = ''
-                this.formValidate.email = ''
-                this.formValidate.phone = ''
-                this.formValidate.birthday = ''
-				this.editContactModal = false
-                window.location.reload();
-			} else {
-				if(res.status==422) {
-					if (this.res.errors.firstName){
-						this.i(res.formValidate.errors.firstName[0])
-                    }
-                    if (this.res.errors.lastName){
-						this.i(res.formValidate.errors.lastName[0])
-                    }
-                    if (this.res.errors.email){
-						this.i(res.formValidate.errors.email[0])
-                    }
-                    if (this.res.errors.phone){
-						this.i(res.formValidate.errors.phone[0])
-                    }
-                    if (this.res.errors.birthday){
-						this.i(res.formValidate.errors.birthday[0])
-					}
-                    this.editContactModal = false;
-                } else {
-                    this.swr()
-                    this.editContactModal = false;                }
-            }
-        },
-
-        showDeleteContactModal(contact, i){
-            // console.log(contact)
-            this.currentContact = contact
-            // console.log('delete method called')
-			this.deletingIndex = i
-            this.showDeletingContactModal = true
-            // console.log(this.currentContact)
-        },
-
-        async deleteContact(){
-            this.isDeleting = true
-			const res = await this.callApi('post', 'app/deleteContact', this.currentContact)
-			if(res.status===200){
-				this.s('Tag has been deleted successfully!')
-			}else{
-				this.swr()
-			}
-			this.isDeleting = false
-            this.showDeleteConactModal = false
-            window.location.reload();
-		},
-////////////////////<--- Address Modals --->////////////////////
         btnCreateAddress(){
-            this.currentContact = {};
-            this.modalContactAdd.show();
+            this.currentAddress = {};
+            this.modalAddressAdd.show();
         },
+
         async btnEditAddress(id) {
             try {
-                const response = await axios.get(`/api/contacts/${id}`);
-                this.currentContact = response.data;
-                this.modalContactEdit.show();
+                const response = await axios.get(`/api/addresses/${id}`);
+                this.currentAddress = response.data;
+                this.modalAddressEdit.show();
             } catch (err) {
                 alert(err);
             }
         },
+
         async btnDeleteAddress(id) {
-            if (confirm('Are you sure you want to delete this item?')) {
+            if (confirm('Are you sure you want to delete this address?')) {
                 try {
-                await axios.delete(`/api/contacts/${id}`);
-                this.getContacts();
+                await axios.delete(`/api/addresses/${id}`);
+                this.btnDetails(this.currentContact.id);
                 } catch (err) {
                 alert(err);
                 }
             }
         },
 
-        async createAddress(formValidateAddress) {
-            if(this.AddressData.number.trim()=='') return this.e('Street Number is required')
-            if(this.AddressData.street.trim()=='') return this.e('Street Name is required')
-            if(this.AddressData.city.trim()=='') return this.e('City is required')
-            if(this.AddressData.state.trim()=='') return this.e('State is required')
-            if(this.AddressData.zip.trim()=='') return this.e('Zip code is required')
-            if(this.AddressData.type.trim()=='') return this.e('Location Type is required')
-
-            this.isCreatingAddress = true
-			const res = await this.callApi(
-                'post',
-                'app/createAddress',
-                this.AddressData)
-            // console.log(res)
-			if(res.status===201){
-				this.s('Address has been created successfully!')
-				this.AddressData.number = ''
-                this.AddressData.street = ''
-                this.AddressData.city = ''
-                this.AddressData.state = ''
-                this.AddressData.zip = ''
-                this.AddressData.type = 'home'
-                window.location.reload();
-			} else {
-				if(res.status==422) {
-					if (this.res.errors.number){
-						this.i(res.formValidateAddress.errors.number[0])
-                    }
-                    if (this.res.errors.street){
-						this.i(res.formValidateAddress.errors.street[0])
-                    }
-                    if (this.res.errors.city){
-						this.i(res.formValidateAddress.errors.city[0])
-                    }
-                    if (this.res.errors.state){
-						this.i(res.formValidateAddress.errors.state[0])
-                    }
-                    if (this.res.errors.zip){
-						this.i(res.formValidateAddress.errors.zip[0])
-					}
-				} else {
-					this.swr()
-                }
-            }
-            this.createAddressModal = false
-            this.isCreatingAddress = false
-        },
-
-        async editAddress(){
-            if(this.AddressData.number.trim()=='') return this.e('Street Number is required')
-            if(this.AddressData.street.trim()=='') return this.e('Street Name is required')
-            if(this.AddressData.city.trim()=='') return this.e('City is required')
-            if(this.AddressData.state.trim()=='') return this.e('State is required')
-            if(this.AddressData.zip.trim()=='') return this.e('Zip code is required')
-            if(this.AddressData.type.trim()=='') return this.e('Location Type is required')
-
-  			const res = await this.callApi('post', 'app/editAddress', this.formValidateAddress)
-            // console.log(res)
-			if(res.status===200){
-				this.s('Address has been edited successfully!')
-				this.formValidateAddress.number = ''
-                this.formValidateAddress.street = ''
-                this.formValidateAddress.city = ''
-                this.formValidateAddress.state = ''
-                this.formValidateAddress.zip = ''
-				this.editAddressModal = false
-                window.location.reload();
-			} else {
-				if(res.status==422) {
-					if (this.res.errors.number){
-						this.i(res.formValidateAddress.errors.number[0])
-                    }
-                    if (this.res.errors.street){
-						this.i(res.formValidateAddress.errors.street[0])
-                    }
-                    if (this.res.errors.city){
-						this.i(res.formValidateAddress.errors.city[0])
-                    }
-                    if (this.res.errors.state){
-						this.i(res.formValidateAddress.errors.state[0])
-                    }
-                    if (this.res.errors.zip){
-						this.i(res.formValidateAddress.errors.zip[0])
-					}
+        async modalAddressAddSubmit() {
+            try {
+                this.currentAddress.contact_id = this.currentContact.id;
+                const response = await axios.post(`/api/addresses`, this.currentAddress);
+                if (response.data.errors) {
+                    alert('All fields are required');
                 } else {
-                    this.swr()
+                this.modalAddressAdd.hide();
+                this.btnDetails(this.currentContact.id);
                 }
+            } catch (err) {
+                alert(err);
             }
-            this.editAddressModal = false;
         },
-
-        async deleteAddress(){
-            this.isDeletingAddress = true
-            // console.log('This is the contact data to be deleted')
-            // console.log(this.currentContact)
-            const res = await this.callApi('post', 'app/deleteAddress', this.addressData)
-            if(res.status===200){
-                this.s('Tag has been deleted successfully!')
-                //window.location.reload(); // need to reload the modal
-                //showDeleteContactModal(this, i)
-            }else{
-                this.swr()
+        async modalAddressEditSubmit() {
+            try {
+                // console.log(this.currentAddress);
+                const response = await axios.put(`/api/addresses/${this.currentAddress.id}`, this.currentAddress);
+                // console.log(response);
+                if (response.data.errors) {
+                    alert('All fields are required');
+                } else {
+                this.modalAddressEdit.hide();
+                this.btnDetails(this.currentContact.id);
+                }
+            } catch (err) {
+                alert(err);
             }
-            this.isDeletingAddress = false
-            this.showDeleteAddressModal = false
         },
-////////////////////<--- Shared Modals --->////////////////////
-        handleReset (name) {
-            this.$refs[name].resetFields();
-        },
-    },
+    }
 }
 </script>
-
 
 <template>
     <div>
        <div class="content">
 			<div class="container-fluid">
-				<!--~~~~~~~ TABLE ONE ~~~~~~~~~-->
-				<div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
-					<p class="_title0">Contacts List <Button type="success" @click="createContactModal=true"><Icon type="md-add" />Add Contact</Button></p>
-
-					<div class="_overflow _table_div">
-						<table class="_table" :columns="contactTable" >
-								<!-- TABLE TITLE -->
-							<tr>
-								<th >First Name</th>
-                                <th>Last Name</th>
-								<th>Email</th>
-								<th>Phone</th>
-                                <th>Birthday</th>
-								<th>Action</th>
-							</tr>
-                                <!-- ITEMS -->
-							<tr v-for="(contacts, i) in contactLists" :key="i">
-                            <!-- v-if="contactss.length" -->
-								<td>{{contacts.firstName}}</td>
-								<td>{{contacts.lastName}}</td>
-								<td>{{contacts.email}}</td>
-                                <td>{{contacts.phone}}</td>
-                                <td>{{contacts.birthday}}</td>
-								<td>
-                                <!-- <Button
-                                    type="info"
-                                    size="small"
-                                    @click="$router.push({path: '/details/{id}', params: { id: $route.params.id },})"
-                                    >Details</Button> -->
-                                    <Button type="primary" size="small" @click="btnDetails(contact.id)">Details</Button>
-									<Button type="warning" size="small" @click="btnEdit(contact.id)">Edit</Button>
-	                                <button type="button" class="btn btn-sm btn-secondary" @click="btnDelete(contact.id)">Delete</button>
-                                </td>
-							</tr>
-								<!-- ITEMS -->
-						</table>
-
-                        <!-- <div class="card-footer">
-                            <pagination :data="contacts" @pagination-change-page="created"></pagination>
-                        </div> -->
-					</div>
+                <!--~~~~~~~ TABLE ONE ~~~~~~~~~-->
+                <h1 class="mt-0 pt-0 pb-2">Contacts</h1>
+                <hr class="mb-3">
+                <Button type="success" @click="btnCreateContact()">New Contact</Button>
+                <div class="_overflow _table_div">
+                    <table class="_table" :columns="contactTable" >
+                            <!-- TABLE TITLE -->
+                        <tr>
+                            <th>ID</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Birthday</th>
+                            <th>Action</th>
+                        </tr>
+                            <!-- ITEMS -->
+                        <tr v-for="contact in contacts" :key="contact.id">
+                            <td>{{contact.id}}</td>
+                            <td>{{contact.firstName}}</td>
+                            <td>{{contact.lastName}}</td>
+                            <td>{{contact.email}}</td>
+                            <td>{{contact.phone}}</td>
+                            <td>{{contact.birthday}}</td>
+                            <td>
+                                <Button type="primary" size="small" @click="btnDetails(contact.id)">Details</Button>
+                                <Button type="warning" size="small" @click="btnEditContact(contact.id)">Edit</Button>
+                                <button type="button" class="btn btn-sm btn-secondary" @click="btnDeleteContact(contact.id)">Delete</button>
+                            </td>
+                        </tr>
+                            <!-- ITEMS -->
+                    </table>
+                    <!-- <div class="card-footer">
+                        <pagination :data="contacts" @pagination-change-page="created"></pagination>
+                    </div> -->
 				</div>
 
-                <!-- Create Contact Modal -->
-                <Modal
-                    v-model="createContactModal"
-					title="Create New Contact"
-					:mask-closable="false"
-					:closable="false"
-                    >
-                    <Form  ref="currentContact" :model="currentContact" :rules="ruleValidate" :label-width="90">
-                        <FormItem label="First Name" prop="firstName">
-                            <Input v-model="currentContact.firstName" placeholder="Enter the First Name"/>
-                        </FormItem>
-                        <FormItem label="Last Name" prop="lastName">
-                            <Input v-model="currentContact.lastName" placeholder="Enter the Last Name"/>
-                        </FormItem>
-                        <FormItem label="E-mail" prop="mail">
-                            <Input v-model="currentContact.email" placeholder="Enter their e-mail"/>
-                        </FormItem>
-                        <FormItem label="Phone" prop="phone">
-                            <Input v-model="currentContact.phone" placeholder="Enter their phone number"/>
-                        </FormItem>
-                        <FormItem label="Birthday">
-                            <div class="row">
-                                <div class="col">
-                                    <DatePicker format="yyyy/MM/dd" type="date" placeholder="Select date" v-model="currentContact.birthday"></DatePicker>
-                                </div>
-                            </div>
-                        </FormItem>
-                    </Form>
-                    <div slot="footer">
-                        <Button
-                            type="default"
-                            @click="closeCreateContactModal(formValidate)"
-                            :disabled="isCreatingAddress"
-                            :loading="isCreatingAddress"
-                            style="margin-left: 8px">Cancel</Button>
-                        <Button type="primary" @click="createContact('formValidate')" :disabled="isCreatingContact" :loading="isCreatingContact">{{isCreatingContact ? 'Creating..' : 'Add Contact'}}</Button>
+                <!-- Add Contact Modal -->
+                <div id="modalContactAdd" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title">Add Contact</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">First</label>
+                            <input v-model="currentContact.firstName" type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Last</label>
+                            <input v-model="currentContact.lastName" type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input v-model="currentContact.email" type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input v-model="currentContact.phone" type="tel" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Birthday</label>
+                            <input v-model="currentContact.birthday" type="text" class="form-control" required>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-sm btn-primary" @click="modalAddSubmit()">Save Changes</button>
+                        </div>
                     </div>
-                </Modal>
+                    </div>
+                </div>
 
                 <!-- Edit Contact Modal -->
-				<Modal
-					v-model="editContactModal"
-					title="Edit Contact"
-					:mask-closable="false"
-					:closable="false">
-                    <Form  ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="90">
-                        <FormItem label="First Name" prop="firstName">
-                            <Input v-model="formValidate.firstName" placeholder="Enter the First Name"/>
-                        </FormItem>
-                        <FormItem label="Last Name" prop="lastName">
-                            <Input v-model="formValidate.lastName" placeholder="Enter the Last Name"/>
-                        </FormItem>
-                        <FormItem label="E-mail" prop="mail">
-                            <Input v-model="formValidate.email" placeholder="Enter their e-mail"/>
-                        </FormItem>
-                        <FormItem label="Phone" prop="phone">
-                            <Input v-model="formValidate.phone" placeholder="Enter their phone number"/>
-                        </FormItem>
-                        <FormItem label="Birthday">
-                            <div class="row">
-                                <div class="col">
-                                    <DatePicker format="yyyy/MM/dd" type="date" placeholder="Select date" v-model="formValidate.birthday"></DatePicker>
+                <div id="modalContactEdit" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title">Edit Contact</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">First</label>
+                            <input v-model="currentContact.firstName" type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Last</label>
+                            <input v-model="currentContact.lastName" type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input v-model="currentContact.email" type="email" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Phone</label>
+                            <input v-model="currentContact.phone" type="tel" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Birthday</label>
+                            <input v-model="currentContact.birthday" type="text" class="form-control" required>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-sm btn-primary" @click="modalEditSubmit()">Save Changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+<!------------------------------------- Details Modal ------------------------------------------------------>
+                <div id="modalContactDetails" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="width:175%">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Contact Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Name: {{ currentContact.firstName }} {{ currentContact.lastName }} <br>
+                                Email: {{ currentContact.email }} <br>
+                                Phone: {{ currentContact.phone }} <br>
+                                Birthday: {{ currentContact.birthday }}
+                                <div class="mt-2">
+                                    <strong>Addresses</strong>
+                                    <hr class="mb-2">
+                                    <Button type="success" @click="btnCreateAddress()">New Address</Button>
+                                    <table class="_table mt-3">
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Numnber</th>
+                                            <th>Street</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>Zip</th>
+                                            <th>Type</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                        <tr v-for="address in currentContact.addresses" :key="address.id">
+                                            <td>{{ address.id }}</td>
+                                            <td>{{ address.number }}</td>
+                                            <td>{{ address.street }}</td>
+                                            <td>{{ address.city }}</td>
+                                            <td>{{ address.state }}</td>
+                                            <td>{{ address.zip }}</td>
+                                            <td>{{ address.type }}</td>
+                                            <td>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button type="button" class="btn btn-sm btn-secondary" @click="btnEditAddress(address.id)">Edit</button>
+                                                <button type="button" class="btn btn-sm btn-secondary" @click="btnDeleteAddress(address.id)">Delete</button>
+                                            </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
-                        </FormItem>
-                    </Form>
-                    <div slot="footer">
-                        <Button @click="closeEditContactModal" style="margin-left: 8px">Cancel</Button>
-                        <Button type="primary" @click="editContact('formValidate', 'index')">Submit</Button>
-                    </div>
-				</Modal>
-
-                <!-- Delete Contact Warning Modal -->
-                <Modal v-model="showDeletingContactModal" width="360">
-					<p slot="header" style="color:#f60;text-align:center">
-						<Icon type="ios-information-circle"></Icon>
-						<span>Delete confirmation</span>
-					</p>
-					<div style="text-align:center">
-						<p>Are you sure you want to delete this Contact?</p>
-
-					</div>
-					<div slot="footer">
-						<Button type="error" size="large" long :loading="isDeleting" :disabled="isDeleting" @click="deleteContact(currentContact, i)" >Delete</Button>
-					</div>
-                </Modal>
-
-<!--------------------------------------------- /Address Modals ----------------------------------------------->
-                <!-- Details Modal-->
-                <Modal
-                    v-model="detailsModal"
-                    title="Contact Details"
-					:mask-closable="false"
-					:closable="false"
-                     width=80%>
-                    <!--~~~~~~~ Addresses Table ~~~~~~~~~-->
-                    <div class="_1adminOverveiw_table_recent _box_shadow _border_radious _mar_b30 _p20">
-                        <div class="row">
-                            <div class="col-6">
-                                <h2>{{this.contactDetailsData.firstName}} {{this.contactDetailsData.lastName}}</h2>
-                                <h4>Phone: {{this.contactDetailsData.phone}}</h4>
-                                <h4>Email: {{this.contactDetailsData.email}}</h4>
-                            </div>
-                            <div class="col-6">
-                                <Button type="success" class="float:right" @click="createAddressModal=true"><Icon type="md-add" />Add Contact</Button>
-                            </div>
-                        </div>
-                        <div class="_overflow _table_div">
-                            <table class="_table">
-                                    <!-- TABLE TITLE -->
-                                <tr>
-                                    <th>Number</th>
-                                    <th>Street</th>
-                                    <th>City</th>
-                                    <th>State</th>
-                                    <th>Zip</th>
-                                    <th>Type</th>
-                                    <th>Action</th>
-                                </tr>
-                                    <!-- TABLE TITLE --><!-- ITEMS -->
-                                <tr v-for="(addresses, i) in addressList" :key="i">
-                                <!-- v-if="contactss.length" -->
-                                    <td>{{addresses.number}}</td>
-                                    <td>{{addresses.street}}</td>
-                                    <td>{{addresses.city}}</td>
-                                    <td>{{addresses.state}}</td>
-                                    <td>{{addresses.zip}}</td>
-                                    <td>{{addresses.type}}</td>
-                                    <td>
-                                        <Button type="warning" size="small" @click="showEditAddressModal(addresses, i)">Edit</Button>
-                                        <Button type="error" size="small" @click="$router.push({path: 'deleteAddress', params: { id: $route.params.id },})">Delete</Button>
-                                        <Button
-                                            type="error"
-                                            size="small"
-                                            @click="showDeleteAddressModal(addresses, i)"
-                                            :loading="addresses.isDeleting">Delete
-                                        </Button>
-                                    </td>
-                                </tr>
-                                    <!-- ITEMS -->
-                            </table>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>
-                </Modal>
+                    </div>
+                </div>
+<!--------------------------------------------- Address Modals ----------------------------------------------->
+                <!-- Add Address Modal -->
+                <div id="modalAddressAdd" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Address</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label class="form-label">Number</label>
+                                    <input v-model="currentAddress.number" type="number" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Street</label>
+                                    <input v-model="currentAddress.street" type="text" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">City</label>
+                                    <input v-model="currentAddress.city" type="text" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">State</label>
+                                    <input v-model="currentAddress.state" type="text" class="form-control" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Zip</label>
+                                    <input v-model="currentAddress.zip" type="number" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 col-sm-12 control-label" for="month">Type</label>
+                                    <div class="col-md-4 col-sm-12">
+                                        <select v-model="currentAddress.type" type="text" class="form-control">
+                                            <option value="home">Home</option>
+                                            <option value="home">Work</option>
+                                            <option value="home">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Contact ID</label>
+                                    <input v-model="currentContact.id" type="number" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-sm btn-primary" @click="modalAddressAddSubmit()">Save Address</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit Address Modal -->
+                <div id="modalAddressEdit" class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title">Edit Address</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Number</label>
+                                <input v-model="currentAddress.number" type="number" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Street</label>
+                                <input v-model="currentAddress.street" type="text" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">City</label>
+                                <input v-model="currentAddress.city" type="text" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">State</label>
+                                <input v-model="currentAddress.state" type="text" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Zip</label>
+                                <input v-model="currentAddress.zip" type="number" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 col-sm-12 control-label" for="month">Type</label>
+                                <div class="col-md-4 col-sm-12">
+                                    <select v-model="currentAddress.type" type="text" class="form-control">
+                                        <option value="home">Home</option>
+                                        <option value="home">Work</option>
+                                        <option value="home">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Contact ID</label>
+                                <input v-model="currentContact.id" type="number" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-sm btn-primary" @click="modalAddressEditSubmit()">Save Changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
 
 			</div>
 		</div>

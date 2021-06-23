@@ -210,12 +210,12 @@ export default {
               Name: {{ currentContact.firstName }} {{ currentContact.lastName }} <br>
               Email: {{ currentContact.email }} <br>
               Phone: {{ currentContact.phone }} <br>
-              Birthday: {{ currentContact.birthday }}              
-              <p class="mt-2">
+              Birthday: {{ currentContact.birthday }}
+              <div class="mt-2">
                 <strong>Addresses</strong>
                 <hr class="mb-2">
                 <small>[ addresses go here ]</small>
-              </p>
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -10,7 +10,7 @@ import lightsOut from './Pages/Contacts/lights-out';
 // import deleteContact from './Pages/Contacts/deleteContact'
 
 // address routes
-import details from './Pages/Addresses/details'
+// import details from './Pages/Addresses/details'
 // import createAddress from './Pages/Addresses/createAddress'
 // import editAddress from './Pages/Addresses/editAddress'
 // import deleteAddress from './Pages/Addresses/deleteAddress'
