@@ -68,8 +68,19 @@ class ContactController extends Controller
             if (empty($contact)) {
                 return response()->json(['errors' => 'Contact not found']);
             }
-            $contact->delete();
-            return response()->json(['success' => true]);
+            $pkg = ['status'=>-1, 'msg'=>''];
+            $row = Contact::find($request->id);
+
+            if($row) {
+                $row->addresses()->delete();
+                $row->delete();
+                $pkg['status']=1;
+                $pkg['msg']='Successfully removed item';
+            } else {
+                $pkg['status']=0;
+                $pkg['msg']='Row ID not found';
+            }
+            return response()->json($pkg);
     }
 
     // Addresses

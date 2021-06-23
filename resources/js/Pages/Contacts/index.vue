@@ -214,7 +214,7 @@ export default {
             if (confirm('Are you sure you want to delete this address?')) {
                 try {
                 await axios.delete(`/api/addresses/${id}`);
-                this.btnDetails();
+                this.btnDetails(this.currentContact.id);
                 } catch (err) {
                 alert(err);
                 }

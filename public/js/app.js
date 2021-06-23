@@ -2357,7 +2357,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return axios__WEBPACK_IMPORTED_MODULE_1___default.a["delete"]("/api/addresses/".concat(id));
 
               case 4:
-                _this8.btnDetails();
+                _this8.btnDetails(_this8.currentContact.id);
 
                 _context8.next = 10;
                 break;
