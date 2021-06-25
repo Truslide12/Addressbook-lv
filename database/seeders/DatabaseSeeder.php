@@ -20,8 +20,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('contacts')->insert([
-            'firstName' => $this->faker->firstName,
-            'lastName' => $this->faker->lastName,
+            'firstName' => Str::random(10),
+            'lastName' => Str::random(10),
             'email' => $this->faker->unique()->email,
             'phone' => $this->faker->phoneNumber,
             'birthday' => $this->faker->date($format = 'Y-m-d', $max = 'now')
