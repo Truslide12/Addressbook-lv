@@ -1924,6 +1924,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js");
+/* harmony import */ var laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_2__);
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -1931,10 +1933,15 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "contacts",
+  components: {
+    pagination: laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_2___default.a
+  },
   data: function data() {
     return {
-      contacts: [],
+      contacts: {},
       currentContact: {
         id: '',
         firstName: '',
@@ -2085,35 +2092,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     ////////////////////<--- Contact Functions --->////////////////////
     getContacts: function getContacts() {
-      var _this = this;
+      var _arguments = arguments,
+          _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
+        var page;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.prev = 0;
+                page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('/api/contacts');
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/contacts?page='".concat(page)).then(function (_ref) {
+                  var data = _ref.data;
+                  _this.contacts = data.data;
+                })["catch"](function (_ref2) {
+                  var response = _ref2.response;
+                  console.error(response);
+                });
 
               case 3:
-                response = _context.sent;
-                _this.contacts = response.data;
-                _context.next = 10;
-                break;
-
-              case 7:
-                _context.prev = 7;
-                _context.t0 = _context["catch"](0);
-                alert(_context.t0);
-
-              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee);
       }))();
     },
     btnCreateContact: function btnCreateContact() {
@@ -68889,11 +68892,11 @@ var render = function() {
                               _vm._v("Home")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "home" } }, [
+                            _c("option", { attrs: { value: "work" } }, [
                               _vm._v("Work")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "home" } }, [
+                            _c("option", { attrs: { value: "other" } }, [
                               _vm._v("Other")
                             ])
                           ]
@@ -69184,11 +69187,11 @@ var render = function() {
                               _vm._v("Home")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "home" } }, [
+                            _c("option", { attrs: { value: "work" } }, [
                               _vm._v("Work")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "home" } }, [
+                            _c("option", { attrs: { value: "other" } }, [
                               _vm._v("Other")
                             ])
                           ]

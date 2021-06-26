@@ -12,7 +12,8 @@ class ContactController extends Controller
 {
     // Get all Contacts
     public function getContactIndex() {
-        return response()->json(Model::orderBy('lastName')->get());
+        $contacts = Model::paginate(10);
+        return response()->json($contacts);
     }
     // Get a Contact
     public function getContact(Request $request, Model $contact) {

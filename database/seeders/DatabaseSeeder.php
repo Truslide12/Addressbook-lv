@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Enumerable;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
-use Faker\Generator as Faker;
+use Faker\Factory as Faker;
+use Ramsey\Uuid\Type\Integer;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,12 +20,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('contacts')->insert([
-            'firstName' => Str::random(10),
-            'lastName' => Str::random(10),
-            'email' => $this->faker->unique()->email,
-            'phone' => $this->faker->phoneNumber,
-            'birthday' => $this->faker->date($format = 'Y-m-d', $max = 'now')
-        ]);
+        $faker = Faker::create();
+        foreach( range( 1 , 100 ) as $index ){
+            DB::table('contacts')->insert([
+                'firstName' => $faker->firstName,
+                'lastName' => $faker->lastName,
+                'email' => $faker->email,
+                'phone' => $faker->phoneNumber,
+                'birthday' => $faker->date,
+            ]);
+        }
     }
 }

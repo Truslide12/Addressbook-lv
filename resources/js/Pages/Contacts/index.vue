@@ -1,10 +1,15 @@
 <script>
 import axios from 'axios';
+import pagination from 'laravel-vue-pagination';
 
 export default {
+    name:"contacts",
+    components:{
+        pagination
+    },
 	data() {
 		return {
-            contacts : [],
+            contacts : {},
 			currentContact : {
                 id : '',
                 firstName : '',
@@ -131,13 +136,18 @@ export default {
         },
 
     ////////////////////<--- Contact Functions --->////////////////////
-        async getContacts() {
-            try {
-                const response = await axios.get('/api/contacts');
-                this.contacts = response.data;
-            } catch (err) {
-                alert(err);
-            }
+        async getContacts(page=1) {
+            await axios.get(`/api/contacts?page='${page}`).then(({data})=>{
+                this.contacts = data.data
+            }).catch(({ response })=>{
+                console.error(response)
+            })
+            // try {
+            //     const response = await axios.get('/api/contacts');
+            //     this.contacts = response.data;
+            // } catch (err) {
+            //     alert(err);
+            // }
         },
         btnCreateContact(){
             this.currentContact = {};
@@ -290,10 +300,9 @@ export default {
                         </tr>
                             <!-- ITEMS -->
                     </table>
-                    <!-- <div class="card-footer">
-                        <pagination :data="contacts" @pagination-change-page="created"></pagination>
-                    </div> -->
+                    <!-- <pagination align="center" :data="contacts" @pagination-change-page="getContacts"></pagination> -->
 				</div>
+
 
                 <!-- Add Contact Modal -->
                 <div id="modalContactAdd" class="modal" tabindex="-1">
@@ -458,8 +467,8 @@ export default {
                                     <div class="col-md-4 col-sm-12">
                                         <select v-model="currentAddress.type" type="text" class="form-control">
                                             <option value="home">Home</option>
-                                            <option value="home">Work</option>
-                                            <option value="home">Other</option>
+                                            <option value="work">Work</option>
+                                            <option value="other">Other</option>
                                         </select>
                                     </div>
                                 </div>
@@ -510,8 +519,8 @@ export default {
                                 <div class="col-md-4 col-sm-12">
                                     <select v-model="currentAddress.type" type="text" class="form-control">
                                         <option value="home">Home</option>
-                                        <option value="home">Work</option>
-                                        <option value="home">Other</option>
+                                        <option value="work">Work</option>
+                                        <option value="other">Other</option>
                                     </select>
                                 </div>
                             </div>
@@ -530,6 +539,7 @@ export default {
 
 			</div>
 		</div>
+        <!-- {{$contacts=>links()}} -->
     </div>
 </template>
 

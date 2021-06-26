@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Factory as Faker;
 
 class AddressFactory extends Factory
 {
