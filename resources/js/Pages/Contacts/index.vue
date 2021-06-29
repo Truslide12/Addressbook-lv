@@ -3,13 +3,14 @@ import axios from 'axios';
 import pagination from 'laravel-vue-pagination';
 
 export default {
-    name:"contacts",
-    components:{
-        pagination
-    },
+    // name:"contacts",
+    // components:{
+    //     pagination
+    // },
 	data() {
 		return {
             contacts : {},
+            // meta : {},
 			currentContact : {
                 id : '',
                 firstName : '',
@@ -135,15 +136,19 @@ export default {
             this.modalAddressEdit = new bootstrap.Modal(document.getElementById('modalAddressEdit'), {});
         },
 
+        changePage(page){
+            this.emit('pagination', page)
+        },
     ////////////////////<--- Contact Functions --->////////////////////
-        async getContacts(page=1) {
-            await axios.get(`/api/contacts?page='${page}`).then(({data})=>{
-                this.contacts = data.data
-            }).catch(({ response })=>{
-                console.error(response)
-            })
+        async getContacts(page) {
+            await axios.get(`/api/contacts?page=` + page)
+                .then(response => {
+                    this.contacts = response.data;
+                });
             // try {
-            //     const response = await axios.get('/api/contacts');
+            //     const response = await axios.get('/api/contacts', {
+            //         params:{page}
+            //     });
             //     this.contacts = response.data;
             // } catch (err) {
             //     alert(err);
@@ -285,7 +290,7 @@ export default {
                             <th>Action</th>
                         </tr>
                             <!-- ITEMS -->
-                        <tr v-for="contact in contacts" :key="contact.id">
+                        <tr v-for="contact in contacts.data" :key="contact.id">
                             <td>{{contact.id}}</td>
                             <td>{{contact.firstName}}</td>
                             <td>{{contact.lastName}}</td>
@@ -300,6 +305,10 @@ export default {
                         </tr>
                             <!-- ITEMS -->
                     </table>
+                    <pagination :data="contacts" @pagination-change-page="getContacts"></pagination>
+                    <!-- <div class="d-flex justify-content-center">
+                        {{!! $contacts->links() !!}}
+                    </div> -->
                     <!-- <pagination align="center" :data="contacts" @pagination-change-page="getContacts"></pagination> -->
 				</div>
 
