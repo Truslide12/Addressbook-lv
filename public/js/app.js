@@ -1935,13 +1935,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "contacts",
-  components: {
-    pagination: laravel_vue_pagination__WEBPACK_IMPORTED_MODULE_2___default.a
-  },
+  // name:"contacts",
+  // components:{
+  //     pagination
+  // },
   data: function data() {
     return {
       contacts: {},
+      // meta : {},
       currentContact: {
         id: '',
         firstName: '',
@@ -2090,28 +2091,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.modalAddressAdd = new bootstrap.Modal(document.getElementById('modalAddressAdd'), {});
       this.modalAddressEdit = new bootstrap.Modal(document.getElementById('modalAddressEdit'), {});
     },
+    changePage: function changePage(page) {
+      this.emit('pagination', page);
+    },
     ////////////////////<--- Contact Functions --->////////////////////
-    getContacts: function getContacts() {
-      var _arguments = arguments,
-          _this = this;
+    getContacts: function getContacts(page) {
+      var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var page;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                page = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : 1;
-                _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/contacts?page='".concat(page)).then(function (_ref) {
-                  var data = _ref.data;
-                  _this.contacts = data.data;
-                })["catch"](function (_ref2) {
-                  var response = _ref2.response;
-                  console.error(response);
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_1___default.a.get("/api/contacts?page=" + page).then(function (response) {
+                  _this.contacts = response.data;
                 });
 
-              case 3:
+              case 2:
               case "end":
                 return _context.stop();
             }
@@ -68042,78 +68039,88 @@ var render = function() {
             [_vm._v("New Contact")]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "_overflow _table_div" }, [
-            _c(
-              "table",
-              { staticClass: "_table", attrs: { columns: _vm.contactTable } },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._l(_vm.contacts, function(contact) {
-                  return _c("tr", { key: contact.id }, [
-                    _c("td", [_vm._v(_vm._s(contact.id))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(contact.firstName))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(contact.lastName))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(contact.email))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(contact.phone))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(contact.birthday))]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      [
-                        _c(
-                          "Button",
-                          {
-                            attrs: { type: "primary", size: "small" },
-                            on: {
-                              click: function($event) {
-                                return _vm.btnDetails(contact.id)
+          _c(
+            "div",
+            { staticClass: "_overflow _table_div" },
+            [
+              _c(
+                "table",
+                { staticClass: "_table", attrs: { columns: _vm.contactTable } },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _vm._l(_vm.contacts.data, function(contact) {
+                    return _c("tr", { key: contact.id }, [
+                      _c("td", [_vm._v(_vm._s(contact.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(contact.firstName))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(contact.lastName))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(contact.email))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(contact.phone))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(contact.birthday))]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c(
+                            "Button",
+                            {
+                              attrs: { type: "primary", size: "small" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.btnDetails(contact.id)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v("Details")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "Button",
-                          {
-                            attrs: { type: "warning", size: "small" },
-                            on: {
-                              click: function($event) {
-                                return _vm.btnEditContact(contact.id)
+                            },
+                            [_vm._v("Details")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "Button",
+                            {
+                              attrs: { type: "warning", size: "small" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.btnEditContact(contact.id)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v("Edit")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-sm btn-secondary",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                return _vm.btnDeleteContact(contact.id)
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-sm btn-secondary",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.btnDeleteContact(contact.id)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v("Delete")]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                })
-              ],
-              2
-            )
-          ]),
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ],
+                        1
+                      )
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("pagination", {
+                attrs: { data: _vm.contacts },
+                on: { "pagination-change-page": _vm.getContacts }
+              })
+            ],
+            1
+          ),
           _vm._v(" "),
           _c(
             "div",
