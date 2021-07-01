@@ -3,7 +3,7 @@
       <!--========== Logo ========-->
         <div class="_1side_menu" >
             <div class="_1side_menu_logo">
-                <h3 style="text-align:center;">Address Book</h3>
+                <h3 style="text-align:center;">VueJS/PHP Address Book</h3>
                 <!-- <router-link to="/">Contacts</router-link> -->
             </div>
         </div>
