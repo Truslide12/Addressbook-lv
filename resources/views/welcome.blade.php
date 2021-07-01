@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Full Stack Laravue</title>
+        <title>Full Stack Laravel VueJS</title>
 
         <!-- Fonts -->
 
