@@ -90,17 +90,17 @@ class ContactController extends Controller
     }
     public function postAddress(Request $request) {
         // need to get validation working
-        // $validator = Validator::make($request->all(), [
-        //     'number' => 'required',
-        //     'street' => 'required',
-        //     'city' => 'required',
-        //     'state' => 'required',
-        //     'zip' => 'required',
-        //     'type' => 'required',
-        // ]);
-        // if ($validator->fails()) {
-        //     return response()->json(['errors' => $validator->errors()]);
-        // }
+        $validator = Validator::make($request->all(), [
+            'number' => 'required',
+            'street' => 'required',
+            'city' => 'required',
+            'state' => 'required',
+            'zip' => 'required',
+            'type' => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
         // // Create item
         $pkg = $request->all();
         return response()->json(Address::create($pkg));
