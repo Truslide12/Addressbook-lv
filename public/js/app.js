@@ -70128,7 +70128,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "_1side_menu" }, [
       _c("div", { staticClass: "_1side_menu_logo" }, [
         _c("h3", { staticStyle: { "text-align": "center" } }, [
-          _vm._v("Address Book")
+          _vm._v("VueJS/PHP")
         ])
       ])
     ])
